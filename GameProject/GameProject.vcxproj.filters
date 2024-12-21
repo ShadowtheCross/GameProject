@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Characters">
+      <UniqueIdentifier>{b02d89fc-7a59-412e-bb51-961bde401fc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Border">
+      <UniqueIdentifier>{a191ce23-bb61-4bb7-9dfb-387be1b59bdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Logic">
+      <UniqueIdentifier>{a03d078e-2e06-49ef-9f66-da31ce6402e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters">
+      <UniqueIdentifier>{7b0ff9e1-84d7-4dc7-bc58-1d2274059ede}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Levels">
+      <UniqueIdentifier>{2d3136e7-26c9-46a5-a279-8fb8012e6560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Logic">
+      <UniqueIdentifier>{d501f45f-3039-4ad8-96f0-7269dffb3f1f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Movement.h">
+      <Filter>Header Files\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\MainCharacter.h">
+      <Filter>Header Files\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\AnimationHandler.h">
+      <Filter>Header Files\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\BorderMapManagement.h">
+      <Filter>Header Files\Border</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameState.h">
+      <Filter>Header Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameLogic.h">
+      <Filter>Header Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\SingleAnimation.h">
+      <Filter>Header Files\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Miscallenious.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\LevelBuilding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\EventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\AnimationHandler.cpp">
+      <Filter>Source Files\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\MainCharacter.cpp">
+      <Filter>Source Files\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Movement.cpp">
+      <Filter>Source Files\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\SingleAnimation.cpp">
+      <Filter>Source Files\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Block.cpp">
+      <Filter>Source Files\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Drawer.cpp">
+      <Filter>Source Files\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Level.cpp">
+      <Filter>Source Files\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Config.cpp">
+      <Filter>Source Files\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameLogic.cpp">
+      <Filter>Source Files\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameState.cpp">
+      <Filter>Source Files\Logic</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
