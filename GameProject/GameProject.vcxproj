@@ -43,6 +43,7 @@
     <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\MainCharacter.cpp" />
     <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Movement.cpp" />
     <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\SingleAnimation.cpp" />
+    <ClCompile Include="playtest.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

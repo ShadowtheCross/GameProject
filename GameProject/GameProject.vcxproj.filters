@@ -101,5 +101,8 @@
     <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameState.cpp">
       <Filter>Source Files\Logic</Filter>
     </ClCompile>
+    <ClCompile Include="playtest.txt">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
