@@ -1,0 +1,6 @@
+[Levels]
+	[Level]
+		RightLine:5
+		UpStairs:5
+	end
+end
