@@ -31,17 +31,20 @@
     <Filter Include="Source Files\Logic">
       <UniqueIdentifier>{d501f45f-3039-4ad8-96f0-7269dffb3f1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Characters\AnimationAndMovement">
+      <UniqueIdentifier>{1d99ddfb-bd7e-4474-84a9-fc9a0e906283}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Characters\Entities">
+      <UniqueIdentifier>{757aba16-b96d-4a30-8a67-9bee59f635e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters\AnimationAndMovement">
+      <UniqueIdentifier>{cabfa33a-6c8b-4ee3-868e-fe4300d88ddf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters\Entities">
+      <UniqueIdentifier>{4565c3ab-a3df-43ab-bbcd-1a70ac629f2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Movement.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\MainCharacter.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\AnimationHandler.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\BorderMapManagement.h">
       <Filter>Header Files\Border</Filter>
     </ClInclude>
@@ -50,9 +53,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameLogic.h">
       <Filter>Header Files\Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\SingleAnimation.h">
-      <Filter>Header Files\Characters</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Miscallenious.h">
       <Filter>Header Files</Filter>
@@ -66,22 +66,22 @@
     <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\EventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\AnimationHandler.h">
+      <Filter>Header Files\Characters\AnimationAndMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\SingleAnimation.h">
+      <Filter>Header Files\Characters\AnimationAndMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Movement.h">
+      <Filter>Header Files\Characters\AnimationAndMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\MainCharacter.h">
+      <Filter>Header Files\Characters\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\AnimationHandler.cpp">
-      <Filter>Source Files\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\MainCharacter.cpp">
-      <Filter>Source Files\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Movement.cpp">
-      <Filter>Source Files\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\SingleAnimation.cpp">
-      <Filter>Source Files\Characters</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Block.cpp">
       <Filter>Source Files\Levels</Filter>
@@ -103,6 +103,18 @@
     </ClCompile>
     <ClCompile Include="playtest.txt">
       <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\MainCharacter.cpp">
+      <Filter>Source Files\Characters\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\AnimationHandler.cpp">
+      <Filter>Source Files\Characters\AnimationAndMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Movement.cpp">
+      <Filter>Source Files\Characters\AnimationAndMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\SingleAnimation.cpp">
+      <Filter>Source Files\Characters\AnimationAndMovement</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

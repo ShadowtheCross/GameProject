@@ -1,2 +1,3 @@
-drawLine:32222
+drawLine:3
 drawDropDown:4
+drawDownStairs:3
