@@ -19,31 +19,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\AnimationHandler.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\BorderMapManagement.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Config.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\EventHandler.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameLogic.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameState.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\LevelBuilding.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\MainCharacter.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Miscallenious.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Movement.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\SingleAnimation.h" />
+    <ClCompile Include="AnimationHandler.cpp" />
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Drawer.cpp" />
+    <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainCharacter.cpp" />
+    <ClCompile Include="Movement.cpp" />
+    <ClCompile Include="playtest.txt" />
+    <ClCompile Include="SingleAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\AnimationHandler.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Block.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Config.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Drawer.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameLogic.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameState.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Level.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\main.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\MainCharacter.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Movement.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\SingleAnimation.cpp" />
-    <ClCompile Include="playtest.txt" />
+    <ClInclude Include="AnimationHandler.h" />
+    <ClInclude Include="Border.h" />
+    <ClInclude Include="BorderMapManagement.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="EventHandler.h" />
+    <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="LevelBuilding.h" />
+    <ClInclude Include="MainCharacter.h" />
+    <ClInclude Include="Miscallenious.h" />
+    <ClInclude Include="Movement.h" />
+    <ClInclude Include="SingleAnimation.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
