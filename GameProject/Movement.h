@@ -27,6 +27,7 @@ public:
 	void moveLeft(float Time);
 	void moveRight(float Time);
 	void moveUp(float Time);
+	
 	void gravity(float Time);
 
 	void update(float dt);
