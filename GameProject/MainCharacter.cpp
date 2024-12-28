@@ -6,7 +6,7 @@ MainCharacter::MainCharacter(GameState* gs, std::string name) : GameObject(gs, n
 	animation = new AnimationHandler(gs, name);
 	mobilize = new Movement(gs, name);
 	dashTimer = new Timer(0.30f, Timer::TIMER_ONCE);
-	jumpTimer = new Timer(0.1f, Timer::TIMER_ONCE);
+	jumpTimer = new Timer(.5f, Timer::TIMER_ONCE);
 }
 
 void MainCharacter::init(float acc_x, float acc_y,
@@ -29,32 +29,44 @@ void MainCharacter::init(float acc_x, float acc_y,
 
 void MainCharacter::update(float dt) {
 	float Time = graphics::getDeltaTime() / 10.f;
-	float elapsed;
-	animation->setCurrent("IdleRight");
+	
+	//Stability movement
+	mobilize->moveY(Time, Movement::Direction::Up, 0.1f);
+
+	
+	if (mobilize->direction_x == Movement::Direction::Right) {
+		animation->setCurrent("IdleRight");
+	}
+	else {
+		animation->setCurrent("IdleLeft");
+	}
+
+
 	if (dashTimer->isRunning()) {
-		elapsed = *dashTimer;
+		float elapsed1= *dashTimer;
 		mobilize->dash(Time,mobilize->direction_x);
 	}
 	if (jumpTimer->isRunning()) {
-		elapsed = *dashTimer;
-		mobilize->jump(Time, mobilize->direction_x);
+		float elapsed2 = *jumpTimer;
+		mobilize->moveY(Time, Movement::Direction::Up,1);
+		if (mobilize->onCeiling()) jumpTimer->stop();
 	}
-
 
 
 	if (mobilize->onFloor()) {
 		if (graphics::getKeyState(graphics::SCANCODE_LEFT)) {
 			mobilize->direction_x = Movement::Direction::Left;
-			mobilize->moveX(Time,mobilize->direction_x);
+			mobilize->moveX(Time,Movement::Direction::Left);
 			animation->setCurrent("RunLeft");
 		}
 		if (graphics::getKeyState(graphics::SCANCODE_RIGHT)) {
 			mobilize->direction_x = Movement::Direction::Right;
-			mobilize->moveY(Time, mobilize->direction_x);
+			mobilize->moveX(Time, mobilize->direction_x);
 			animation->setCurrent("RunRight");
 		}
-		if (graphics::getKeyState(graphics::SCANCODE_SPACE)) {
+		if (graphics::getKeyState(graphics::SCANCODE_SPACE) && !jumpTimer->isRunning()) {
 			jumpTimer->start();
+			std::cout << "ERROR if pressed more than once";
 		}else if (graphics::getKeyState(graphics::SCANCODE_LSHIFT)) {
 			dashTimer->start();
 		}
@@ -62,7 +74,7 @@ void MainCharacter::update(float dt) {
 	else {
 		if (graphics::getKeyState(graphics::SCANCODE_LEFT)) {
 			mobilize->direction_x = Movement::Direction::Left;
-			mobilize->moveY(Time, mobilize->direction_x);
+			mobilize->moveX(Time, mobilize->direction_x);
 			if (mobilize->rising()) {
 				animation->setCurrent("RiseRight");
 			}
@@ -72,7 +84,7 @@ void MainCharacter::update(float dt) {
 		}
 		if (graphics::getKeyState(graphics::SCANCODE_RIGHT)) {
 			mobilize->direction_x = Movement::Direction::Right;
-			mobilize->moveY(Time, mobilize->direction_x);
+			mobilize->moveX(Time, mobilize->direction_x);
 			if (mobilize->rising()) {
 				animation->setCurrent("RiseLeft");
 			}
@@ -82,7 +94,7 @@ void MainCharacter::update(float dt) {
 		}
 	}
 	
-
+	mobilize->moveY(Time, Movement::Direction::Up, 0.1f);
 
 
 	mobilize->gravity(Time);

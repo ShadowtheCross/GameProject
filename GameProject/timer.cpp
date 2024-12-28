@@ -1,6 +1,6 @@
 #include "timer.h"
-#include "sgg/graphics.h"
-
+#include <sgg/graphics.h>
+#include <iostream>
 Timer::Timer(float period, timer_type_t type)
 	: m_period(period), m_type(type)
 {
@@ -28,6 +28,7 @@ void Timer::pause(bool p)
 
 	if (!m_pause)
 	{
+
 		switch (m_type)
 		{
 		case TIMER_ONCE:
@@ -44,6 +45,7 @@ Timer::operator float()
 {
 	if (m_running && !m_pause)
 	{
+
 		switch (m_type)
 		{
 		case TIMER_ONCE:

@@ -14,7 +14,7 @@ public:
 		TIMER_PINGPONG		/// Continuously loop from 0 to 1 and back to 0
 	};   
 
-private:
+protected:
 	float m_val = 0.0f;
 	float m_period;
 	float m_time_start = 0.0f;

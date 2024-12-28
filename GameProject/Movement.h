@@ -44,6 +44,8 @@ public:
 	bool rising() {
 		return speed_y <= 0;
 	}
+
+	bool onCeiling();
 	bool onFloor();
 	void gravity(float Time);
 

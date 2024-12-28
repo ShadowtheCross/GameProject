@@ -10,8 +10,8 @@ void Movement::init(float acc_x, float acc_y,
 	float* player_x, float* player_y) {
 
 
-	acceleration_x = acc_x; acceleration_y = acc_y ;
-	max_speed_x = max_x; max_speed_y = max_y ;
+	acceleration_x = acc_x*10e-3; acceleration_y = acc_y * 10e-3;
+	max_speed_x = max_x * 10e-3; max_speed_y = max_y * 10e-3;
 	width = w;
 	height = h;
 	
@@ -31,17 +31,18 @@ void Movement::limitY() {
 }
 
 void Movement::moveY(float Time, Direction dir, float rate) {
-	speed_y = Time * dir * acceleration_x *rate;
-	if (GameObject::m_state->canGoAt(*current_x, *current_y + speed_y + height / 2 * dir)) {
-		*current_y += speed_y * dir;
+	speed_y += Time * dir * acceleration_x *rate;
+	if (GameObject::m_state->canGoAt(*current_x, *current_y + speed_y + height / 2 * dir )) {
+		*current_y += speed_y;
+
 		return;
 	}
 	speed_y = 0.0f;
 }
 void Movement::moveX(float Time, Direction dir, float rate) {
-	speed_y = Time * dir * acceleration_x * rate;
-	if (GameObject::m_state->canGoAt(*current_x + speed_y + width/ 2 * dir, *current_y )) {
-		*current_x += speed_x * dir;
+	speed_x += Time * dir * acceleration_x * rate;
+	if (GameObject::m_state->canGoAt(*current_x + speed_x + width/ 2 * dir, *current_y )) {
+		*current_x += speed_x ;
 		return;
 	}
 	speed_x = 0.0f;
@@ -62,7 +63,7 @@ void Movement::dash(float Time, Direction dir, float rate) {
 
 
 void Movement::gravity(float Time) {
-	moveY(Time, Direction::Down);
+	moveY(Time, Direction::Down,0.5);
 
 }
 
@@ -71,18 +72,19 @@ void Movement::gravity(float Time) {
 
 void Movement::update(float dt) {
 	if (onFloor()) speed_y = 0;
-	speed_x = speed_x * 0.1;
-	std::cout << speed_x << " " << speed_y << "\n";
+	speed_x *= 0.9f;
 }
 
-
+bool Movement::onCeiling() {
+	return !GameObject::m_state->canGoAt(*current_x, *current_y - height / 2 - 0.02f);
+}
 
 
 
 
 bool Movement::onFloor() {
 	
-	return !GameObject::m_state->canGoAt(*current_x, *current_y + height/2 +0.002f );
+	return !GameObject::m_state->canGoAt(*current_x, *current_y + height/2 +0.05f );
 }
 
 void Movement::draw() {

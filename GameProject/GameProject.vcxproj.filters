@@ -91,7 +91,7 @@
       <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
     <ClCompile Include="timer.cpp">
-      <Filter>Source Files\Logic</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,7 +132,7 @@
       <Filter>Header Files\Logic</Filter>
     </ClInclude>
     <ClInclude Include="timer.h">
-      <Filter>Header Files\Logic</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
