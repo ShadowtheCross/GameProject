@@ -31,7 +31,7 @@ void Movement::limitY() {
 }
 
 void Movement::moveDown(float Time) {
-	float down = Time * 0.01f;
+	float down = Time * 0.05f;
 	if ( GameObject::m_state->canGoAt(*current_x,*current_y + speed_y + height/2 + down)  ){
 		*current_y += down;
 	}
