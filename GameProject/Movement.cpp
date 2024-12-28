@@ -30,22 +30,23 @@ void Movement::limitY() {
 	}
 }
 
-void Movement::moveDown() {
-	if ( GameObject::m_state->canGoAt(*current_x,*current_y + speed_y + height/2+0.01f)  ){
-		*current_y += 0.01f;
+void Movement::moveDown(float Time) {
+	float down = Time * 0.05f;
+	if ( GameObject::m_state->canGoAt(*current_x,*current_y + speed_y + height/2 + down)  ){
+		*current_y += down;
 	}
 	
 }
 
-void Movement::moveUp() {
-	if (GameObject::m_state->canGoAt(*current_x, *current_y + speed_y - height / 2 - 0.01f)) {
-		*current_y -= 0.01f;
+void Movement::moveUp(float Time) {
+	float up =  - Time * 0.05f;
+	if (GameObject::m_state->canGoAt(*current_x, *current_y + speed_y - height / 2 + up)) {
+		*current_y += up;
 	}
 	
 }
 
-void Movement::gravity() {
-	float Time = graphics::getDeltaTime();
+void Movement::gravity(float Time) {
 	speed_y += acceleration_y * Time;
 	if (GameObject::m_state->canGoAt(*current_x, *current_y + speed_y + height / 2)) {
 		*current_y += speed_y;
@@ -58,8 +59,7 @@ void Movement::gravity() {
 
 
 
-void Movement::moveLeft() {
-	float Time = graphics::getDeltaTime();
+void Movement::moveLeft(float Time) {
 	speed_x -= acceleration_x * Time;
 	limitX();
 	if (GameObject::m_state->canGoAt(*current_x - width/2 + speed_x, *current_y)) {
@@ -67,8 +67,7 @@ void Movement::moveLeft() {
 	}
 	
 }
-void Movement::moveRight() {
-	float Time = graphics::getDeltaTime();
+void Movement::moveRight(float Time) {
 	speed_x += acceleration_x * Time;
 	limitX();
 	if (GameObject::m_state->canGoAt(*current_x + width / 2 + speed_x, *current_y)) {

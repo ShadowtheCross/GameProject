@@ -7,6 +7,9 @@ class MainCharacter : public GameObject {
 	class AnimationHandler* animation;
 	class Movement *mobilize;
 	float true_x =0.0f, true_y=0.0f;
+	
+
+
 public:
 	MainCharacter(GameState* gs, std::string name);
 

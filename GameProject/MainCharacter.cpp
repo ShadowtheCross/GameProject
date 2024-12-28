@@ -27,20 +27,21 @@ void MainCharacter::init(float acc_x, float acc_y,
 }
 
 void MainCharacter::update(float dt) {
-	mobilize->moveUp();
+	float Time = graphics::getDeltaTime() / 10.f;
+	mobilize->moveUp(Time);
 	if (!graphics::getKeyState(graphics::SCANCODE_LEFT) && !graphics::getKeyState(graphics::SCANCODE_RIGHT)) {
 		animation->setCurrent("Idle");
 	}
 	if (graphics::getKeyState(graphics::SCANCODE_RIGHT)) {
-		mobilize->moveRight();
+		mobilize->moveRight(Time);
 		animation->setCurrent("RunRight");
 	}
 	if (graphics::getKeyState(graphics::SCANCODE_LEFT)) {
-		mobilize->moveLeft();
+		mobilize->moveLeft(Time);
 		animation->setCurrent("RunLeft");
 	}
-	mobilize->moveDown();
-	mobilize->gravity();
+	mobilize->moveDown(Time);
+	mobilize->gravity(Time);
 
 	animation->update(dt);
 	mobilize->update(dt);

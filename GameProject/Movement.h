@@ -22,12 +22,12 @@ public:
 		float max_x, float max_y,
 		float w, float h,
 		float* player_x, float* player_y);
-	void moveDown();
+	void moveDown(float Time);
 	bool onFloor();
-	void moveLeft();
-	void moveRight();
-	void moveUp();
-	void gravity();
+	void moveLeft(float Time);
+	void moveRight(float Time);
+	void moveUp(float Time);
+	void gravity(float Time);
 
 	void update(float dt);
 	void draw();
