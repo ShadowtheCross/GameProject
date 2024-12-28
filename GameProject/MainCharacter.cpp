@@ -30,6 +30,7 @@ void MainCharacter::init(float acc_x, float acc_y,
 void MainCharacter::update(float dt) {
 	float Time = graphics::getDeltaTime() / 10.f;
 	float elapsed;
+	animation->setCurrent("IdleRight");
 	if (dashTimer->isRunning()) {
 		elapsed = *dashTimer;
 		mobilize->dash(Time,mobilize->direction_x);
@@ -44,7 +45,7 @@ void MainCharacter::update(float dt) {
 	if (mobilize->onFloor()) {
 		if (graphics::getKeyState(graphics::SCANCODE_LEFT)) {
 			mobilize->direction_x = Movement::Direction::Left;
-			mobilize->moveY(Time,mobilize->direction_x);
+			mobilize->moveX(Time,mobilize->direction_x);
 			animation->setCurrent("RunLeft");
 		}
 		if (graphics::getKeyState(graphics::SCANCODE_RIGHT)) {
@@ -63,27 +64,28 @@ void MainCharacter::update(float dt) {
 			mobilize->direction_x = Movement::Direction::Left;
 			mobilize->moveY(Time, mobilize->direction_x);
 			if (mobilize->rising()) {
-				animation->setCurrent("RightRising");
+				animation->setCurrent("RiseRight");
 			}
 			else {
-				animation->setCurrent("RightFalling");
+				animation->setCurrent("FallRight");
 			}
 		}
 		if (graphics::getKeyState(graphics::SCANCODE_RIGHT)) {
 			mobilize->direction_x = Movement::Direction::Right;
 			mobilize->moveY(Time, mobilize->direction_x);
 			if (mobilize->rising()) {
-				animation->setCurrent("LeftRising");
+				animation->setCurrent("RiseLeft");
 			}
 			else {
-				animation->setCurrent("LeftFalling");
+				animation->setCurrent("FallLeft");
 			}
 		}
 	}
+	
 
 
 
-
+	mobilize->gravity(Time);
 
 	animation->update(dt);
 	mobilize->update(dt);

@@ -10,8 +10,8 @@ void Movement::init(float acc_x, float acc_y,
 	float* player_x, float* player_y) {
 
 
-	acceleration_x = acc_x*1e-3; acceleration_y = acc_y * 1e-3;
-	max_speed_x = max_x*1e-3; max_speed_y = max_y * 1e-3;
+	acceleration_x = acc_x; acceleration_y = acc_y ;
+	max_speed_x = max_x; max_speed_y = max_y ;
 	width = w;
 	height = h;
 	
@@ -32,7 +32,7 @@ void Movement::limitY() {
 
 void Movement::moveY(float Time, Direction dir, float rate) {
 	speed_y = Time * dir * acceleration_x *rate;
-	if (GameObject::m_state->canGoAt(*current_x, *current_y + speed_y * dir + height / 2 * dir)) {
+	if (GameObject::m_state->canGoAt(*current_x, *current_y + speed_y + height / 2 * dir)) {
 		*current_y += speed_y * dir;
 		return;
 	}
@@ -40,7 +40,7 @@ void Movement::moveY(float Time, Direction dir, float rate) {
 }
 void Movement::moveX(float Time, Direction dir, float rate) {
 	speed_y = Time * dir * acceleration_x * rate;
-	if (GameObject::m_state->canGoAt(*current_x + speed_y * dir + width/ 2 * dir, *current_y )) {
+	if (GameObject::m_state->canGoAt(*current_x + speed_y + width/ 2 * dir, *current_y )) {
 		*current_x += speed_x * dir;
 		return;
 	}

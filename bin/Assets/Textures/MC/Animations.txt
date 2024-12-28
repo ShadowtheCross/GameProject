@@ -1,5 +1,9 @@
-IdleRight:6:100
-IdleLeft:6:100
+IdleRight:6:100.0f
+IdleLeft:6:100.0f
+FallLeft:2:50
+FallRight:2:50
+RiseLeft:2:50
+RiseRight:2:50
 RunRight:7:75.0f
 RunLeft:7:75.0f
 Hit:3:1
