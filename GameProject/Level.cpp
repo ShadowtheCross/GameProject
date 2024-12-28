@@ -8,7 +8,7 @@ Level::Level(GameState* gs, std::string name) : GameObject(gs, name), Drawer(gs,
 
 void Level::init(std::string constructionFile, std::string texturesFile) {
 	Drawer::init(constructionFile, texturesFile);
-	MC->init(10, 10, 50, 50,
+	MC->init(20, 1, 4560, 5,
 		"Assets\\Textures\\MC\\", "Assets\\Textures\\MC\\Animations.txt",
 		2.0/3.0 ,2.0/ 3.0, 0, 0);
 }

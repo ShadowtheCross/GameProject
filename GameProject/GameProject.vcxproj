@@ -31,6 +31,7 @@
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="playtest.txt" />
     <ClCompile Include="SingleAnimation.cpp" />
+    <ClCompile Include="timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationHandler.h" />
@@ -45,6 +46,7 @@
     <ClInclude Include="Miscallenious.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="SingleAnimation.h" />
+    <ClInclude Include="timer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

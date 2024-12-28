@@ -1,14 +1,18 @@
 #pragma once
 #include "AnimationHandler.h"
 #include "Movement.h"
+#include "timer.h"
 
 
 class MainCharacter : public GameObject {
 	class AnimationHandler* animation;
 	class Movement *mobilize;
 	float true_x =0.0f, true_y=0.0f;
+	//Ability Timers
+	class Timer* dashTimer,*jumpTimer;
 	
 
+	
 
 public:
 	MainCharacter(GameState* gs, std::string name);

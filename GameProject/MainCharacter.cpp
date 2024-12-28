@@ -5,6 +5,8 @@ float counter = 0;
 MainCharacter::MainCharacter(GameState* gs, std::string name) : GameObject(gs, name) {
 	animation = new AnimationHandler(gs, name);
 	mobilize = new Movement(gs, name);
+	dashTimer = new Timer(0.30f, Timer::TIMER_ONCE);
+	jumpTimer = new Timer(0.1f, Timer::TIMER_ONCE);
 }
 
 void MainCharacter::init(float acc_x, float acc_y,
@@ -17,31 +19,71 @@ void MainCharacter::init(float acc_x, float acc_y,
 	animation->init(TexturesDirectory, LoadScript,
 		width, height,
 		&true_x, &true_y);
-	mobilize->init(acc_x, acc_y, 
-		max_x, max_y, 
-		width, height, 
+	mobilize->init(acc_x, acc_y,
+		max_x, max_y,
+		width, height,
 		&true_x, &true_y);
-
 
 
 }
 
 void MainCharacter::update(float dt) {
 	float Time = graphics::getDeltaTime() / 10.f;
-	mobilize->moveUp(Time);
-	if (!graphics::getKeyState(graphics::SCANCODE_LEFT) && !graphics::getKeyState(graphics::SCANCODE_RIGHT)) {
-		animation->setCurrent("Idle");
+	float elapsed;
+	if (dashTimer->isRunning()) {
+		elapsed = *dashTimer;
+		mobilize->dash(Time,mobilize->direction_x);
 	}
-	if (graphics::getKeyState(graphics::SCANCODE_RIGHT)) {
-		mobilize->moveRight(Time);
-		animation->setCurrent("RunRight");
+	if (jumpTimer->isRunning()) {
+		elapsed = *dashTimer;
+		mobilize->jump(Time, mobilize->direction_x);
 	}
-	if (graphics::getKeyState(graphics::SCANCODE_LEFT)) {
-		mobilize->moveLeft(Time);
-		animation->setCurrent("RunLeft");
+
+
+
+	if (mobilize->onFloor()) {
+		if (graphics::getKeyState(graphics::SCANCODE_LEFT)) {
+			mobilize->direction_x = Movement::Direction::Left;
+			mobilize->moveY(Time,mobilize->direction_x);
+			animation->setCurrent("RunLeft");
+		}
+		if (graphics::getKeyState(graphics::SCANCODE_RIGHT)) {
+			mobilize->direction_x = Movement::Direction::Right;
+			mobilize->moveY(Time, mobilize->direction_x);
+			animation->setCurrent("RunRight");
+		}
+		if (graphics::getKeyState(graphics::SCANCODE_SPACE)) {
+			jumpTimer->start();
+		}else if (graphics::getKeyState(graphics::SCANCODE_LSHIFT)) {
+			dashTimer->start();
+		}
 	}
-	mobilize->moveDown(Time);
-	mobilize->gravity(Time);
+	else {
+		if (graphics::getKeyState(graphics::SCANCODE_LEFT)) {
+			mobilize->direction_x = Movement::Direction::Left;
+			mobilize->moveY(Time, mobilize->direction_x);
+			if (mobilize->rising()) {
+				animation->setCurrent("RightRising");
+			}
+			else {
+				animation->setCurrent("RightFalling");
+			}
+		}
+		if (graphics::getKeyState(graphics::SCANCODE_RIGHT)) {
+			mobilize->direction_x = Movement::Direction::Right;
+			mobilize->moveY(Time, mobilize->direction_x);
+			if (mobilize->rising()) {
+				animation->setCurrent("LeftRising");
+			}
+			else {
+				animation->setCurrent("LeftFalling");
+			}
+		}
+	}
+
+
+
+
 
 	animation->update(dt);
 	mobilize->update(dt);
@@ -55,4 +97,5 @@ void MainCharacter::draw() {
 
 MainCharacter::~MainCharacter() {
 	delete animation, mobilize;
+	delete jumpTimer, dashTimer;
 }

@@ -30,49 +30,39 @@ void Movement::limitY() {
 	}
 }
 
-void Movement::moveDown(float Time) {
-	float down = Time * 0.05f;
-	if ( GameObject::m_state->canGoAt(*current_x,*current_y + speed_y + height/2 + down)  ){
-		*current_y += down;
+void Movement::moveY(float Time, Direction dir, float rate) {
+	speed_y = Time * dir * acceleration_x *rate;
+	if (GameObject::m_state->canGoAt(*current_x, *current_y + speed_y * dir + height / 2 * dir)) {
+		*current_y += speed_y * dir;
+		return;
 	}
-	
+	speed_y = 0.0f;
+}
+void Movement::moveX(float Time, Direction dir, float rate) {
+	speed_y = Time * dir * acceleration_x * rate;
+	if (GameObject::m_state->canGoAt(*current_x + speed_y * dir + width/ 2 * dir, *current_y )) {
+		*current_x += speed_x * dir;
+		return;
+	}
+	speed_x = 0.0f;
 }
 
-void Movement::moveUp(float Time) {
-	float up =  - Time * 0.05f;
-	if (GameObject::m_state->canGoAt(*current_x, *current_y + speed_y - height / 2 + up)) {
-		*current_y += up;
-	}
-	
+void Movement::jump(float Time, float rate) {
+	moveY(Time, Direction::Up, rate);
 }
+
+void Movement::dash(float Time, Direction dir, float rate) {
+	moveX(Time, dir, rate);
+}
+
+
+
+
+
+
 
 void Movement::gravity(float Time) {
-	speed_y += acceleration_y * Time;
-	if (GameObject::m_state->canGoAt(*current_x, *current_y + speed_y + height / 2)) {
-		*current_y += speed_y;
-	}
-	else {
-		speed_y = 0.0f;
-	}
-
-}
-
-
-
-void Movement::moveLeft(float Time) {
-	speed_x -= acceleration_x * Time;
-	limitX();
-	if (GameObject::m_state->canGoAt(*current_x - width/2 + speed_x, *current_y)) {
-		*current_x += speed_x;
-	}
-	
-}
-void Movement::moveRight(float Time) {
-	speed_x += acceleration_x * Time;
-	limitX();
-	if (GameObject::m_state->canGoAt(*current_x + width / 2 + speed_x, *current_y)) {
-		*current_x += speed_x;
-	}
+	moveY(Time, Direction::Down);
 
 }
 
