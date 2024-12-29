@@ -10,8 +10,8 @@ void Movement::init(float acc_x, float acc_y,
 	float* player_x, float* player_y) {
 
 
-	acceleration_x = acc_x*10e-3; acceleration_y = acc_y * 10e-3;
-	max_speed_x = max_x * 10e-3; max_speed_y = max_y * 10e-3;
+	acceleration_x = acc_x*10e-4; acceleration_y = acc_y * 10e-4;
+	max_speed_x = max_x * 10e-4; max_speed_y = max_y * 10e-4;
 	width = w;
 	height = h;
 	
@@ -63,7 +63,7 @@ void Movement::dash(float Time, Direction dir, float rate) {
 
 
 void Movement::gravity(float Time) {
-	moveY(Time, Direction::Down,0.5);
+	moveY(Time, Direction::Down,1);
 
 }
 
@@ -73,6 +73,7 @@ void Movement::gravity(float Time) {
 void Movement::update(float dt) {
 	if (onFloor()) speed_y = 0;
 	speed_x *= 0.9f;
+	std::cout << speed_y << "\n";
 }
 
 bool Movement::onCeiling() {
@@ -84,7 +85,7 @@ bool Movement::onCeiling() {
 
 bool Movement::onFloor() {
 	
-	return !GameObject::m_state->canGoAt(*current_x, *current_y + height/2 +0.05f );
+	return !GameObject::m_state->canGoAt(*current_x, *current_y + height/2 +0.1f );
 }
 
 void Movement::draw() {

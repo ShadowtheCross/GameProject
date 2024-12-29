@@ -10,7 +10,8 @@ class GameState {
 private:
 	float* x_global, * y_global;
 	float x =0, y=0,BlockSize =256;
-	int player_width, player_height;
+	float* player_x, * player_y;
+	int OffsetX, OffsetY;
 
 	GameState();
 	class Level *current;
@@ -29,12 +30,18 @@ public:
 
 	void setGlobalX(float*);
 	void setGlobalY(float*);
+	void setPlayerX(float*);
+	void setPlayerY(float*);
+
 
 	void setBorder(std::unordered_map<int, BlockBorder* > *ref);
 	bool canGoAt(float x, float y);
 
 	float getGlobalX();
 	float getGlobalY();
+	float getPlayerX();
+	float getPlayerY();
+	
 	int get_player_width();
 	int get_player_height();
 	int getBlockSize();

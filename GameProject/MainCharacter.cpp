@@ -6,7 +6,9 @@ MainCharacter::MainCharacter(GameState* gs, std::string name) : GameObject(gs, n
 	animation = new AnimationHandler(gs, name);
 	mobilize = new Movement(gs, name);
 	dashTimer = new Timer(0.30f, Timer::TIMER_ONCE);
-	jumpTimer = new Timer(.5f, Timer::TIMER_ONCE);
+	dashCooldown = new Timer(0.6f, Timer::TIMER_ONCE);
+	jumpTimer = new Timer(0.1f, Timer::TIMER_ONCE);
+	jumpCoolDown = new Timer(.3f, Timer::TIMER_ONCE);
 }
 
 void MainCharacter::init(float acc_x, float acc_y,
@@ -24,6 +26,9 @@ void MainCharacter::init(float acc_x, float acc_y,
 		width, height,
 		&true_x, &true_y);
 
+	GameObject::m_state->setPlayerX(&true_x);
+	GameObject::m_state->setPlayerY(&true_y);
+
 
 }
 
@@ -31,7 +36,6 @@ void MainCharacter::update(float dt) {
 	float Time = graphics::getDeltaTime() / 10.f;
 	
 	//Stability movement
-	mobilize->moveY(Time, Movement::Direction::Up, 0.1f);
 
 	
 	if (mobilize->direction_x == Movement::Direction::Right) {
@@ -48,55 +52,94 @@ void MainCharacter::update(float dt) {
 	}
 	if (jumpTimer->isRunning()) {
 		float elapsed2 = *jumpTimer;
-		mobilize->moveY(Time, Movement::Direction::Up,1);
+		mobilize->moveY(Time, Movement::Direction::Up,3);
 		if (mobilize->onCeiling()) jumpTimer->stop();
 	}
+	float cooldown = *dashCooldown;
+	cooldown = *jumpCoolDown;
+
+
+	
+	bool left = false, right = false, jump = false, dash =false;
+	left = graphics::getKeyState(graphics::SCANCODE_LEFT);
+	right = graphics::getKeyState(graphics::SCANCODE_RIGHT);
+	jump = graphics::getKeyState(graphics::SCANCODE_SPACE);
+	dash = graphics::getKeyState(graphics::SCANCODE_LSHIFT);
+	bool doNothing = false;
+	bool idle = (left && right) || (!left && !right);
+
+	// Movement Configurer
+	if (  idle  ) {
+		//Set movement to idle
+		doNothing = true;
+	}
+	else {
+		if (left) {
+			mobilize->direction_x = Movement::Direction::Left;	
+			mobilize->moveX(Time, Movement::Direction::Left);
+
+		}
+		else if(right){
+			mobilize->direction_x = Movement::Direction::Right;
+			mobilize->moveX(Time, Movement::Direction::Right);
+
+		}
+	}
+
+
+	//Invoke direction
+
 
 
 	if (mobilize->onFloor()) {
-		if (graphics::getKeyState(graphics::SCANCODE_LEFT)) {
-			mobilize->direction_x = Movement::Direction::Left;
-			mobilize->moveX(Time,Movement::Direction::Left);
+		if (doNothing) {
+			if (mobilize->direction_x == Movement::Direction::Right) {
+				animation->setCurrent("IdleRight");
+			}
+			else {
+				animation->setCurrent("IdleLeft");
+			}
+		}
+		else if (left) {
 			animation->setCurrent("RunLeft");
 		}
-		if (graphics::getKeyState(graphics::SCANCODE_RIGHT)) {
-			mobilize->direction_x = Movement::Direction::Right;
-			mobilize->moveX(Time, mobilize->direction_x);
+		else {
 			animation->setCurrent("RunRight");
 		}
-		if (graphics::getKeyState(graphics::SCANCODE_SPACE) && !jumpTimer->isRunning()) {
+		if (jump && !jumpCoolDown->isRunning()) {
 			jumpTimer->start();
-			std::cout << "ERROR if pressed more than once";
-		}else if (graphics::getKeyState(graphics::SCANCODE_LSHIFT)) {
+			jumpCoolDown->start();
+		}
+		if (dash && !dashCooldown->isRunning() && !idle) {
 			dashTimer->start();
+			dashCooldown->start();
 		}
 	}
 	else {
-		if (graphics::getKeyState(graphics::SCANCODE_LEFT)) {
-			mobilize->direction_x = Movement::Direction::Left;
-			mobilize->moveX(Time, mobilize->direction_x);
-			if (mobilize->rising()) {
+		if (mobilize->rising()) {
+			if (mobilize->direction_x == Movement::Direction::Right) {
 				animation->setCurrent("RiseRight");
 			}
 			else {
-				animation->setCurrent("FallRight");
+				animation->setCurrent("RiseLeft");
 			}
 		}
-		if (graphics::getKeyState(graphics::SCANCODE_RIGHT)) {
-			mobilize->direction_x = Movement::Direction::Right;
-			mobilize->moveX(Time, mobilize->direction_x);
-			if (mobilize->rising()) {
-				animation->setCurrent("RiseLeft");
+		else {
+			if (mobilize->direction_x == Movement::Direction::Right) {
+				animation->setCurrent("FallRight");
 			}
 			else {
 				animation->setCurrent("FallLeft");
 			}
 		}
+		
+		
+		
+		
+
+
 	}
 	
-	mobilize->moveY(Time, Movement::Direction::Up, 0.1f);
-
-
 	mobilize->gravity(Time);
 
 	animation->update(dt);

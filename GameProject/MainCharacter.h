@@ -9,7 +9,8 @@ class MainCharacter : public GameObject {
 	class Movement *mobilize;
 	float true_x =0.0f, true_y=0.0f;
 	//Ability Timers
-	class Timer* dashTimer,*jumpTimer;
+	class Timer* dashTimer,*dashCooldown,
+		*jumpTimer,*jumpCoolDown;
 	
 
 	

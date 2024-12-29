@@ -1,3 +1,2 @@
 drawLine:3
-drawDropDown:4
-drawDownStairs:3
+drawCavern:33
