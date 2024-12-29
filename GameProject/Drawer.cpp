@@ -13,31 +13,21 @@ Drawer::Drawer(GameState* gs, std::string name) : GameObject(gs,name){
 }
 
 void Drawer::init(std::string constructionFile, std::string texturesFile) {
-
+	
 	// Load The brushes
+	
 
-	BackGround.outline_opacity = 0.0f;
-	BackGround.texture = texturesFile + "BackGround.png";
-	Ceiling.outline_opacity = 0.0f;
-	Ceiling.texture = texturesFile + "Ceiling.png";
-	DownStairs.outline_opacity = 0.0f;
-	DownStairs.texture = texturesFile + "DownStairs.png";
-	DownStairsCeiling.outline_opacity = 0.0f;
-	DownStairsCeiling.texture = texturesFile + "DownStairsCeiling.png";
-	Ground.outline_opacity = 0.0f;
-	Ground.texture = texturesFile + "Ground.png";
-	GroundRight.outline_opacity = 0.0f;
-	GroundRight.texture = texturesFile + "GroundRight.png";
-	LeftWall.outline_opacity = 0.0f;
-	LeftWall.texture = texturesFile + "LeftWall.png";
-	OutsideMap.outline_opacity = 0.0f;
-	OutsideMap.texture = texturesFile + "OutsideMap.png";
-	RightWall.outline_opacity = 0.0f;
-	RightWall.texture = texturesFile + "RightWall.png";
-	UpStairs.outline_opacity = 0.0f;
-	UpStairs.texture = texturesFile + "UpStairs.png";
-	UpStairsCeiling.outline_opacity = 0.0f;
-	UpStairsCeiling.texture = texturesFile + "UpStairsCeilng.png";
+
+	BackGround.setup(texturesFile + "BackGround", 3);
+	Ceiling.setup(texturesFile + "Ceiling", 1);
+	DownStairs.setup(texturesFile + "DownStairs", 2);
+	DownStairsCeiling.setup(texturesFile + "DownStairsCeiling",1);
+	Ground.setup(texturesFile + "Ground",4);
+	GroundRight.setup( texturesFile + "GroundRight",1);
+	LeftWall.setup( texturesFile + "LeftWall",1);	
+	RightWall.setup( texturesFile + "RightWall", 1);
+	UpStairs.setup(texturesFile + "UpStairs",2);
+	UpStairsCeiling.setup( texturesFile + "UpStairsCeilng",1);
 
 	std::ifstream file(constructionFile);
 	std::string data,type,length;
@@ -81,10 +71,10 @@ void Drawer::update() {
 void Drawer::drawStart() {
 	//PathStart
 	int BlockSize = GameObject::m_state->getBlockSize();
-	Blocks[0][0] = (Block::declareAndInit(GameObject::m_state, "", 0, 0, &BackGround));
-	Blocks[0][1] = (Block::declareAndInit(GameObject::m_state, "", 0, 1, &Ceiling));
-	Blocks[0][-1] = (Block::declareAndInit(GameObject::m_state, "",0, -1, &Ground));
-	Blocks[-1][0] = (Block::declareAndInit(GameObject::m_state, "",-1, 0, &RightWall));
+	Blocks[0][0] = (Block::declareAndInit(GameObject::m_state, "", 0, 0, BackGround.random() ));
+	Blocks[0][1] = (Block::declareAndInit(GameObject::m_state, "", 0, 1, Ceiling.random() ));
+	Blocks[0][-1] = (Block::declareAndInit(GameObject::m_state, "",0, -1,Ground.random() ));
+	Blocks[-1][0] = (Block::declareAndInit(GameObject::m_state, "",-1, 0, RightWall.random() ));
 	Border[0] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		0.0, .5f, //bottom 
 		0.0, -.5f); //top
@@ -100,9 +90,9 @@ void Drawer::drawLine(int n) {
 	}
 	int BlockSize = GameObject::m_state->getBlockSize();
 	for (int i = 0; i < n; i++) {
-		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, &BackGround));
-		Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, &Ground));
-		Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, &Ceiling));
+		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random() ));
+		Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random() ));
+		Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, Ceiling.random() ));
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			0.0, (-y_next + 0.5f) , 
 			0.0, (-y_next - 0.5f) );
@@ -115,8 +105,8 @@ void Drawer::drawUpStairs(int n) {
 
 	for (int i = 0; i < n; i++) {
 		
-		Blocks[x_next][y_next] =(Block::declareAndInit(GameObject::m_state, "", x_next, y_next, &UpStairs));
-		Blocks[x_next][y_next+1] =(Block::declareAndInit(GameObject::m_state, "",x_next, y_next+1, &UpStairsCeiling));
+		Blocks[x_next][y_next] =(Block::declareAndInit(GameObject::m_state, "", x_next, y_next, UpStairs.random() ));
+		Blocks[x_next][y_next+1] =(Block::declareAndInit(GameObject::m_state, "",x_next, y_next+1, UpStairsCeiling.random() ));
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			-1.0, (-y_next ),
 			-1.0, (-y_next - 1.0));
@@ -128,8 +118,8 @@ void Drawer::drawDownStairs(int n) {
 	int BlockSize = GameObject::m_state->getBlockSize();
 
 	for (int i = 0; i < n; i++) {
-		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, &DownStairsCeiling));
-		Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, &DownStairs));
+		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, DownStairsCeiling.random() ));
+		Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, DownStairs.random() ));
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			1.0, (-y_next+1),
 			1.0, (-y_next) 
@@ -142,28 +132,28 @@ void Drawer::drawDropDown(int n) {
 	//Draw the start
 	int BlockSize = GameObject::m_state->getBlockSize();
 
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, &BackGround));
-	Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, &GroundRight));
-	Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next + 1, &Ceiling));
+	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, BackGround.random() ) );
+	Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, GroundRight.random() ));
+	Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next + 1, Ceiling.random() ));
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		0.0, (y_next + 0.5) ,
 		0.0, (y_next - 0.5) 
 		);
 	x_next++;
 
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, &BackGround));
-	Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next+1, &Ceiling));
-	Blocks[x_next+1][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next + 1, y_next , &LeftWall));	
+	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, BackGround.random() ));
+	Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next+1, Ceiling.random() ));
+	Blocks[x_next+1][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next + 1, y_next , LeftWall.random() ));
 	y_next--;
 
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, &BackGround));
-	Blocks[x_next+1][y_next] =(Block::declareAndInit(GameObject::m_state, "",x_next+1, y_next, &LeftWall));
+	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random() ));
+	Blocks[x_next+1][y_next] =(Block::declareAndInit(GameObject::m_state, "",x_next+1, y_next, LeftWall.random() ));
 	y_next--;
 	
 	for (int i = 0; i < n; i++) {
-		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, &BackGround));
-		Blocks[x_next - 1 ][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next-1, y_next , &RightWall));
-		Blocks[x_next + 1][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next+1, y_next , &LeftWall));
+		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random() ));
+		Blocks[x_next - 1 ][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next-1, y_next , RightWall.random() ));
+		Blocks[x_next + 1][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next+1, y_next , LeftWall.random() ));
 		y_next--;
 	}
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
@@ -172,9 +162,9 @@ void Drawer::drawDropDown(int n) {
 	);
 
 
-	Blocks[x_next][y_next] =(Block::declareAndInit(GameObject::m_state, "", x_next, y_next , &BackGround));
-	Blocks[x_next-1][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next -1 , y_next , &RightWall));
-	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next-1, &Ground));
+	Blocks[x_next][y_next] =(Block::declareAndInit(GameObject::m_state, "", x_next, y_next , BackGround.random() ));
+	Blocks[x_next-1][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next -1 , y_next , RightWall.random() ) );
+	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next-1, Ground.random() ));
 	x_next++;
 	drawLine(1);
 
@@ -182,9 +172,9 @@ void Drawer::drawDropDown(int n) {
 void Drawer::drawCavern(int n) {
 	int BlockSize = GameObject::m_state->getBlockSize();
 	
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next , &BackGround));
-	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, &Ground));
-	Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, &UpStairsCeiling));
+	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next , BackGround.random() ));
+	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random() ));
+	Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, UpStairsCeiling.random() ));
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		0.0, y_next + 0.5f,
 		-1.0f, y_next -1.0f);
@@ -196,10 +186,10 @@ void Drawer::drawCavern(int n) {
 	
 	x_next++;
 	for (int i = 0; i < n - 2; i++) {
-		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, &BackGround));
-		Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, &Ground));
-		Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, &BackGround));
-		Blocks[x_next][y_next+2] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 2, &Ceiling));
+		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, BackGround.random() ));
+		Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random() ));
+		Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, BackGround.random() ));
+		Blocks[x_next][y_next+2] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 2, Ceiling.random() ));
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			0.0f, (y_next + .5f) ,
 			0.0f, (y_next - 1.5f) 
@@ -213,9 +203,9 @@ void Drawer::drawCavern(int n) {
 		0.0f, (y_next - 0.5f)
 	);
 
-	Blocks[x_next][y_next] =(Block::declareAndInit(GameObject::m_state, "", x_next, y_next, &BackGround));
-	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next - 1, &Ground));
-	Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next + 1, &DownStairsCeiling));
+	Blocks[x_next][y_next] =(Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random() ));
+	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next - 1, Ground.random() ));
+	Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next + 1, DownStairsCeiling.random()));
 	x_next++;
 
 }
@@ -228,10 +218,10 @@ void Drawer::drawEnd() {
 
 
 	//PathStart
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, &BackGround));
-	Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next+1, &Ceiling));
-	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next -1, &Ground));
-	Blocks[x_next+1][y_next] =(Block::declareAndInit(GameObject::m_state, "", x_next+1, y_next, &LeftWall));
+	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, BackGround.random() ));
+	Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next+1, Ceiling.random() ));
+	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next -1, Ground.random() ));
+	Blocks[x_next+1][y_next] =(Block::declareAndInit(GameObject::m_state, "", x_next+1, y_next, LeftWall.random() ));
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		-0.0f, (-y_next + 0.5f) ,
 		0.0f, (-y_next - 0.5f) 

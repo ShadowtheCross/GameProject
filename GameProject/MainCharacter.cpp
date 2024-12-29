@@ -7,7 +7,7 @@ MainCharacter::MainCharacter(GameState* gs, std::string name) : GameObject(gs, n
 	mobilize = new Movement(gs, name);
 	dashTimer = new Timer(0.30f, Timer::TIMER_ONCE);
 	dashCooldown = new Timer(0.6f, Timer::TIMER_ONCE);
-	jumpTimer = new Timer(0.1f, Timer::TIMER_ONCE);
+	jumpTimer = new Timer(0.05, Timer::TIMER_ONCE);
 	jumpCoolDown = new Timer(.3f, Timer::TIMER_ONCE);
 }
 
@@ -52,7 +52,7 @@ void MainCharacter::update(float dt) {
 	}
 	if (jumpTimer->isRunning()) {
 		float elapsed2 = *jumpTimer;
-		mobilize->moveY(Time, Movement::Direction::Up,3);
+		mobilize->moveY(Time, Movement::Direction::Up,5);
 		if (mobilize->onCeiling()) jumpTimer->stop();
 	}
 	float cooldown = *dashCooldown;

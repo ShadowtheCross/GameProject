@@ -23,7 +23,7 @@ int main(void) {
 	
 	game->createInstance();
 
-	game->instance->init(256,"Assets\\Level1.txt", "Assets\\Textures\\Level\\");
+	game->instance->init(512,"Assets\\Level1.txt", "Assets\\Textures\\Level\\");
 
 	graphics::startMessageLoop();
 

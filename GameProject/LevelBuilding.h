@@ -6,6 +6,13 @@
 #include <unordered_map>
 #include "BorderMapManagement.h"
 #include "MainCharacter.h"
+#include <vector>
+#include "RandomGet.h"
+#include "Miscallenious.h"
+
+
+
+
 
 class Block : protected GameObject{
 private:
@@ -41,7 +48,7 @@ protected:
 	std::unordered_map<int, BlockBorder*>  Border;
 
 
-	graphics::Brush BackGround,
+	class RandomBrush BackGround,
 		Ceiling, DownStairs, DownStairsCeiling,
 		Ground, GroundRight, LeftWall, OutsideMap, RightWall,
 		UpStairs, UpStairsCeiling;

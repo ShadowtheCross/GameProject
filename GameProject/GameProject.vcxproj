@@ -45,6 +45,7 @@
     <ClInclude Include="MainCharacter.h" />
     <ClInclude Include="Miscallenious.h" />
     <ClInclude Include="Movement.h" />
+    <ClInclude Include="RandomGet.h" />
     <ClInclude Include="SingleAnimation.h" />
     <ClInclude Include="timer.h" />
   </ItemGroup>

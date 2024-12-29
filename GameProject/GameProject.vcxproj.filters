@@ -52,6 +52,9 @@
     <Filter Include="Source Files\LevelBuilding">
       <UniqueIdentifier>{4c762ade-7019-4bec-b8d8-881c117285bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Helpful">
+      <UniqueIdentifier>{c9f2bc82-000d-4792-9252-35ac861e6eec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="playtest.txt">
@@ -98,9 +101,6 @@
     <ClInclude Include="EventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Miscallenious.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AnimationHandler.h">
       <Filter>Header Files\Entities\AnimationManagement</Filter>
     </ClInclude>
@@ -133,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="timer.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Miscallenious.h">
+      <Filter>Header Files\Helpful</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomGet.h">
+      <Filter>Header Files\Helpful</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
