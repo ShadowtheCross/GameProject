@@ -73,7 +73,6 @@ void Movement::gravity(float Time) {
 void Movement::update(float dt) {
 	if (onFloor()) speed_y = 0;
 	speed_x *= 0.9f;
-	std::cout << speed_y << "\n";
 }
 
 bool Movement::onCeiling() {

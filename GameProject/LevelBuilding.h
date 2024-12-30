@@ -5,12 +5,10 @@
 #include <iostream>
 #include <unordered_map>
 #include "BorderMapManagement.h"
-#include "MainCharacter.h"
 #include <vector>
 #include "RandomGet.h"
 #include "Miscallenious.h"
-#include "Enemies.h"
-
+#include "Character.h"
 
 
 
@@ -87,7 +85,8 @@ public:
 
 	
 	class MainCharacter* MC;
-	std::list<Enemy*> Enemies;
+	class Goblin* g;
+	class Skeleton* s;
 	Level(GameState* gs, std::string name);
 	
 

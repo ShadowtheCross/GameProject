@@ -1,10 +1,7 @@
-#include "MainCharacter.h"
-#include "AnimationHandler.h"
+#include "Character.h"
 
 float counter = 0;
-MainCharacter::MainCharacter(GameState* gs, std::string name) : GameObject(gs, name) {
-	animation = new AnimationHandler(gs, name);
-	mobilize = new Movement(gs, name);
+MainCharacter::MainCharacter(GameState* gs, std::string name) : Character(gs, name) {
 	dashTimer = new Timer(0.30f, Timer::TIMER_ONCE);
 	dashCooldown = new Timer(0.6f, Timer::TIMER_ONCE);
 	jumpTimer = new Timer(0.05, Timer::TIMER_ONCE);

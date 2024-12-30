@@ -2,6 +2,7 @@
 #include "GameState.h"
 #include "GameLogic.h"
 
+
 Level::Level(GameState* gs, std::string name) : GameObject(gs, name), Drawer(gs, name + "Builder") {
 	MC = new MainCharacter(gs, "MainCharacter");
 	g = new Goblin(gs);
@@ -13,7 +14,7 @@ void Level::init(std::string constructionFile, std::string texturesFile) {
 	MC->init(1, 1, 1, 12,
 		"Assets\\Textures\\MC\\", "Assets\\Textures\\MC\\Animations.txt",
 		2.0/3.0 ,2.0/ 3.0, 0, 0);
-	g->init(1, 0);
+	g->init(16, 0);
 	s->init(2, 0);
 }
 

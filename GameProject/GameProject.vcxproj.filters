@@ -58,6 +58,9 @@
     <Filter Include="Header Files\Triggers">
       <UniqueIdentifier>{7f4356c0-ca69-4313-bdb8-809f92859e25}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{818b273b-b4ff-44d1-b40a-742524e12a0d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="playtest.txt">
@@ -99,7 +102,7 @@
     <ClCompile Include="timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
+    <ClCompile Include="Character.cpp">
       <Filter>Source Files\Entities\Creature</Filter>
     </ClCompile>
     <ClCompile Include="Goblin.cpp">
@@ -122,16 +125,10 @@
     <ClInclude Include="Movement.h">
       <Filter>Header Files\Entities\Movement</Filter>
     </ClInclude>
-    <ClInclude Include="MainCharacter.h">
-      <Filter>Header Files\Entities\Creatures</Filter>
-    </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\Logic</Filter>
     </ClInclude>
     <ClInclude Include="GameLogic.h">
-      <Filter>Header Files\Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelBuilding.h">
       <Filter>Header Files\Logic</Filter>
     </ClInclude>
     <ClInclude Include="BorderMapManagement.h">
@@ -152,11 +149,14 @@
     <ClInclude Include="RandomGet.h">
       <Filter>Header Files\Helpful</Filter>
     </ClInclude>
-    <ClInclude Include="Enemies.h">
+    <ClInclude Include="Character.h">
       <Filter>Header Files\Entities\Creatures</Filter>
     </ClInclude>
     <ClInclude Include="Trigger.h">
       <Filter>Header Files\Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelBuilding.h">
+      <Filter>Header Files\LevelHandling</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

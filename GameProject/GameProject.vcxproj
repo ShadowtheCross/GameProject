@@ -23,7 +23,7 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Drawer.cpp" />
-    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Goblin.cpp" />
@@ -41,12 +41,11 @@
     <ClInclude Include="Border.h" />
     <ClInclude Include="BorderMapManagement.h" />
     <ClInclude Include="Config.h" />
-    <ClInclude Include="Enemies.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="LevelBuilding.h" />
-    <ClInclude Include="MainCharacter.h" />
     <ClInclude Include="Miscallenious.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="RandomGet.h" />

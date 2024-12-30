@@ -1,11 +1,11 @@
-#include "Enemies.h"
+#include "Character.h"
 
-Enemy::Enemy(GameState* gs, std::string name) : GameObject(gs, name) {
+Character::Character(GameState* gs, std::string name) : GameObject(gs, name) {
 	animation = new AnimationHandler(gs, name + " Animation");
 	mobilize = new Movement(gs, name + "Physics");
 }
 
-void Enemy::init(float acc_x, float acc_y, float max_x, float max_y,
+void Character::init(float acc_x, float acc_y, float max_x, float max_y,
 	std::string TexturesDirectory, std::string LoadScript,
 	float width, float height,
 	int spawn_x, int spawn_y) {
@@ -21,18 +21,23 @@ void Enemy::init(float acc_x, float acc_y, float max_x, float max_y,
 		&true_x, &true_y);
 
 }
-void Enemy::kill() {
+void Character::kill() {
 	GameObject::setActive(false);
 }
 
-void Enemy::update(float dt) {}
+float Character::playerDistance() {
+	return GameObject::m_state->getPlayerX() - true_x;
+}
 
-void Enemy::draw() {
+
+void Character::update(float dt) {}
+
+void Character::draw() {
 	mobilize->draw();
 	animation->draw();
 }
 
-Enemy::~Enemy() {
+Character::~Character() {
 	delete mobilize;
 	delete animation;
 

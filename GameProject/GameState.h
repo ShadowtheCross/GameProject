@@ -3,8 +3,8 @@
 #include <iostream>
 #include "LevelBuilding.h"
 #include <unordered_map>
-#include "MainCharacter.h"
 #include "BorderMapManagement.h"
+#include "Character.h"
 
 class GameState {
 private:
@@ -12,7 +12,6 @@ private:
 	float x =0, y=0,BlockSize =256;
 	float* player_x, * player_y;
 	int OffsetX, OffsetY;
-	std::list<Enemy*> Enemies;
 
 
 	GameState();
@@ -44,8 +43,6 @@ public:
 	float getPlayerX();
 	float getPlayerY();
 	
-	void addEnemy(Enemy*);
-	void wipeEnemies();
 
 
 

@@ -2,8 +2,8 @@
 #include "Config.h"
 
 GameState* GameState::instance = NULL;
-int Config::window_width = 2560;
-int Config::window_height = 1440;
+int Config::window_width = 2500;
+int Config::window_height = 1000;
 
 int Config::mainPlayerWidth = 10;
 int Config::mainPlayerHeight = 30;
