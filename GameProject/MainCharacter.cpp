@@ -60,11 +60,14 @@ void MainCharacter::update(float dt) {
 
 
 	
-	bool left = false, right = false, jump = false, dash =false;
-	left = graphics::getKeyState(graphics::SCANCODE_LEFT);
-	right = graphics::getKeyState(graphics::SCANCODE_RIGHT);
+	bool left = false, right = false, jump = false, dash =false,hit = false;
+	left = graphics::getKeyState(graphics::SCANCODE_A);
+	right = graphics::getKeyState(graphics::SCANCODE_D);
 	jump = graphics::getKeyState(graphics::SCANCODE_SPACE);
 	dash = graphics::getKeyState(graphics::SCANCODE_LSHIFT);
+	graphics::MouseState st;
+	graphics::getMouseState(st);
+	hit = st.button_left_pressed;
 	bool doNothing = false;
 	bool idle = (left && right) || (!left && !right);
 

@@ -12,6 +12,8 @@ private:
 	float x =0, y=0,BlockSize =256;
 	float* player_x, * player_y;
 	int OffsetX, OffsetY;
+	std::list<Enemy*> Enemies;
+
 
 	GameState();
 	class Level *current;
@@ -42,6 +44,11 @@ public:
 	float getPlayerX();
 	float getPlayerY();
 	
+	void addEnemy(Enemy*);
+	void wipeEnemies();
+
+
+
 	int get_player_width();
 	int get_player_height();
 	int getBlockSize();

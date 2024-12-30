@@ -55,6 +55,9 @@
     <Filter Include="Header Files\Helpful">
       <UniqueIdentifier>{c9f2bc82-000d-4792-9252-35ac861e6eec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Triggers">
+      <UniqueIdentifier>{7f4356c0-ca69-4313-bdb8-809f92859e25}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="playtest.txt">
@@ -95,6 +98,15 @@
     </ClCompile>
     <ClCompile Include="timer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="Goblin.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +151,12 @@
     </ClInclude>
     <ClInclude Include="RandomGet.h">
       <Filter>Header Files\Helpful</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemies.h">
+      <Filter>Header Files\Entities\Creatures</Filter>
+    </ClInclude>
+    <ClInclude Include="Trigger.h">
+      <Filter>Header Files\Triggers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@
 #include <vector>
 #include "RandomGet.h"
 #include "Miscallenious.h"
-
+#include "Enemies.h"
 
 
 
@@ -87,6 +87,7 @@ public:
 
 	
 	class MainCharacter* MC;
+	std::list<Enemy*> Enemies;
 	Level(GameState* gs, std::string name);
 	
 

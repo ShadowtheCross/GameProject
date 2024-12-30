@@ -6,7 +6,6 @@
 #include <cmath>
 #include "LevelBuilding.h"
 
-
 GameState::GameState()  {
 	x_global = &x;
 	y_global = &y;
@@ -20,8 +19,6 @@ GameState::GameState()  {
 
 void GameState::update(float dt) {
 	current->update(dt); 
-	
-
 }
 void GameState::init(int BlockS,std::string ConstructionFile, std::string texturesFile) {
 	BlockSize = BlockS;

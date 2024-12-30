@@ -199,9 +199,9 @@ void Drawer::drawCavern(int n) {
 	}
 
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
-		-1.0f, (y_next + 1.0f) ,
-		0.0f, (y_next - 0.5f)
-	);
+		0.0, y_next + 0.5f,
+		1.0f, y_next - 1.0f);
+
 
 	Blocks[x_next][y_next] =(Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random() ));
 	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next - 1, Ground.random() ));
@@ -242,8 +242,6 @@ void Drawer::draw() {
 		for (int y = cy-10; y < cy+10; y++) {
 			if (Blocks[x][y]) {
 				Blocks[x][y]->draw();
-				
-
 			}
 		}
 	}
