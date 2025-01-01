@@ -13,26 +13,31 @@ GameState::GameState()  {
 	player_y = &y;
 	OffsetX = Config::window_width / 2;
 	OffsetY = Config::window_height / 2;
-
-
+	Handler = new EntityHandler(this);
 }
 
 void GameState::update(float dt) {
-	current->update(dt); 
+	ActiveLevel->update(dt); 
+	Handler->update(dt);
 }
 void GameState::init(int BlockS,std::string ConstructionFile, std::string texturesFile) {
 	BlockSize = BlockS;
-	current = new Level(instance, "Level1");
-	current->init(ConstructionFile, texturesFile);
+	Handler->init();
+
+	ActiveLevel = new Level(instance, "Level1");
+	ActiveLevel->init(ConstructionFile, texturesFile);
 	
 	
 }
 void GameState::draw() {
-	current->draw();
-
+	ActiveLevel->draw();
+	Handler->draw();
 
 
 }
+
+
+
 
 void GameState::createInstance() {
 	if (GameState::instance == nullptr) {
@@ -65,7 +70,7 @@ bool GameState::canGoAt(float x, float y) {
 
 
 GameState::~GameState() {
-	delete current;
+	delete ActiveLevel, Handler;
 }
 
 float GameState::getGlobalX() {
@@ -89,7 +94,13 @@ void GameState::setPlayerY(float* Y) {
 	player_y = Y;
 }
 
+void GameState::wipeEnemies() {
+	Handler->wipeEntities();
+}
 
+void GameState::appendEntity(Entity* en) {
+	Handler->appendEntity(en);
+}
 
 void GameState::setGlobalX(float* X) {
 	x_global = X;

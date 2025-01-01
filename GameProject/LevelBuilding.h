@@ -1,5 +1,4 @@
 #pragma once
-
 #include "sgg/graphics.h"
 #include "GameLogic.h"
 #include <iostream>
@@ -9,8 +8,13 @@
 #include "RandomGet.h"
 #include "Miscallenious.h"
 #include "Character.h"
+#include "Config.h"
 
 
+/*
+* General Block Class
+* 
+*/
 
 class Block : protected GameObject{
 private:
@@ -33,6 +37,32 @@ public:
 };
 
 /*
+* 
+* Class enemy spawn Block
+* 
+*/
+
+class EnemyBlock : public Block {
+
+public:
+	static EnemyBlock* declareAndInit(GameState* gs, std::string name, int x_cord, int y_cord,graphics::Brush* toUse,int rate);
+
+
+	EnemyBlock(GameState* gs, std::string name);
+	void init(float x_cord, float y_cord, graphics::Brush* toUse,int spawnRate);
+	void draw();
+	void update();
+	~EnemyBlock();
+
+
+};
+
+
+
+
+
+
+/*
 	* World Building Methods
 	*
 	* Will be used by init to construct the play world
@@ -40,7 +70,7 @@ public:
 */
 
 
-class Drawer : protected GameObject {
+class DungeonDrawer : protected GameObject {
 protected:
 	std::unordered_map<int, std::unordered_map<int, Block*> > Blocks;
 	std::unordered_map<int, BlockBorder*>  Border;
@@ -68,25 +98,18 @@ protected:
 
 public:
 
-	Drawer(GameState* gs, std::string name);
+	DungeonDrawer(GameState* gs, std::string name);
 
 	void init(std::string constructionFile,std::string texturesFile);
 	void update();
 	void draw();
 	
-	~Drawer();
+	~DungeonDrawer();
 
 };
 
-class Level : public Drawer, public GameObject {
-
-
+class Level : public DungeonDrawer, public GameObject {
 public:
-
-	
-	class MainCharacter* MC;
-	class Goblin* g;
-	class Skeleton* s;
 	Level(GameState* gs, std::string name);
 	
 
@@ -94,10 +117,5 @@ public:
 	void update(float dt);
 	void draw();
 
-
-
 	~Level();
-
-
-
 };

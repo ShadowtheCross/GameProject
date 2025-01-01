@@ -111,6 +111,15 @@
     <ClCompile Include="Skeleton.cpp">
       <Filter>Source Files\Entities\Creature</Filter>
     </ClCompile>
+    <ClCompile Include="EntityManagement.cpp">
+      <Filter>Source Files\LevelBuilding</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBlock.cpp">
+      <Filter>Source Files\LevelBuilding</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EventHandler.h">
@@ -156,6 +165,9 @@
       <Filter>Header Files\Triggers</Filter>
     </ClInclude>
     <ClInclude Include="LevelBuilding.h">
+      <Filter>Header Files\LevelHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManagement.h">
       <Filter>Header Files\LevelHandling</Filter>
     </ClInclude>
   </ItemGroup>

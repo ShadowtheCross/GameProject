@@ -2,26 +2,19 @@
 
 float counter = 0;
 MainCharacter::MainCharacter(GameState* gs, std::string name) : Character(gs, name) {
-	dashTimer = new Timer(0.30f, Timer::TIMER_ONCE);
-	dashCooldown = new Timer(0.6f, Timer::TIMER_ONCE);
+	dashTimer = new Timer(0.15f, Timer::TIMER_ONCE);
+	dashCooldown = new Timer(0.3f, Timer::TIMER_ONCE);
 	jumpTimer = new Timer(0.05, Timer::TIMER_ONCE);
 	jumpCoolDown = new Timer(.3f, Timer::TIMER_ONCE);
 }
 
-void MainCharacter::init(float acc_x, float acc_y,
-	float max_x, float max_y,
-	std::string TexturesDirectory, std::string LoadScript,
-	float width, float height,
-	int spawn_x, int spawn_y) {
-	true_x = spawn_x;
-	true_y = spawn_y;
-	animation->init(TexturesDirectory, LoadScript,
-		width, height,
-		&true_x, &true_y);
-	mobilize->init(acc_x, acc_y,
-		max_x, max_y,
-		width, height,
-		&true_x, &true_y);
+void MainCharacter::init(int spawn_x, int spawn_y) {
+	
+	Character::init(1, 1, 1, 12,
+		"Assets\\Textures\\MC\\", "Assets\\Textures\\MC\\Animations.txt",
+		2.0 / 3.0, 2.0 / 3.0, 
+		spawn_x, spawn_y,
+		100);
 
 	GameObject::m_state->setPlayerX(&true_x);
 	GameObject::m_state->setPlayerY(&true_y);
@@ -31,7 +24,9 @@ void MainCharacter::init(float acc_x, float acc_y,
 
 void MainCharacter::update(float dt) {
 	float Time = graphics::getDeltaTime() / 10.f;
+	std::cout << true_x << " " << Character::true_y << std::endl;
 	
+
 	//Stability movement
 
 	

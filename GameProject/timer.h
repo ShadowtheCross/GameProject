@@ -47,8 +47,8 @@ public:
 	*/
 	bool isRunning() { return m_running; }
 
-	/** Casting operator. Updates and reports the current normalized interval value.
-	*   \return the current normalized (output) value of the timer.
+	/** Casting operator. Updates and reports the ActiveLevel normalized interval value.
+	*   \return the ActiveLevel normalized (output) value of the timer.
 	*/
 	operator float();
 };

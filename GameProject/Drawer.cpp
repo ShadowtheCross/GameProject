@@ -8,11 +8,11 @@
 #include "BorderMapManagement.h"
 #include "Miscallenious.h"
 
-Drawer::Drawer(GameState* gs, std::string name) : GameObject(gs,name){
+DungeonDrawer::DungeonDrawer(GameState* gs, std::string name) : GameObject(gs,name){
 
 }
 
-void Drawer::init(std::string constructionFile, std::string texturesFile) {
+void DungeonDrawer::init(std::string constructionFile, std::string texturesFile) {
 	
 	// Load The brushes
 	
@@ -64,11 +64,11 @@ void Drawer::init(std::string constructionFile, std::string texturesFile) {
 
 }
 
-void Drawer::update() {
+void DungeonDrawer::update() {
 
 }
 
-void Drawer::drawStart() {
+void DungeonDrawer::drawStart() {
 	//PathStart
 	int BlockSize = GameObject::m_state->getBlockSize();
 	Blocks[0][0] = (Block::declareAndInit(GameObject::m_state, "", 0, 0, BackGround.random() ));
@@ -84,13 +84,13 @@ void Drawer::drawStart() {
 
 }
 
-void Drawer::drawLine(int n) {
+void DungeonDrawer::drawLine(int n) {
 	if (n < 0) {
 		return;
 	}
 	int BlockSize = GameObject::m_state->getBlockSize();
 	for (int i = 0; i < n; i++) {
-		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random() ));
+		Blocks[x_next][y_next] = (EnemyBlock::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random(), Config::spawn_rate ));
 		Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random() ));
 		Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, Ceiling.random() ));
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
@@ -100,7 +100,7 @@ void Drawer::drawLine(int n) {
 	}
 }
 
-void Drawer::drawUpStairs(int n) {
+void DungeonDrawer::drawUpStairs(int n) {
 	int BlockSize = GameObject::m_state->getBlockSize();
 
 	for (int i = 0; i < n; i++) {
@@ -114,7 +114,7 @@ void Drawer::drawUpStairs(int n) {
 		y_next++;
 	}
 }
-void Drawer::drawDownStairs(int n) {
+void DungeonDrawer::drawDownStairs(int n) {
 	int BlockSize = GameObject::m_state->getBlockSize();
 
 	for (int i = 0; i < n; i++) {
@@ -128,7 +128,7 @@ void Drawer::drawDownStairs(int n) {
 		y_next--;
 	}
 }
-void Drawer::drawDropDown(int n) {
+void DungeonDrawer::drawDropDown(int n) {
 	//Draw the start
 	int BlockSize = GameObject::m_state->getBlockSize();
 
@@ -169,7 +169,7 @@ void Drawer::drawDropDown(int n) {
 	drawLine(1);
 
 }
-void Drawer::drawCavern(int n) {
+void DungeonDrawer::drawCavern(int n) {
 	int BlockSize = GameObject::m_state->getBlockSize();
 	
 	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next , BackGround.random() ));
@@ -213,7 +213,7 @@ void Drawer::drawCavern(int n) {
 
 
 
-void Drawer::drawEnd() {
+void DungeonDrawer::drawEnd() {
 	int BlockSize = GameObject::m_state->getBlockSize();
 
 
@@ -230,7 +230,7 @@ void Drawer::drawEnd() {
 
 }
 
-void Drawer::draw() {
+void DungeonDrawer::draw() {
 	int start_x, end_x, start_y, end_y;
 	int gx = GameObject::m_state->getGlobalX();
 	int gy = GameObject::m_state->getGlobalY();
@@ -248,7 +248,7 @@ void Drawer::draw() {
 	
 
 }
-Drawer::~Drawer() {
+DungeonDrawer::~DungeonDrawer() {
 	
 
 }

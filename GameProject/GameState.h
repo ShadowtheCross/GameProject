@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include "BorderMapManagement.h"
 #include "Character.h"
+#include "EntityManagement.h"
 
 class GameState {
 private:
@@ -15,8 +16,8 @@ private:
 
 
 	GameState();
-	class Level *current;
-	class MainCharacter* Player;
+	class Level *ActiveLevel;
+	class EntityHandler* Handler;
 	std::unordered_map<int, class BlockBorder*> *blockRef ;
 
 public:
@@ -43,8 +44,13 @@ public:
 	float getPlayerX();
 	float getPlayerY();
 	
+	void wipeEnemies();
+	void appendEntity(Entity* en);
 
 
+	void changeLevel(Level* level) {
+		ActiveLevel =  level;
+	}
 
 	int get_player_width();
 	int get_player_height();

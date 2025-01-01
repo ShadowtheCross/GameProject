@@ -2,6 +2,7 @@
 #include "Miscallenious.h"
 
 Movement::Movement(GameState* gs, std::string name) : GameObject(gs, name) {
+
 }
 
 void Movement::init(float acc_x, float acc_y,

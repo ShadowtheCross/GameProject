@@ -5,10 +5,11 @@ Skeleton::Skeleton(GameState* gs) : Character(gs, "Skeleton") {
 }
 
 void Skeleton::init(int spawn_x, int spawn_y) {
-	Character::init(1, 1, 1, 12,
+	Character::init(0.2, 1, 0.5, 12,
 		"Assets\\Textures\\Enemies\\Skeleton\\", "Assets\\Textures\\Enemies\\Skeleton\\Animations.txt",
-		3.0 / 4.0, 3.0 / 4.0,
-		spawn_x, spawn_y);
+		6.0 / 4.0, 3.0 / 4.0,
+		spawn_x, spawn_y,
+		100);
 }
 void Skeleton::update(float dt) {
 	float Time = graphics::getDeltaTime();

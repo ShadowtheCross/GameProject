@@ -24,7 +24,10 @@ public:
 		Up =-1,
 		Down= 1
 	};
+	
 	Direction direction_x = Direction::Right;
+	Direction ability_x = Direction::Right;
+
 	Movement(GameState* gs, std::string name);
 
 	void init(float acc_x, float acc_y,
