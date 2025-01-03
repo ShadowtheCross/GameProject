@@ -4,7 +4,6 @@
 #include <string>
 
 
-
 inline void doubleDotSplit(std::string primary,std::string& part1, std::string& part2) {
 	bool dotFound = false;
 	part1 = "";
@@ -80,4 +79,5 @@ inline int randomInt(int a, int b) {
 	return dist6(rng) ;
 
 }
+
 

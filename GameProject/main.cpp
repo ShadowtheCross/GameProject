@@ -2,16 +2,14 @@
 #include "GameState.h"
 #include "Config.h"
 #include <iostream>
+#include "MainMenu.h"
 
 GameState *game;
-float count =0.0f;
 void draw() {
 	game->instance->draw();
 }
 void update(float dt) {
 	game->instance->update(dt);
-	count += graphics::getDeltaTime();
-	
 }
 
 int main(void) {
@@ -24,6 +22,10 @@ int main(void) {
 	game->createInstance();
 
 	game->instance->init(256,"Assets\\Level1.txt", "Assets\\Textures\\Level\\");
+
+	
+
+
 
 	graphics::startMessageLoop();
 

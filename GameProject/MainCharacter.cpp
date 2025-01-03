@@ -81,6 +81,7 @@ void MainCharacter::update(float dt) {
 		float elapsed1= *dashTimer;
 		mobilize->dash(Time,mobilize->direction_x);
 		activeAbility = true;
+		canDash = false;
 		canHit = false;
 		return;
 	}
@@ -101,7 +102,7 @@ void MainCharacter::update(float dt) {
 			animation->setCurrent("Attack1Left");
 		}
 		if (!attackTimer1->isRunning()) {
-			attack(10);
+			attack(Config::attackDamage1);
 			nextAttackWindow->start();
 		}
 		mobilize->gravity(Time);
@@ -119,7 +120,7 @@ void MainCharacter::update(float dt) {
 			animation->setCurrent("Attack2Left");
 		}
 		if (!attackTimer2->isRunning()) {
-			attack(20);
+			attack(Config::attackDamage2);
 		}
 		mobilize->gravity(Time);
 
@@ -245,7 +246,11 @@ void MainCharacter::damage(float dmg) {
 	dashTimer->stop();
 }
 
+void MainCharacter::teleport(float x, float y) {
+	true_x = x;
+	true_y = y;
 
+}
 
 
 MainCharacter::~MainCharacter() {

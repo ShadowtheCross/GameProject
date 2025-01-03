@@ -2,13 +2,17 @@
 #include "Config.h"
 
 GameState* GameState::instance = NULL;
-int Config::window_width = 1000;
+int Config::window_width = 1500;
 int Config::window_height = 1000;
 
-int Config::spawn_rate = 0;
+int Config::spawn_rate = 100;
 
 int Config::mainPlayerWidth = 10;
 int Config::mainPlayerHeight = 30;
 
 float Config::playerVelocity = 0.5f;
 float Config::playerHealth = 100.0f;
+
+float Config::attackDamage1 = 450;
+float Config::attackDamage2= 100.0f;
+

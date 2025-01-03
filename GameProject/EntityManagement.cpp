@@ -10,14 +10,18 @@ void EntityHandler::init() {
 void EntityHandler::update(float dt) {
 	std::list<Entity*>::iterator it;
 	it = Entities.begin();
-	for (it = Entities.begin(); it != Entities.end(); it++) {
+	while (it != Entities.end() ) {
 		(*it)->update(dt);
-		if (!(*it)->isActive()) {
+		if (!(*it)->isActive() ) {
 			delete* it;
-			it = Entities.erase(it);
+			it = Entities.erase(it++);
+		}
+		else {
+			it++;
 		}
 	}
 	for (int i = 0; i < StaticEntities.size(); i++) {
+
 		StaticEntities[i]->update(dt);
 	}
 
@@ -70,6 +74,10 @@ void EntityHandler::damageEnemies(float dmg) {
 	}
 }
 
+void EntityHandler::teleportPlayer(float x, float y) {
+	player->teleport(x, y);
+
+}
 
 
 void EntityHandler::wipeEntities() {

@@ -38,7 +38,7 @@ void Block::drawDebug() {
 
 }
 
-void Block::update() {
+void Block::update(float dt) {
 
 }
 

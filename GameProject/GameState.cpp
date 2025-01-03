@@ -14,28 +14,56 @@ GameState::GameState()  {
 	OffsetX = Config::window_width / 2;
 	OffsetY = Config::window_height / 2;
 	Handler = new EntityHandler(this);
+	Menu = new MainPlayerMenu(this);
 }
 
 void GameState::update(float dt) {
+	if (onTheMenu) {
+		Menu->update(dt);
+		return;
+	}
+	if (goToTheNextLevel) {
+		Handler->wipeEntities();
+		Handler->clearStaticEntities();
+		Handler->teleportPlayer(0, 0);
+		DungeonDrawer* temp = ActiveLevel;
+		ActiveLevel = load("Level" + std::to_string(currentLevel), this);
+		delete temp;
+		goToTheNextLevel = false;
+	}
+
+
+
+
+
 	ActiveLevel->update(dt); 
 	Handler->update(dt);
 }
 void GameState::init(int BlockS,std::string ConstructionFile, std::string texturesFile) {
+	Menu->init();
 	BlockSize = BlockS;
 	Handler->init();
-
-	ActiveLevel = new Level(instance, "Level1");
-	ActiveLevel->init(ConstructionFile, texturesFile);
-	
-	
 }
 void GameState::draw() {
+	if (onTheMenu) {
+		Menu->draw();
+		return;
+	}
+	if(ActiveLevel!= nullptr)
 	ActiveLevel->draw();
 	Handler->draw();
-
-
+}
+void GameState::backToMenu() {
+	Handler->wipeEntities();
+	Handler->clearStaticEntities();
+	delete ActiveLevel;
+	currentLevel = 0;
 }
 
+
+void GameState::teleportPlayer(float x, float y) {
+	Handler->teleportPlayer(x, y);
+}
 
 
 
@@ -123,6 +151,13 @@ void GameState::damagePlayer(float dmg) {
 
 void GameState::damageEnemies(float dmg) {
 	Handler->damageEnemies(dmg);
+}
+
+void GameState::nextLevel() {
+	onTheMenu = false;
+	goToTheNextLevel = true;
+	currentLevel++;
+	
 }
 
 

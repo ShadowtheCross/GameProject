@@ -23,6 +23,8 @@ public:
 
 	void attack(float dmg);
 
+	void teleportPlayer(float x, float y);
+
 	void appendStaticEntity(StaticEntity * en);
 	void clearStaticEntities();
 

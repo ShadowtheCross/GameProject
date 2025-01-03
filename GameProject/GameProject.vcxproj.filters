@@ -55,14 +55,14 @@
     <Filter Include="Header Files\Helpful">
       <UniqueIdentifier>{c9f2bc82-000d-4792-9252-35ac861e6eec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Triggers">
-      <UniqueIdentifier>{7f4356c0-ca69-4313-bdb8-809f92859e25}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\UI">
-      <UniqueIdentifier>{818b273b-b4ff-44d1-b40a-742524e12a0d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\StaticEntities">
       <UniqueIdentifier>{20eb5c71-9e41-4dc9-80b4-31e5740a5041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainMenu">
+      <UniqueIdentifier>{818b273b-b4ff-44d1-b40a-742524e12a0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MainMenu">
+      <UniqueIdentifier>{11bc6384-b6fb-4eb6-977a-0c3fae268904}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -96,9 +96,6 @@
     <ClCompile Include="Block.cpp">
       <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Source Files\LevelBuilding</Filter>
-    </ClCompile>
     <ClCompile Include="Drawer.cpp">
       <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
@@ -128,6 +125,12 @@
     </ClCompile>
     <ClCompile Include="EntityBlock.cpp">
       <Filter>Source Files\LevelBuilding</Filter>
+    </ClCompile>
+    <ClCompile Include="Chest.cpp">
+      <Filter>Source Files\StaticEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files\MainMenu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -170,14 +173,17 @@
     <ClInclude Include="Entities.h">
       <Filter>Header Files\Entities\Creatures</Filter>
     </ClInclude>
-    <ClInclude Include="Trigger.h">
-      <Filter>Header Files\Triggers</Filter>
-    </ClInclude>
     <ClInclude Include="LevelBuilding.h">
       <Filter>Header Files\LevelHandling</Filter>
     </ClInclude>
     <ClInclude Include="EntityManagement.h">
       <Filter>Header Files\LevelHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Header Files\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackEntity.cpp">
+      <Filter>Source Files\StaticEntities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

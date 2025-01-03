@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="AnimationHandler.cpp" />
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Chest.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Drawer.cpp" />
@@ -32,9 +33,9 @@
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Goblin.cpp" />
-    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainCharacter.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Movement.cpp" />
     <ClCompile Include="playtest.txt" />
     <ClCompile Include="SingleAnimation.cpp" />
@@ -51,13 +52,14 @@
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="AttackEntity.cpp" />
     <ClInclude Include="LevelBuilding.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Miscallenious.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="RandomGet.h" />
     <ClInclude Include="SingleAnimation.h" />
     <ClInclude Include="timer.h" />
-    <ClInclude Include="Trigger.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

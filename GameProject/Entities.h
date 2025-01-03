@@ -55,12 +55,11 @@ public:
 };
 
 class Door :public StaticEntity {
-	
+	bool opened = false;
     protected:
-		float static_offset_x=0, static_offset_y=0;
 	AnimationHandler* animations;
         float true_x = 0, true_y = 0;
-
+        Timer NextLevelGo = Timer(2.0f, Timer::TIMER_ONCE);
     public:
 
 		Door* declareAndInit(GameState* gs, float x, float y) {
@@ -86,6 +85,27 @@ class Door :public StaticEntity {
 };
 
 
+class Chest :public StaticEntity {
+	AnimationHandler* animations;
+	float true_x = 0, true_y = 0;
+	bool opened = false;
+public:
+
+	Chest* declareAndInit(GameState* gs, float x, float y) {
+		Chest* temp = new Chest(gs, "Door");
+		temp->init(x, y);
+		return temp;
+	}
+
+
+	Chest(GameState* gs, std::string name);
+
+	void init(float x, float y);
+	void update(float dt);
+	void draw();
+
+	~Chest();
+};
 
 
 
@@ -216,14 +236,14 @@ class MainCharacter : public Character {
 	class Timer* dashTimer, * dashCooldown,
 		* jumpTimer, * jumpCoolDown,*attackTimer1,*attackTimer2,*nextAttackWindow,
 		*stuntTimer;
-
+	bool canDash = true;
 
 
 
 public:
 	MainCharacter(GameState* gs, std::string name);
 
-
+	void teleport(float x, float y);
 	void damage(float dmg);
 	void attack(float dmg);
 

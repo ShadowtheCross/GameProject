@@ -7,6 +7,7 @@
 #include "Entities.h"
 #include "EntityManagement.h"
 #include "Movement.h"
+#include "MainMenu.h"
 
 class GameState {
 private:
@@ -14,12 +15,16 @@ private:
 	float x =0, y=0,BlockSize =256;
 	float* player_x, * player_y;
 	int OffsetX, OffsetY;
-
+	bool onTheMenu = true,goToTheNextLevel= false;
+	int currentLevel = 0;
+	
 
 	GameState();
-	class Level *ActiveLevel;
+	class DungeonDrawer* ActiveLevel;
 	class EntityHandler* Handler;
 	std::unordered_map<int, class BlockBorder*> *blockRef ;
+
+	class MainPlayerMenu *Menu;
 
 public:
 
@@ -36,7 +41,7 @@ public:
 	void setPlayerX(float*);
 	void setPlayerY(float*);
 
-
+	void teleportPlayer(float x, float y);
 	void setBorder(std::unordered_map<int, BlockBorder* > *ref);
 	bool canGoAt(float x, float y);
 
@@ -53,11 +58,9 @@ public:
 	
 	void damagePlayer(float dmg);
 	void damageEnemies(float dmg);
-
-	void changeLevel(Level* level) {
-		wipeEnemies();
-		ActiveLevel =  level;
-	}
+public:
+	void nextLevel();
+	void backToMenu();
 
 	int get_player_width();
 	int get_player_height();
