@@ -4,8 +4,9 @@
 #include "LevelBuilding.h"
 #include <unordered_map>
 #include "BorderMapManagement.h"
-#include "Character.h"
+#include "Entities.h"
 #include "EntityManagement.h"
+#include "Movement.h"
 
 class GameState {
 private:
@@ -44,11 +45,17 @@ public:
 	float getPlayerX();
 	float getPlayerY();
 	
+	void appendStaticEntity(StaticEntity* en);
+	void wipeStaticEnemies();
+
 	void wipeEnemies();
 	void appendEntity(Entity* en);
-
+	
+	void damagePlayer(float dmg);
+	void damageEnemies(float dmg);
 
 	void changeLevel(Level* level) {
+		wipeEnemies();
 		ActiveLevel =  level;
 	}
 

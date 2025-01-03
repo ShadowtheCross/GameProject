@@ -141,6 +141,7 @@ void DungeonDrawer::drawDropDown(int n) {
 		);
 	x_next++;
 
+
 	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, BackGround.random() ));
 	Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next+1, Ceiling.random() ));
 	Blocks[x_next+1][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next + 1, y_next , LeftWall.random() ));
@@ -150,6 +151,7 @@ void DungeonDrawer::drawDropDown(int n) {
 	Blocks[x_next+1][y_next] =(Block::declareAndInit(GameObject::m_state, "",x_next+1, y_next, LeftWall.random() ));
 	y_next--;
 	
+	float temp_y = y_next + 3;
 	for (int i = 0; i < n; i++) {
 		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random() ));
 		Blocks[x_next - 1 ][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next-1, y_next , RightWall.random() ));
@@ -157,8 +159,8 @@ void DungeonDrawer::drawDropDown(int n) {
 		y_next--;
 	}
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
-		-0.0f, (-y_next + n-3.5),
-		-0.0f, (-y_next - 2*n+1.5)
+		-0.0f, (-y_next + 0.5),
+		-0.0f, (-temp_y - 0.5)
 	);
 
 
@@ -172,7 +174,7 @@ void DungeonDrawer::drawDropDown(int n) {
 void DungeonDrawer::drawCavern(int n) {
 	int BlockSize = GameObject::m_state->getBlockSize();
 	
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next , BackGround.random() ));
+	Blocks[x_next][y_next] = (EnemyBlock::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random(), Config::spawn_rate));
 	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random() ));
 	Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, UpStairsCeiling.random() ));
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
@@ -186,7 +188,7 @@ void DungeonDrawer::drawCavern(int n) {
 	
 	x_next++;
 	for (int i = 0; i < n - 2; i++) {
-		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, BackGround.random() ));
+		Blocks[x_next][y_next] = (EnemyBlock::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random(), Config::spawn_rate));
 		Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random() ));
 		Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, BackGround.random() ));
 		Blocks[x_next][y_next+2] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 2, Ceiling.random() ));
@@ -203,7 +205,7 @@ void DungeonDrawer::drawCavern(int n) {
 		1.0f, y_next - 1.0f);
 
 
-	Blocks[x_next][y_next] =(Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random() ));
+	Blocks[x_next][y_next] =(EnemyBlock::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random(), Config::spawn_rate));
 	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next - 1, Ground.random() ));
 	Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next + 1, DownStairsCeiling.random()));
 	x_next++;
@@ -215,10 +217,10 @@ void DungeonDrawer::drawCavern(int n) {
 
 void DungeonDrawer::drawEnd() {
 	int BlockSize = GameObject::m_state->getBlockSize();
-
+	
 
 	//PathStart
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, BackGround.random() ));
+	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, BackGround.random() ) );
 	Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next+1, Ceiling.random() ));
 	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next -1, Ground.random() ));
 	Blocks[x_next+1][y_next] =(Block::declareAndInit(GameObject::m_state, "", x_next+1, y_next, LeftWall.random() ));
@@ -226,6 +228,9 @@ void DungeonDrawer::drawEnd() {
 		-0.0f, (-y_next + 0.5f) ,
 		0.0f, (-y_next - 0.5f) 
 	);
+	Door* test = new Door(GameObject::m_state, "");
+	test->init(x_next, y_next);
+	GameObject::m_state->appendStaticEntity(test);
 
 
 }

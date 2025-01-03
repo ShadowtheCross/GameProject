@@ -14,14 +14,89 @@ public:
 	void init();
 	void update(float dt);
 	void draw();
-
+	virtual void attack();
+	virtual void damage(float dmg);
 	virtual float getX();
 	virtual float getY();
+
+	float playerDistanceX();
+	float playerDistanceY();
+
 
 	~Entity();
 };
 
+/*
+* 
+* Static Entities are entities meant to be present(drawn) 
+*  or to trigger under certain conditions
+* 
+* WARNING: ALL STATIC ENTITIES ARE TO BE PART OF A SPECIAL BLOCK AND NOT INDEPENDANT
+*  TO MAXIMIZE PERFORMANCE AND CONFUSION FROM THE ENTITY HANDLER
+*/
 
+class StaticEntity : public Entity {
+protected:
+	float true_x = 0, true_y = 0;
+public:
+	StaticEntity(GameState* gs, std::string name) : Entity(gs,name) {}
+
+	void init(float x, float y) {}
+	void update(float dt) {}
+	void draw() {}
+	void attack() {}
+	void damage(float dmg) {}
+	
+
+
+	~StaticEntity() {}
+
+
+};
+
+class Door :public StaticEntity {
+	
+    protected:
+		float static_offset_x=0, static_offset_y=0;
+	AnimationHandler* animations;
+        float true_x = 0, true_y = 0;
+
+    public:
+
+		Door* declareAndInit(GameState* gs, float x, float y) {
+			Door* temp = new Door(gs, "Door");
+			temp->init(x, y);
+			return temp;
+		}
+
+
+		Door(GameState* gs, std::string name);
+
+		void init(float x, float y);
+		void update(float dt);
+		void draw();
+
+    
+	
+
+
+
+	~Door();
+
+};
+
+
+
+
+
+
+
+/*
+* 
+* Definition of the Character Class along with allthe active Entities in Game
+* 
+* 
+*/
 class Character :public Entity{
 protected:
 	class AnimationHandler* animation;
@@ -29,8 +104,10 @@ protected:
 	float true_x = 0.0f, true_y = 0.0f;
 	float health = 1,max_health =100;
 	int width=0, height=0;
+	bool canDash = false;
+	bool canHit = true;
 public:
-
+	int getDirectionX();
 	Character(GameState* gs, std::string name);
 
 	void init(float acc_x, float acc_y, float max_x, float max_y,
@@ -38,6 +115,10 @@ public:
 		float width, float height,
 		int spawn_x, int spawn_y,
 		float m_h);
+	
+	float playerDistanceX();
+	float playerDistanceY();
+
 	
 	void update(float dt);
 
@@ -47,7 +128,15 @@ public:
 	float getY() {
 		return true_y;
 	}
-	float playerDistance();
+	
+
+
+	void attack() {}
+
+	void damage(float dmg) {}
+	
+
+
 	void kill();
 
 	void draw();
@@ -60,17 +149,24 @@ public:
 
 class Goblin : public Character {
 	bool aggrivate =false;
-	Timer *attackCooldown, * attackTimer, * dashTimer,*dashCooldown;
+	Timer *attackCooldown, * attackTimer1, * dashTimer,*dashCooldown,*stunt,*death;
 public:
 	Goblin(GameState* gs);
 
 	void init(int spawn_x, int spawn_y);
+
 
 	static Goblin* declareAndInit(GameState* gs, int spawn_x, int spawn_y) {
 		Goblin* temp = new Goblin(gs);
 		temp->init(spawn_x, spawn_y);
 		return temp;
 	}
+
+	void attack();
+
+	void damage(float dmg);
+
+
 
 	void draw();
 	void update(float dt);
@@ -84,8 +180,11 @@ public:
 
 class Skeleton : public Character {
 public:
+	
+	
 	Skeleton(GameState* gs);
-
+	bool aggrivate = false;
+	Timer* death,*turnAroundTimer,*attackTimer,*blockTimer,*stuntTimer;
 	void init(int spawn_x, int spawn_y);
 
 	static Skeleton* declareAndInit(GameState* gs, int spawn_x, int spawn_y) {
@@ -93,6 +192,11 @@ public:
 		temp->init(spawn_x, spawn_y);
 		return temp;
 	}
+
+	void attack();
+
+	void damage(float dmg);
+
 
 	void draw();
 	void update(float dt);
@@ -110,7 +214,8 @@ class MainCharacter : public Character {
 	
 	//Ability Timers
 	class Timer* dashTimer, * dashCooldown,
-		* jumpTimer, * jumpCoolDown;
+		* jumpTimer, * jumpCoolDown,*attackTimer1,*attackTimer2,*nextAttackWindow,
+		*stuntTimer;
 
 
 
@@ -118,6 +223,9 @@ class MainCharacter : public Character {
 public:
 	MainCharacter(GameState* gs, std::string name);
 
+
+	void damage(float dmg);
+	void attack(float dmg);
 
 	void init(int spawn_x, int spawn_y);
 

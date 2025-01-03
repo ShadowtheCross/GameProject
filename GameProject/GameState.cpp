@@ -102,11 +102,27 @@ void GameState::appendEntity(Entity* en) {
 	Handler->appendEntity(en);
 }
 
+void GameState::appendStaticEntity(StaticEntity* en) {
+	Handler->appendStaticEntity(en);
+}
+
+void GameState::wipeStaticEnemies() {
+	Handler->clearStaticEntities();
+}
+
 void GameState::setGlobalX(float* X) {
 	x_global = X;
 }
 void GameState::setGlobalY(float* Y) {
 	y_global = Y;
+}
+
+void GameState::damagePlayer(float dmg) {
+	Handler->damagePlayer(dmg);
+}
+
+void GameState::damageEnemies(float dmg) {
+	Handler->damageEnemies(dmg);
 }
 
 

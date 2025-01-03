@@ -44,7 +44,13 @@ void AnimationHandler::update(float dt) {
 
 void AnimationHandler::draw() {
 	Animations[cur]->draw();
+	
 }
+
+void AnimationHandler::fromTheStart(std::string anim) {
+	Animations[anim]->startFromTheBegining();
+}
+
 
 void AnimationHandler::setCurrent(std::string anim) {
 	cur = anim;

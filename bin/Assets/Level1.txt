@@ -1,3 +1,2 @@
-drawLine:330
-drawCavern:33
-drawDownStairs:2323
+drawLine:2
+dd

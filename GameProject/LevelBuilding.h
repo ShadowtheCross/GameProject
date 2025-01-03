@@ -7,7 +7,7 @@
 #include <vector>
 #include "RandomGet.h"
 #include "Miscallenious.h"
-#include "Character.h"
+#include "Entities.h"
 #include "Config.h"
 
 
@@ -56,6 +56,7 @@ public:
 
 
 };
+
 
 
 

@@ -25,7 +25,7 @@ public:
 	// Folder - Animation Frames - Duration
 
 	void setCurrent(std::string anim);
-
+	void fromTheStart(std::string anim);
 	void update(float dt);
 
 	void draw();

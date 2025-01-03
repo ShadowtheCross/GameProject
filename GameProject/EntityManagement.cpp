@@ -8,65 +8,74 @@ void EntityHandler::init() {
 }
 
 void EntityHandler::update(float dt) {
-	int BlockSize = GameObject::m_state->getBlockSize();
-	int cx = player->getX();
-	int cy = player->getY();
-	int start_x = cx - ( (float) Config::window_width *0.8/BlockSize);
-	int start_y = cy - ((float)Config::window_height * 0.8 / BlockSize);
-	int end_x = cx + ((float)Config::window_width * 0.8 / BlockSize);
-	int end_y = cy + ((float)Config::window_height * 0.8 / BlockSize);
 	std::list<Entity*>::iterator it;
-	for (int x = start_x; x < end_x; x++) {
-		for (int y = start_y; y < end_y; y++) {
-			if (!Entities[x][y].empty()) {
-				it = Entities[x][y].begin();
-				for (it = Entities[x][y].begin(); it != Entities[x][y].end(); it++) {
-					(*it)->update(dt);
-				}
-			}
+	it = Entities.begin();
+	for (it = Entities.begin(); it != Entities.end(); it++) {
+		(*it)->update(dt);
+		if (!(*it)->isActive()) {
+			delete* it;
+			it = Entities.erase(it);
 		}
 	}
-
-
-
+	for (int i = 0; i < StaticEntities.size(); i++) {
+		StaticEntities[i]->update(dt);
+	}
 
 	player->update(dt);
 
 }
 
 void EntityHandler::draw() {
-	int BlockSize = GameObject::m_state->getBlockSize();
-	int cx = player->getX();
-	int cy = player->getY();
-	int start_x = cx - ((float)Config::window_width * 0.8 / BlockSize);
-	int start_y = cy - ((float)Config::window_height * 0.8 / BlockSize);
-	int end_x = cx + ((float)Config::window_width * 0.8 / BlockSize);
-	int end_y = cy + ((float)Config::window_height * 0.8 / BlockSize);
 	std::list<Entity*>::iterator it;
-	for (int x = start_x; x < end_x; x++) {
-		for (int y = start_y; y < end_y; y++) {
-			if (!Entities[x][y].empty()) {
-				it = Entities[x][y].begin();
-				for (it = Entities[x][y].begin(); it != Entities[x][y].end(); it++) {
-					(*it)->draw();
-				}
-			}
-		}
+	for (it = Entities.begin(); it != Entities.end(); ++it) {
+		(*it)->draw();
+	}
+	for (int i = 0; i < StaticEntities.size(); i++) {
+		StaticEntities[i]->draw();
 	}
 	player->draw();
 
 }
 
+void EntityHandler::appendStaticEntity(StaticEntity* en) {
+	
+	StaticEntities.push_back(en);
+}
+
+void EntityHandler::clearStaticEntities() {
+	for (int i = 0; i < StaticEntities.size(); i++) {
+		delete StaticEntities[i];
+
+	}
+	StaticEntities.clear();
+}
+
+
+
+void EntityHandler::damagePlayer(float dmg) {
+	player->damage(dmg);
+}
+
+void EntityHandler::damageEnemies(float dmg) {
+	std::list<Entity*>::iterator it;
+	float dx;
+	float dy;
+	for (it = Entities.begin(); it != Entities.end(); ++it) {
+		dx =  (*it)->getX() - player->getX();
+		dy =  (*it)->getY() - player->getY();
+		if (  ( dx*player->getDirectionX() <1 &&  0 <dx * player->getDirectionX())  && abs(dy)< 0.2f) {
+			(*it)->damage(dmg);
+		}
+		
+	}
+}
+
+
+
 void EntityHandler::wipeEntities() {
 	std::list<Entity*>::iterator it;
-	for (auto& x : Entities) {
-		for (auto& y : x.second) {
-			it = y.second.begin();
-			for (it = y.second.begin(); it != y.second.end(); it++) {
-				delete* it;
-			}
-
-		}
+	for (it = Entities.begin(); it != Entities.end(); it++) {
+		delete (*it);
 	}
 	Entities.clear();
 }
@@ -75,13 +84,10 @@ void EntityHandler::wipeEntities() {
 EntityHandler::~EntityHandler() {
 	wipeEntities();
 	Entities.clear();
+	clearStaticEntities();
 	delete player;
 }
 
 void EntityHandler::appendEntity(Entity* en) {
-	
-	int x = en->getX();
-	int y = en->getY();
-
-	Entities[x][y].push_back(en);
+		Entities.push_back(en);
 }

@@ -1,4 +1,4 @@
-#include "Character.h"
+#include "Entities.h"
 
 Character::Character(GameState* gs, std::string name) : Entity(gs, name) {
 	animation = new AnimationHandler(gs, name + " Animation");
@@ -31,12 +31,21 @@ void Character::kill() {
 	GameObject::setActive(false);
 }
 
-float Character::playerDistance() {
+int Character::getDirectionX() {
+	return mobilize->direction_x;
+}
+
+float Character::playerDistanceX() {
 	return GameObject::m_state->getPlayerX() - true_x;
+}
+float Character::playerDistanceY() {
+	return GameObject::m_state->getPlayerY() - true_y;
 }
 
 
-void Character::update(float dt) {}
+void Character::update(float dt) {
+	
+}
 
 void Character::draw() {
 	mobilize->draw();

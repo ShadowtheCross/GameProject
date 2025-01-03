@@ -24,6 +24,8 @@ public:
 	void draw();
 	void play();
 
+	void startFromTheBegining();
+
 	~SingleAnimation();
 
 

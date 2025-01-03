@@ -39,6 +39,11 @@ void SingleAnimation::update(float dt) {
 	}
 }
 
+void SingleAnimation::startFromTheBegining() {
+	measure = .0f;
+	counter = 0;
+}
+
 void SingleAnimation::draw() {
 	int BlockSize = GameObject::m_state->getBlockSize();
 	int trueX = GameObject::m_state->getGlobalX()+ (*loc_x) * BlockSize;
