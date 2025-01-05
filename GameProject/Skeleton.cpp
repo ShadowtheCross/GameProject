@@ -9,11 +9,12 @@ Skeleton::Skeleton(GameState* gs) : Character(gs, "Skeleton") {
 }
 
 void Skeleton::init(int spawn_x, int spawn_y) {
-	Character::init(0.2, 1, 0.5, 12,
-		"Assets\\Textures\\Enemies\\Skeleton\\", "Assets\\Textures\\Enemies\\Skeleton\\Animations.txt",
-		6.0 / 4.0, 3.0 / 4.0,
-		spawn_x, spawn_y,
-		100);
+	
+	true_x = spawn_x;
+	true_y = spawn_y;
+
+	mobilize->init(0.2, 1, 0.5, 12, 1.0 / 3.0, 2.0 / 3.0, &true_x, &true_y);
+	animation->init("Assets\\Textures\\Enemies\\Skeleton\\", "Assets\\Textures\\Enemies\\Skeleton\\Animations.txt", 6.0 / 4.0, 3.0 / 4.0, &true_x, &true_y);
 }
 void Skeleton::update(float dt) {
 	float Time = graphics::getDeltaTime();

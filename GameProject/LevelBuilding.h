@@ -69,21 +69,53 @@ public:
 	*
 */
 
+/*
+* 
+* This class will be the primary method all entities inherit
+* 
+*/
 
-class DungeonDrawer : protected GameObject {
-private:
-	void loadTexturesPerNum(std::string file);
+class Drawer : public GameObject {
 protected:
 	std::unordered_map<int, std::unordered_map<int, Block*> > Blocks;
 	std::unordered_map<int, BlockBorder*>  Border;
 	std::unordered_map<std::string, int> TexturesNum;
 
+	class RandomBrush OutsideMap;
 
 
+	void loadTexturesPerNum(std::string file);
+
+	int x_next, y_next;
+
+	virtual void fillUpperY(int x_next, int y_next, int nBlocks);
+	virtual void fillLowerY(int x_next, int y_next, int nBlocks);
+	virtual void drawStart();
+	virtual void drawEnd();
+public:
+	Drawer(GameState* gs, std::string name);
+
+	virtual void init(std::string constructionFile, std::string texturesFile, std::string TexturesPerBlock);
+	virtual void update(float dt);
+	virtual void draw();
+
+
+
+
+	virtual ~Drawer();
+
+};
+
+
+
+class DungeonDrawer : public Drawer {
+private:
 	class RandomBrush BackGround,
 		Ceiling, HalfCeilingUp, HalfBlockUp, HalfCeilingDown, HalfBlockDown, LeftEdge, RightEdge,
-		Ground, GroundRight, LeftWall, OutsideMap, RightWall;
-	int x_next, y_next;
+		Ground, GroundRight, LeftWall, RightWall, UpperRightEdge,
+		UpperLeftEdge,	BottomRightEdge,BottomLeftEdge;
+
+	
 
 	void drawStart();
 	void drawEnd();
@@ -105,19 +137,56 @@ public:
 
 	DungeonDrawer(GameState* gs, std::string name);
 
-	void init(std::string constructionFile,std::string texturesFile, std::string TexturesPerBlock);
-	void update(float dt);
-	void draw();
+	virtual void init(std::string constructionFile,std::string texturesFile, std::string TexturesPerBlock);
+	virtual void update(float dt);
+	virtual void draw();
 	
 	~DungeonDrawer();
-
 };
 
 
 
+class OpenMapDrawer : public Drawer {
+	//For the cave exit
+	class RandomBrush BackGround, RightWall, LeftWall, Ground, Ceiling,
+		UpperRightEdge, UpperLeftEdge, BottomRightEdge, BottomLeftEdge,
+		HalfBlock;
+	const float top = 100000;
 
-inline DungeonDrawer* load(std::string name, GameState* gs) {
-	DungeonDrawer* newLevel;
+
+	void drawStart();
+	void drawEnd();
+
+	void drawLine(int n);
+
+	void drawUpBlocks(int n);
+
+	void drawDownBlocks(int n);
+
+	void drawSpikeDrop(int n);
+
+//	void drawDropDown(int n);
+
+
+
+public:
+
+	OpenMapDrawer(GameState* gs, std::string name);
+
+	virtual void init(std::string constructionFile, std::string texturesFile, std::string TexturesPerBlock);
+	virtual void update(float dt);
+	virtual void draw();
+
+	~OpenMapDrawer();
+
+};
+
+class FinalBossMap;
+
+
+
+inline Drawer* loadLevel(std::string name, GameState* gs) {
+	Drawer* newLevel;
 
 	if (name == "Level1") {
 		newLevel = new DungeonDrawer(gs, "Level1");
@@ -129,6 +198,12 @@ inline DungeonDrawer* load(std::string name, GameState* gs) {
 		newLevel = new DungeonDrawer(gs, "Level1");
 		newLevel->init("Assets\\Level2.txt", "Assets\\Textures\\Level2\\","Assets\\Textures\\Level2\\TextureNumbers.txt");
 		return newLevel;
+	}
+	if (name == "Level3") {
+		newLevel = new OpenMapDrawer(gs, "Level3");
+		newLevel->init("Assets\\Level3.txt", "Assets\\Textures\\Level3\\", "Assets\\Textures\\Level3\\TextureNumbers.txt");
+		return newLevel;
+
 	}
 	return nullptr;
 

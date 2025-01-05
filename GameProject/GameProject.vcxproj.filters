@@ -96,7 +96,7 @@
     <ClCompile Include="Block.cpp">
       <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
-    <ClCompile Include="Drawer.cpp">
+    <ClCompile Include="DyngeonDrawer.cpp">
       <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
     <ClCompile Include="timer.cpp">
@@ -131,6 +131,12 @@
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawer.cpp">
+      <Filter>Source Files\LevelBuilding</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenMapDrawer.cpp">
+      <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

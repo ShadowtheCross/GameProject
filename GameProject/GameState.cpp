@@ -26,8 +26,8 @@ void GameState::update(float dt) {
 		Handler->wipeEntities();
 		Handler->clearStaticEntities();
 		Handler->teleportPlayer(0, 0);
-		DungeonDrawer* temp = ActiveLevel;
-		ActiveLevel = load("Level" + std::to_string(currentLevel), this);
+		Drawer* temp = ActiveLevel;
+		ActiveLevel = loadLevel("Level" + std::to_string(currentLevel), this);
 		delete temp;
 		goToTheNextLevel = false;
 	}

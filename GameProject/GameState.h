@@ -20,7 +20,7 @@ private:
 	
 
 	GameState();
-	class DungeonDrawer* ActiveLevel;
+	class Drawer* ActiveLevel;
 	class EntityHandler* Handler;
 	std::unordered_map<int, class BlockBorder*> *blockRef ;
 

@@ -33,7 +33,9 @@ void Movement::limitY() {
 
 void Movement::moveY(float Time, Direction dir, float rate) {
 	speed_y += Time * dir * acceleration_x *rate;
-	if (GameObject::m_state->canGoAt(*current_x, *current_y + speed_y + height / 2 * dir )) {
+	int direction = sign(speed_y);
+	if (GameObject::m_state->canGoAt(*current_x+width/2, *current_y + speed_y + height / 2 * direction ) &&
+		GameObject::m_state->canGoAt(*current_x-width/2, *current_y + speed_y + height / 2 * direction)) {
 		*current_y += speed_y;
 
 		return;
@@ -42,7 +44,8 @@ void Movement::moveY(float Time, Direction dir, float rate) {
 }
 void Movement::moveX(float Time, Direction dir, float rate) {
 	speed_x += Time * dir * acceleration_x * rate;
-	if (GameObject::m_state->canGoAt(*current_x + speed_x + width/ 2 * dir, *current_y )) {
+	if (GameObject::m_state->canGoAt(*current_x + speed_x + width/ 2 * dir, *current_y + height/2)&&
+		GameObject::m_state->canGoAt(*current_x + speed_x + width / 2 * dir, *current_y -height/2)) {
 		*current_x += speed_x ;
 		return;
 	}

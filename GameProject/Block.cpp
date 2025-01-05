@@ -23,6 +23,7 @@ void Block::init(float x_cord, float y_cord, graphics::Brush* toUse) {
 }
 
 void Block::draw() {
+	if (b == nullptr) return;
 	int BlockSize = GameObject::m_state->getBlockSize();
 	float trueX = x*BlockSize + (GameObject::m_state->getGlobalX());
 	float trueY = -y*BlockSize + (GameObject::m_state->getGlobalY());

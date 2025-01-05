@@ -59,7 +59,7 @@ class Door :public StaticEntity {
     protected:
 	AnimationHandler* animations;
         float true_x = 0, true_y = 0;
-        Timer NextLevelGo = Timer(2.0f, Timer::TIMER_ONCE);
+        Timer NextLevelGo = Timer(0.5f, Timer::TIMER_ONCE);
     public:
 
 		Door* declareAndInit(GameState* gs, float x, float y) {
@@ -234,10 +234,10 @@ class MainCharacter : public Character {
 	
 	//Ability Timers
 	class Timer* dashTimer, * dashCooldown,
-		* jumpTimer, * jumpCoolDown,*attackTimer1,*attackTimer2,*nextAttackWindow,
+		* jumpTimer1, * jumpCoolDown,*attackTimer1,*attackTimer2,*nextAttackWindow,
 		*stuntTimer;
 	bool canDash = true;
-
+	bool canJumpAgain = true;
 
 
 public:

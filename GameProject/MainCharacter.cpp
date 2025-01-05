@@ -4,8 +4,8 @@ float counter = 0;
 MainCharacter::MainCharacter(GameState* gs, std::string name) : Character(gs, name) {
 	dashTimer = new Timer(0.15f, Timer::TIMER_ONCE);
 	dashCooldown = new Timer(0.3f, Timer::TIMER_ONCE);
-	jumpTimer = new Timer(0.05, Timer::TIMER_ONCE);
-	jumpCoolDown = new Timer(.3f, Timer::TIMER_ONCE);
+	jumpTimer1 = new Timer(0.05, Timer::TIMER_ONCE);
+	jumpCoolDown = new Timer(.2f, Timer::TIMER_ONCE);
 	attackTimer1 = new Timer(0.45, Timer::TIMER_ONCE);
 	attackTimer2 = new Timer(0.45, Timer::TIMER_ONCE);
 	nextAttackWindow = new Timer(0.3f, Timer::TIMER_ONCE);
@@ -85,11 +85,11 @@ void MainCharacter::update(float dt) {
 		canHit = false;
 		return;
 	}
-	if (jumpTimer->isRunning()) {
-		float elapsed2 = *jumpTimer;
-		mobilize->moveY(Time, Movement::Direction::Up,5);
+	if (jumpTimer1->isRunning()) {
+		float elapsed2 = *jumpTimer1;
+		mobilize->moveY(Time, Movement::Direction::Up,6);
 		activeAbility = true;
-		if (mobilize->onCeiling()) jumpTimer->stop();
+		if (mobilize->onCeiling()) jumpTimer1->stop();
 	}
 	float elapsed3;
 	elapsed3 = *nextAttackWindow;
@@ -159,6 +159,8 @@ void MainCharacter::update(float dt) {
 	
 	if (mobilize->onFloor()) {
 		canDash = true;
+		canJumpAgain = true;
+
 		if (left) {
 			animation->setCurrent("RunLeft");
 		}
@@ -166,7 +168,7 @@ void MainCharacter::update(float dt) {
 			animation->setCurrent("RunRight");
 		}
 		if (jump && !jumpCoolDown->isRunning()) {
-			jumpTimer->start();
+			jumpTimer1->start();
 			jumpCoolDown->start();
 		}  
 		
@@ -192,6 +194,10 @@ void MainCharacter::update(float dt) {
 		} 
 	}
 	else {
+		if (canJumpAgain && jump && !jumpCoolDown->isRunning()) {
+			jumpTimer1->start();
+			canJumpAgain = false;
+		}
 		if (mobilize->rising()) {
 			if (mobilize->direction_x == Movement::Direction::Right) {
 				animation->setCurrent("RiseRight");
@@ -255,5 +261,5 @@ void MainCharacter::teleport(float x, float y) {
 
 MainCharacter::~MainCharacter() {
 	delete animation, mobilize;
-	delete jumpTimer, dashTimer;
+	delete jumpTimer1, dashTimer;
 }

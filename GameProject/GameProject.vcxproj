@@ -25,6 +25,7 @@
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Drawer.cpp" />
+    <ClCompile Include="DyngeonDrawer.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="EnemyBlock.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -37,6 +38,7 @@
     <ClCompile Include="MainCharacter.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Movement.cpp" />
+    <ClCompile Include="OpenMapDrawer.cpp" />
     <ClCompile Include="playtest.txt" />
     <ClCompile Include="SingleAnimation.cpp" />
     <ClCompile Include="Skeleton.cpp" />
