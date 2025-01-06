@@ -29,6 +29,7 @@ void Goblin::update(float dt) {
 	float elapse;
 	
 	float dx_p = Character::playerDistanceX();
+	float dy_p = playerDistanceY();
 	if (mobilize->direction_x == Movement::Direction::Right) {
 		animation->setCurrent("IdleRight");
 	}
@@ -124,7 +125,7 @@ void Goblin::update(float dt) {
 			dashTimer->start();
 			dashCooldown->start();
 		}
-		else if (abs(dx_p) < 0.2 && !attackCooldown->isRunning()) {
+		else if (abs(dx_p) < 0.2 && !attackCooldown->isRunning() && abs(dy_p) < 0.3f) {
 			attackTimer1->start();
 			attackCooldown->start();
 		} 		
@@ -154,8 +155,8 @@ void Goblin::update(float dt) {
 
 void Goblin::attack() {
 	float dx_p = playerDistanceX();
-
-	if (dx_p *mobilize->direction_x  < 0.5f && dx_p * mobilize->direction_x > 0) {
+	float dy_p = playerDistanceY();
+	if (dx_p *mobilize->direction_x  < 0.5f && dx_p * mobilize->direction_x > 0 && abs(dy_p) < 0.3f) {
 		GameObject::m_state->damagePlayer(10);
 	}
 }

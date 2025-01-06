@@ -9,7 +9,7 @@
 #include "Miscallenious.h"
 #include "Entities.h"
 #include "Config.h"
-
+#include "Back.h"
 
 /*
 * General Block Class
@@ -114,7 +114,6 @@ private:
 		Ceiling, HalfCeilingUp, HalfBlockUp, HalfCeilingDown, HalfBlockDown, LeftEdge, RightEdge,
 		Ground, GroundRight, LeftWall, RightWall, UpperRightEdge,
 		UpperLeftEdge,	BottomRightEdge,BottomLeftEdge;
-
 	
 
 	void drawStart();
@@ -150,9 +149,9 @@ class OpenMapDrawer : public Drawer {
 	//For the cave exit
 	class RandomBrush BackGround, RightWall, LeftWall, Ground, Ceiling,
 		UpperRightEdge, UpperLeftEdge, BottomRightEdge, BottomLeftEdge,
-		HalfBlock;
+		HalfBlock,DecorativeObjects;
 	const float top = 100000;
-
+	graphics::Brush backPanel;
 
 	void drawStart();
 	void drawEnd();
@@ -181,16 +180,33 @@ public:
 
 };
 
-class FinalBossMap;
+class FinalBossDrawer : public  Drawer {
+private:
+	class RandomBrush Ground ,Ceiling,UpperLeftEdge ,
+		UpperRightEdge ,BottomLeftEdge,	BottomRightEdge,OutsideMap,
+		RightWall,LeftWall,BackGround;
+
+public:
+
+
+	FinalBossDrawer(GameState* gs, std::string name);
+	virtual void init(std::string constructionFile, std::string texturesFile, std::string TexturesPerBlock);
+	virtual void update(float dt);
+	virtual void draw();
+
+	~FinalBossDrawer();
+
+
+};
 
 
 
 inline Drawer* loadLevel(std::string name, GameState* gs) {
 	Drawer* newLevel;
 
+/*
 	if (name == "Level1") {
 		newLevel = new DungeonDrawer(gs, "Level1");
-		std::cout << "LOad";
 		newLevel->init( "Assets\\Level1.txt", "Assets\\Textures\\Level1\\", "Assets\\Textures\\Level1\\TextureNumbers.txt");
 		return newLevel;
 	}
@@ -198,12 +214,22 @@ inline Drawer* loadLevel(std::string name, GameState* gs) {
 		newLevel = new DungeonDrawer(gs, "Level1");
 		newLevel->init("Assets\\Level2.txt", "Assets\\Textures\\Level2\\","Assets\\Textures\\Level2\\TextureNumbers.txt");
 		return newLevel;
-	}
-	if (name == "Level3") {
+	}*/
+	if (name == "Level1") {
 		newLevel = new OpenMapDrawer(gs, "Level3");
 		newLevel->init("Assets\\Level3.txt", "Assets\\Textures\\Level3\\", "Assets\\Textures\\Level3\\TextureNumbers.txt");
 		return newLevel;
-
+	}
+	if (name == "Level4") {
+		newLevel = new OpenMapDrawer(gs, "Level4");
+		newLevel->init("Assets\\Level4.txt", "Assets\\Textures\\Level4\\", "Assets\\Textures\\Level4\\TextureNumbers.txt");
+		return newLevel;
+	}
+	if (name == "Level5") {
+		newLevel = new FinalBossDrawer(gs, "Level5");
+		newLevel->init("Assets\\Level5.txt", "Assets\\Textures\\Level5\\", "Assets\\Textures\\Level5\\TextureNumbers.txt");
+		std::cout << "RUn";
+		return newLevel;
 	}
 	return nullptr;
 

@@ -98,7 +98,7 @@ void Skeleton::update(float dt) {
 	}
 
 	float dx_p = playerDistanceX();
-
+	float dy_p = playerDistanceY();
 
 	if (( abs(dx_p) < 8 && aggrivate) || abs(dx_p ) < 2 ) {
 		aggrivate = true;
@@ -121,7 +121,7 @@ void Skeleton::update(float dt) {
 		}
 		else if(!turnAroundTimer->isRunning()) { turnAroundTimer->start(); }
 
-		if (dx_p < 0.4 && dx_p > -0.4) {
+		if (dx_p < 0.4 && dx_p > -0.4 && abs(dy_p) <0.5f ) {
 			if (!attackTimer->isRunning()) {
 				attackTimer->start();
 				mobilize->direction_x = mobilize->direction_x == Movement::Direction::Right ?  Movement::Direction::Right : Movement::Direction::Left;
@@ -140,7 +140,8 @@ void Skeleton::update(float dt) {
 
 void Skeleton::attack() {
 	float dx_p = playerDistanceX();
-	if (dx_p * mobilize->direction_x < 0.5f && dx_p * mobilize->direction_x > 0) {
+	float dy_p = playerDistanceY();
+	if (dx_p * mobilize->direction_x < 0.5f && dx_p * mobilize->direction_x > 0 && abs(dy_p) < 0.5f) {
 		GameObject::m_state->damagePlayer(20);
 	}
 

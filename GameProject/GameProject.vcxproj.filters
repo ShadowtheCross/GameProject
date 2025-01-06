@@ -114,9 +114,6 @@
     <ClCompile Include="EntityManagement.cpp">
       <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Source Files\Logic</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyBlock.cpp">
       <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
@@ -136,6 +133,18 @@
       <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
     <ClCompile Include="OpenMapDrawer.cpp">
+      <Filter>Source Files\LevelBuilding</Filter>
+    </ClCompile>
+    <ClCompile Include="Spikes.cpp">
+      <Filter>Source Files\StaticEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="FinalBossDrawer.cpp">
+      <Filter>Source Files\LevelBuilding</Filter>
+    </ClCompile>
+    <ClCompile Include="BackPanel.cpp">
       <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
   </ItemGroup>
@@ -190,6 +199,9 @@
     </ClInclude>
     <ClInclude Include="AttackEntity.cpp">
       <Filter>Source Files\StaticEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="Back.h">
+      <Filter>Header Files\Helpful</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

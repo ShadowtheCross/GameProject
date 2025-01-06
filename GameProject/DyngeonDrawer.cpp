@@ -154,7 +154,7 @@ void DungeonDrawer::drawUpBlocks(int n) {
 		y_next++;
 		}
 		else {
-			drawLine(2);
+			drawLine(5);
 		}
 	}
 }
@@ -177,7 +177,7 @@ void DungeonDrawer::drawDownBlocks(int n) {
 		y_next--;
 		}
 		else {
-			drawLine(2);
+			drawLine(5);
 		}
 
 		
@@ -253,7 +253,7 @@ void DungeonDrawer::drawDropDown(int n) {
 	fillLowerY(x_next-2, y_next, 20);
 	fillLowerY(x_next-3, y_next, 20);
 
-
+	drawLine(1);
 
 }
 void DungeonDrawer::drawCavern(int n) {

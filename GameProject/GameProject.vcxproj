@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimationHandler.cpp" />
+    <ClCompile Include="BackPanel.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="Config.cpp" />
@@ -31,6 +32,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityBlock.cpp" />
     <ClCompile Include="EntityManagement.cpp" />
+    <ClCompile Include="FinalBossDrawer.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Goblin.cpp" />
@@ -42,10 +44,12 @@
     <ClCompile Include="playtest.txt" />
     <ClCompile Include="SingleAnimation.cpp" />
     <ClCompile Include="Skeleton.cpp" />
+    <ClCompile Include="Spikes.cpp" />
     <ClCompile Include="timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationHandler.h" />
+    <ClInclude Include="Back.h" />
     <ClInclude Include="Border.h" />
     <ClInclude Include="BorderMapManagement.h" />
     <ClInclude Include="Config.h" />

@@ -18,7 +18,7 @@ void Door::init(float x, float y) {
 void Door::update(float dt) {
 	bool InteractPressed = graphics::getKeyState(graphics::SCANCODE_E);
 	animations->setCurrent("Closed");
-	if (abs(playerDistanceX() -true_x)< 1 && abs(playerDistanceY()-true_y ) <1  && InteractPressed) {
+	if (abs(playerDistanceX())< 1 && abs(playerDistanceY()) <1  && InteractPressed) {
 		opened = true;
 		NextLevelGo.start();
 	}

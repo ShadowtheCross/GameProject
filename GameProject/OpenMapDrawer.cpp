@@ -1,10 +1,12 @@
 #include "LevelBuilding.h"
 
 OpenMapDrawer::OpenMapDrawer(GameState*gs,std::string name) : Drawer(gs,name) {
+	
 }
 
 void OpenMapDrawer::init(std::string constructionFile, std::string texturesFile, std::string TexturesPerBlock) {
 	Drawer::init(constructionFile, texturesFile, TexturesPerBlock);
+	backPanel.texture =  texturesFile + "Back\\BackGround.png";
 	BackGround.setup(texturesFile + "BackGround", TexturesNum["BackGround"]);
 	RightWall.setup(texturesFile + "RightWall", TexturesNum["RightWall"]);
 	LeftWall.setup(texturesFile + "LeftWall", TexturesNum["LeftWall"]);
@@ -15,6 +17,7 @@ void OpenMapDrawer::init(std::string constructionFile, std::string texturesFile,
 	BottomRightEdge.setup(texturesFile + "BottomRightEdge", TexturesNum["BottomRightEdge"]);
 	BottomLeftEdge.setup(texturesFile + "BottomLeftEdge", TexturesNum["BottomLeftEdge"]);
 	HalfBlock.setup(texturesFile + "HalfBlock", TexturesNum["HalfBlock"]);
+	DecorativeObjects.setup(texturesFile + "DecorativeObjects", TexturesNum["DecorativeObjects"]);
 	std::ifstream file(constructionFile);
 	std::string data, type, length;
 	std::getline(file, data);
@@ -54,6 +57,7 @@ void OpenMapDrawer::update(float dt) {
 }
 
 void OpenMapDrawer::draw() {
+	graphics::drawRect(Config::window_width/2,Config::window_height/2, Config::window_width,Config::window_height, backPanel );
 	Drawer::draw();
 }
 
@@ -74,13 +78,13 @@ void OpenMapDrawer::drawStart() {
 	fillUpperY(-1, 1, 20);
 	fillLowerY(-1, -1, 20);
 	Blocks[-1][-1] = (Block::declareAndInit(GameObject::m_state, "", -1, -1, UpperRightEdge.random()));
-	Blocks[-1][0] = (Block::declareAndInit(GameObject::m_state, "", -1, 0, RightWall.random()));
+	Blocks[-1][0] = (Block::declareAndInit(GameObject::m_state, "", -1, 0, LeftWall.random()));
 	Blocks[-1][1] = (Block::declareAndInit(GameObject::m_state, "", -1, 1, BottomRightEdge.random()));
 
 	//for the starting point
 	x_next = 0;
 	y_next = 0;
-	while (x_next < 20) {
+	while (x_next < 4) {
 		fillUpperY(x_next, +1, 20);
 		fillLowerY(x_next, -1, 20);
 		Blocks[x_next][0] = (Block::declareAndInit(GameObject::m_state, "", x_next, 0, BackGround.random()));
@@ -99,6 +103,8 @@ void OpenMapDrawer::drawLine(int n) {
 
 	for (int i = 0; i < n; i++) {
 		Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next-1 , Ground.random()));
+		Blocks[x_next][y_next] = (EnemyBlock::declareAndInit(GameObject::m_state, "", x_next, y_next, DecorativeObjects.random() , Config::spawn_rate));
+
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			0.0, -y_next+.5f, //bottom 
 			0.0, -y_next-top); //top
@@ -118,7 +124,7 @@ void OpenMapDrawer::drawUpBlocks(int n) {
 		fillLowerY(x_next, y_next, 20);
 		y_next++;
 		x_next++;
-		drawLine(1);
+		drawLine(5);
 	}
 
 }
@@ -132,7 +138,7 @@ void OpenMapDrawer::drawDownBlocks(int n) {
 			0.0, -y_next - top); //top
 		fillLowerY(x_next, y_next, 20);
 		x_next++;
-		drawLine(1);
+		drawLine(4);
 
 	}
 
@@ -140,8 +146,10 @@ void OpenMapDrawer::drawDownBlocks(int n) {
 
 
 void OpenMapDrawer::drawSpikeDrop(int n) {
+	Spikes* temp;
 	for (int i = 0; i < n; i++) {
 	//Draw Ledge
+	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, DecorativeObjects.random()));
 	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next-1, Ground.random()));
 	Blocks[x_next][y_next-2] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 2, LeftWall.random()));
 	Blocks[x_next][y_next-3] = Blocks[x_next][y_next-3] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 3, UpperRightEdge.random()));
@@ -156,6 +164,9 @@ void OpenMapDrawer::drawSpikeDrop(int n) {
 	Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, BackGround.random()));
 	Blocks[x_next][y_next - 2] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 2, BackGround.random()));
 	Blocks[x_next][y_next - 3] = Blocks[x_next][y_next - 3] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 3, Ground.random()));
+	temp = new Spikes(GameObject::m_state);
+	temp->init(x_next, y_next-2);
+	GameObject::m_state->appendStaticEntity(temp);
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		0.0, -y_next + 2.5, 
 		0.0, -y_next - top);
@@ -163,6 +174,7 @@ void OpenMapDrawer::drawSpikeDrop(int n) {
 	x_next++;
 
 	//draw the next edge
+	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, DecorativeObjects.random()));
 	Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random()));
 	Blocks[x_next][y_next - 2] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 2, RightWall.random()));
 	Blocks[x_next][y_next - 3] = Blocks[x_next][y_next - 3] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 3, UpperLeftEdge.random()));
@@ -182,7 +194,7 @@ void OpenMapDrawer::drawEnd() {
 
 
 	//Cave Exit
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 4; i++) {
 		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random()));
 		Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, Ceiling.random()));
 		Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random()));

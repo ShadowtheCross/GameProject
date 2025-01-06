@@ -5,7 +5,7 @@ GameState* GameState::instance = NULL;
 int Config::window_width = 1500;
 int Config::window_height = 1000;
 
-int Config::spawn_rate = 0;
+int Config::spawn_rate = 25;
 
 int Config::mainPlayerWidth = 10;
 int Config::mainPlayerHeight = 30;

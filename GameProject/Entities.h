@@ -6,7 +6,7 @@
 
 
 class Entity : public GameObject {
-
+protected:
 	float true_x = 0, true_y = 0;
 public:
 	Entity(GameState* gs, std::string name);
@@ -36,8 +36,6 @@ public:
 */
 
 class StaticEntity : public Entity {
-protected:
-	float true_x = 0, true_y = 0;
 public:
 	StaticEntity(GameState* gs, std::string name) : Entity(gs,name) {}
 
@@ -58,7 +56,6 @@ class Door :public StaticEntity {
 	bool opened = false;
     protected:
 	AnimationHandler* animations;
-        float true_x = 0, true_y = 0;
         Timer NextLevelGo = Timer(0.5f, Timer::TIMER_ONCE);
     public:
 
@@ -87,7 +84,6 @@ class Door :public StaticEntity {
 
 class Chest :public StaticEntity {
 	AnimationHandler* animations;
-	float true_x = 0, true_y = 0;
 	bool opened = false;
 public:
 
@@ -107,7 +103,18 @@ public:
 	~Chest();
 };
 
+class Spikes : public StaticEntity {
+protected:
+	AnimationHandler* animations;
+public:
+	Spikes(GameState* gs);
+	void init(float x, float y);
+	void draw();
+	void update(float dt);
+	~Spikes();
 
+
+};
 
 
 
