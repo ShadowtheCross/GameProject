@@ -234,6 +234,20 @@ public:
 
 };
 
+class Boss : public Character {
+	bool aggrivate = false;
+
+	Boss(GameState* gs);
+
+	void init(int spawn_x, int spawn_y);
+
+	void update(float dt);
+	void draw();
+
+	~Boss();
+
+};
+
 
 
 
@@ -242,10 +256,12 @@ class MainCharacter : public Character {
 	//Ability Timers
 	class Timer* dashTimer, * dashCooldown,
 		* jumpTimer1, * jumpCoolDown,*attackTimer1,*attackTimer2,*nextAttackWindow,
-		*stuntTimer;
+		*stuntTimer,*fluskUseCooldown;
 	bool canDash = true;
 	bool canJumpAgain = true;
+	int FluskUses = 4;
 
+	graphics::Brush text;
 
 public:
 	MainCharacter(GameState* gs, std::string name);
@@ -253,6 +269,10 @@ public:
 	void teleport(float x, float y);
 	void damage(float dmg);
 	void attack(float dmg);
+
+	void regenerateHealth(float Health);
+	void increaseHealth(float Health);
+	void addFlaskUse();
 
 	void init(int spawn_x, int spawn_y);
 

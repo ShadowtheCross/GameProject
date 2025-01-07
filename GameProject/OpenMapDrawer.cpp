@@ -1,12 +1,13 @@
 #include "LevelBuilding.h"
 
 OpenMapDrawer::OpenMapDrawer(GameState*gs,std::string name) : Drawer(gs,name) {
-	
+	backPanel = new VisualBackground(gs);
 }
 
 void OpenMapDrawer::init(std::string constructionFile, std::string texturesFile, std::string TexturesPerBlock) {
 	Drawer::init(constructionFile, texturesFile, TexturesPerBlock);
-	backPanel.texture =  texturesFile + "Back\\BackGround.png";
+	backPanel->init(3.0,3.0,texturesFile + "Back\\BackGround.png");
+
 	BackGround.setup(texturesFile + "BackGround", TexturesNum["BackGround"]);
 	RightWall.setup(texturesFile + "RightWall", TexturesNum["RightWall"]);
 	LeftWall.setup(texturesFile + "LeftWall", TexturesNum["LeftWall"]);
@@ -53,11 +54,11 @@ void OpenMapDrawer::init(std::string constructionFile, std::string texturesFile,
 }
 
 void OpenMapDrawer::update(float dt) {
-
+	backPanel->update(dt);
 }
 
 void OpenMapDrawer::draw() {
-	graphics::drawRect(Config::window_width/2,Config::window_height/2, Config::window_width,Config::window_height, backPanel );
+	backPanel->draw();
 	Drawer::draw();
 }
 

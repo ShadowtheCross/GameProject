@@ -15,6 +15,7 @@ GameState::GameState()  {
 	OffsetY = Config::window_height / 2;
 	Handler = new EntityHandler(this);
 	Menu = new MainPlayerMenu(this);
+	transition = new BlackScreen(this);
 }
 
 void GameState::update(float dt) {
@@ -23,19 +24,22 @@ void GameState::update(float dt) {
 		return;
 	}
 	if (goToTheNextLevel) {
+		transition->activate();
+	}
+	if (goToTheNextLevel && transition->isActivated()) {
 		Handler->wipeEntities();
 		Handler->clearStaticEntities();
 		Handler->teleportPlayer(0, 0);
 		Drawer* temp = ActiveLevel;
 		ActiveLevel = loadLevel("Level" + std::to_string(currentLevel), this);
-		delete temp;
+		if (temp != nullptr) {
+			delete temp;
+
+		}
 		goToTheNextLevel = false;
+		transition->deactivate();
 	}
-
-
-
-
-
+	transition->update(dt);
 	ActiveLevel->update(dt); 
 	Handler->update(dt);
 }
@@ -43,6 +47,7 @@ void GameState::init(int BlockS,std::string ConstructionFile, std::string textur
 	Menu->init();
 	BlockSize = BlockS;
 	Handler->init();
+	transition->init();
 }
 void GameState::draw() {
 	if (onTheMenu) {
@@ -52,6 +57,8 @@ void GameState::draw() {
 	if(ActiveLevel!= nullptr)
 	ActiveLevel->draw();
 	Handler->draw();
+	transition->draw();
+
 }
 void GameState::backToMenu() {
 	Handler->wipeEntities();
@@ -98,7 +105,7 @@ bool GameState::canGoAt(float x, float y) {
 
 
 GameState::~GameState() {
-	delete ActiveLevel, Handler;
+	delete ActiveLevel, Handler,transition;
 }
 
 float GameState::getGlobalX() {
@@ -165,3 +172,12 @@ void GameState::nextLevel() {
 int GameState::getBlockSize() {
 	return BlockSize;
 }
+
+void GameState::regenerateHealth(float Health) {
+	Handler->regeneratePlayerHealth(Health);
+}
+void GameState::increaseHealth(float Health) {
+	Handler->increasePlayerHealth(Health);
+}
+
+

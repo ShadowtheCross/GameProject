@@ -151,8 +151,7 @@ class OpenMapDrawer : public Drawer {
 		UpperRightEdge, UpperLeftEdge, BottomRightEdge, BottomLeftEdge,
 		HalfBlock,DecorativeObjects;
 	const float top = 100000;
-	graphics::Brush backPanel;
-
+	class VisualBackground* backPanel;
 	void drawStart();
 	void drawEnd();
 
@@ -204,17 +203,17 @@ public:
 inline Drawer* loadLevel(std::string name, GameState* gs) {
 	Drawer* newLevel;
 
-/*
-	if (name == "Level1") {
-		newLevel = new DungeonDrawer(gs, "Level1");
-		newLevel->init( "Assets\\Level1.txt", "Assets\\Textures\\Level1\\", "Assets\\Textures\\Level1\\TextureNumbers.txt");
-		return newLevel;
-	}
-	if (name == "Level2") {
-		newLevel = new DungeonDrawer(gs, "Level1");
-		newLevel->init("Assets\\Level2.txt", "Assets\\Textures\\Level2\\","Assets\\Textures\\Level2\\TextureNumbers.txt");
-		return newLevel;
-	}*/
+
+	//if (name == "Level1") {
+	//	newLevel = new DungeonDrawer(gs, "Level1");
+	//	newLevel->init( "Assets\\Level1.txt", "Assets\\Textures\\Level1\\", "Assets\\Textures\\Level1\\TextureNumbers.txt");
+	//	return newLevel;
+	//}
+	//if (name == "Level2") {
+	//	newLevel = new DungeonDrawer(gs, "Level1");
+	//	newLevel->init("Assets\\Level2.txt", "Assets\\Textures\\Level2\\","Assets\\Textures\\Level2\\TextureNumbers.txt");
+	//	return newLevel;
+	//}
 	if (name == "Level1") {
 		newLevel = new OpenMapDrawer(gs, "Level3");
 		newLevel->init("Assets\\Level3.txt", "Assets\\Textures\\Level3\\", "Assets\\Textures\\Level3\\TextureNumbers.txt");
@@ -225,10 +224,10 @@ inline Drawer* loadLevel(std::string name, GameState* gs) {
 		newLevel->init("Assets\\Level4.txt", "Assets\\Textures\\Level4\\", "Assets\\Textures\\Level4\\TextureNumbers.txt");
 		return newLevel;
 	}
-	if (name == "Level5") {
+	if (name == "Level5") {	
+		std::cout << "RUn";
 		newLevel = new FinalBossDrawer(gs, "Level5");
 		newLevel->init("Assets\\Level5.txt", "Assets\\Textures\\Level5\\", "Assets\\Textures\\Level5\\TextureNumbers.txt");
-		std::cout << "RUn";
 		return newLevel;
 	}
 	return nullptr;

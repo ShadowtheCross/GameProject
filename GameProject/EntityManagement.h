@@ -31,6 +31,12 @@ public:
 	void damagePlayer(float dmg);
 	void damageEnemies(float dmg);
 
+
+	void regeneratePlayerHealth(float Health);
+	void increasePlayerHealth(float Health);
+
+
+
 	void appendEntity(Entity* en);
 	void wipeEntities();
 	~EntityHandler();

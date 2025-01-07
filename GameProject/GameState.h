@@ -8,8 +8,11 @@
 #include "EntityManagement.h"
 #include "Movement.h"
 #include "MainMenu.h"
+#include "BlackScreen.h"
 
 class GameState {
+public:
+	class BlackScreen* transition;
 private:
 	float* x_global, * y_global;
 	float x =0, y=0,BlockSize =256;
@@ -25,7 +28,7 @@ private:
 	std::unordered_map<int, class BlockBorder*> *blockRef ;
 
 	class MainPlayerMenu *Menu;
-
+	
 public:
 
 	void update(float dt);
@@ -40,6 +43,11 @@ public:
 	void setGlobalY(float*);
 	void setPlayerX(float*);
 	void setPlayerY(float*);
+
+	void regenerateHealth(float Health);
+	void increaseHealth(float Health);
+
+
 
 	void teleportPlayer(float x, float y);
 	void setBorder(std::unordered_map<int, BlockBorder* > *ref);

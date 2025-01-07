@@ -26,13 +26,20 @@ void FinalBossDrawer::init(std::string constructionFile, std::string texturesFil
 	}	
 	Border[0] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		0, 103.5f,
-		0, -9.5);
+		0, -90000.5);
 	Border[-1] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		0, 103.5f,
-		0, +100.5);
+		0, +101.5);
 	Border[+1] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		0, 103.5f,
-		0, +100.5);
+		0, +101.5);
+
+
+	//RightWall
+	Blocks[-6][-101] = (Block::declareAndInit(GameObject::m_state, "", -6, -101, BottomRightEdge.random()));
+	Blocks[-6][-102] = (Block::declareAndInit(GameObject::m_state, "", -6, -102, RightWall.random()));
+	Blocks[-6][-103] = (Block::declareAndInit(GameObject::m_state, "", -6, -103, RightWall.random()));
+	Blocks[-6][-104] = (Block::declareAndInit(GameObject::m_state, "", -6, -104, UpperRightEdge.random()));
 
 
 	//draw the arena
@@ -40,22 +47,44 @@ void FinalBossDrawer::init(std::string constructionFile, std::string texturesFil
 		Blocks[x][-101] = (Block::declareAndInit(GameObject::m_state, "", x, -101, Ceiling.random()));
 		Blocks[x][-102] = (Block::declareAndInit(GameObject::m_state, "", x, -102, BackGround.random()));
 		Blocks[x][-103] = (Block::declareAndInit(GameObject::m_state, "", x, -103, BackGround.random()));
-		Blocks[x][-104] = (Block::declareAndInit(GameObject::m_state, "", x, -103, Ground.random()));
-		Border[0] = BlockBorder::buildAndInit(GameObject::m_state, "",
-			0, 104.5f,
-			0, -9.5);
+		Blocks[x][-104] = (Block::declareAndInit(GameObject::m_state, "", x, -104, Ground.random()));
+		Border[x] = BlockBorder::buildAndInit(GameObject::m_state, "",
+			0, 103.5f,
+			0, +101.5);
 	}
+	//Falling Blocks
+	for (int x = -1; x < 2; x++) {
+		if(x != 0)	Blocks[x][-101] = (Block::declareAndInit(GameObject::m_state, "", x, -101, Ceiling.random()));
+		else Blocks[x][-101] = (Block::declareAndInit(GameObject::m_state, "", x, -101, BackGround.random()));
+		Blocks[x][-102] = (Block::declareAndInit(GameObject::m_state, "", x, -102, BackGround.random()));
+		Blocks[x][-103] = (Block::declareAndInit(GameObject::m_state, "", x, -103, BackGround.random()));
+		Blocks[x][-104] = (Block::declareAndInit(GameObject::m_state, "", x, -104, Ground.random()));
+	}
+
+
+
 	for (int x = 2; x < 15; x++) {
 		Blocks[x][-101] = (Block::declareAndInit(GameObject::m_state, "", x, -101, Ceiling.random()));
 		Blocks[x][-102] = (Block::declareAndInit(GameObject::m_state, "", x, -102, BackGround.random()));
 		Blocks[x][-103] = (Block::declareAndInit(GameObject::m_state, "", x, -103, BackGround.random()));
-		Blocks[x][-104] = (Block::declareAndInit(GameObject::m_state, "", x, -103, Ground.random()));
-		Border[0] = BlockBorder::buildAndInit(GameObject::m_state, "",
-			0, 104.5f,
-			0, -9.5);
+		Blocks[x][-104] = (Block::declareAndInit(GameObject::m_state, "", x, -104, Ground.random()));
+		Border[x] = BlockBorder::buildAndInit(GameObject::m_state, "",
+			0, 103.5f,
+			0, +101.5);
 
 	}
 
+	Blocks[15][-101] = (Block::declareAndInit(GameObject::m_state, "", 15, -101, BottomLeftEdge.random()));
+	Blocks[15][-102] = (Block::declareAndInit(GameObject::m_state, "", 15, -102, LeftWall.random()));
+	Blocks[15][-103] = (Block::declareAndInit(GameObject::m_state, "", 15, -103, LeftWall.random()));
+	Blocks[15][-104] = (Block::declareAndInit(GameObject::m_state, "", 15, -104, UpperLeftEdge.random()));
+
+
+	for (int x = -20; x < 30; x++) {
+		fillLowerY(x, -99, 100);
+		fillUpperY(x, -100, 120);
+
+	}
 
 
 

@@ -24,6 +24,7 @@ void Chest::update(float dt) {
 	animations->setCurrent("Closed");
 	if (abs(playerDistanceX() - true_x) < 1 && abs(playerDistanceY() - true_y) < 2 && InteractPressed) {
 		opened = true;
+		GameObject::m_state->increaseHealth(50);
 	}
 }
 

@@ -14,3 +14,5 @@ FallLeft:2:100.0f
 FallRight:2:100.0f
 TakeHitRight:4:100.0f
 TakeHitLeft:4:100.0f
+DashRight:1:100.0f
+DashLeft:1:100.0f

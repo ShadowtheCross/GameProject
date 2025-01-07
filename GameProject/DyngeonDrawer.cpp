@@ -134,7 +134,7 @@ void DungeonDrawer::drawLine(int n) {
 }
 
 void DungeonDrawer::drawUpBlocks(int n) {
-	n = n - n % 2;
+	n = n / 2;
 	for (int i = 0; i < n; i++) {
 		if (i % 2) {
 
@@ -160,7 +160,7 @@ void DungeonDrawer::drawUpBlocks(int n) {
 }
 
 void DungeonDrawer::drawDownBlocks(int n) {
-	n = n - n % 2;
+	n = n /2;
 	for (int i = 0; i < n; i++) {
 		if (i % 2) {
 		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, HalfCeilingDown.random()));

@@ -10,6 +10,7 @@ MainCharacter::MainCharacter(GameState* gs, std::string name) : Character(gs, na
 	attackTimer2 = new Timer(0.45, Timer::TIMER_ONCE);
 	nextAttackWindow = new Timer(0.3f, Timer::TIMER_ONCE);
 	stuntTimer = new Timer(0.5f, Timer::TIMER_ONCE);
+	fluskUseCooldown = new Timer(2.0f, Timer::TIMER_ONCE);
 }
 
 void MainCharacter::init(int spawn_x, int spawn_y) {
@@ -23,7 +24,9 @@ void MainCharacter::init(int spawn_x, int spawn_y) {
 
 	GameObject::m_state->setPlayerX(&true_x);
 	GameObject::m_state->setPlayerY(&true_y);
-
+	text.fill_color[0] = 1.0f;
+	text.fill_color[1] = 1.0f;
+	text.fill_color[2] = 1.0f;
 
 }
 
@@ -74,12 +77,21 @@ void MainCharacter::update(float dt) {
 
 	cooldown = *dashCooldown;
 	cooldown = *jumpCoolDown;
+	cooldown = *fluskUseCooldown;
 	bool activeAbility = false;
 
 	//Ability set
 	if (dashTimer->isRunning()) {
 		float elapsed1= *dashTimer;
 		mobilize->dash(Time,mobilize->direction_x);
+		if (mobilize->direction_x == Movement::Direction::Right) {
+			animation->setCurrent("DashRight");
+		}
+		else {
+			animation->setCurrent("DashLeft");
+		}
+
+
 		activeAbility = true;
 		canDash = false;
 		canHit = false;
@@ -137,7 +149,7 @@ void MainCharacter::update(float dt) {
 	bool right = graphics::getKeyState(graphics::SCANCODE_D);
 	bool jump = graphics::getKeyState(graphics::SCANCODE_SPACE);
 	bool dash = graphics::getKeyState(graphics::SCANCODE_LSHIFT);
-	
+	bool heal = graphics::getKeyState(graphics::SCANCODE_H);
 	bool idle = (left && right) || (!left && !right) || activeAbility;
 
 	// Movement Configurer
@@ -221,6 +233,11 @@ void MainCharacter::update(float dt) {
 		dashTimer->start();
 		dashCooldown->start();
 	}
+	if (!fluskUseCooldown->isRunning() && heal && FluskUses > 0) {
+		FluskUses--;
+		fluskUseCooldown->start();
+		regenerateHealth(50);
+	}
 
 
 	mobilize->gravity(Time);
@@ -232,11 +249,40 @@ void MainCharacter::update(float dt) {
 void MainCharacter::draw() {
 	animation->draw();
 	mobilize->draw();
-
+	graphics::setFont("Assets\\Fonts\\RubikVinyl-Regular.ttf");
+	graphics::drawText(10, 100, 50, "Health: " + std::to_string((int)health) + "/" + std::to_string((int)max_health), text);
+	graphics::drawText(10, 200, 50, "Flusk Uses: " + std::to_string(FluskUses) + "/4", text);
 }
 void MainCharacter::attack(float dmg) {
 	GameObject::m_state->damageEnemies(dmg);
 }
+
+void MainCharacter::regenerateHealth(float Health) {
+	health += Health;
+	if (health > max_health) {
+		health = max_health;
+	}
+}
+void MainCharacter::increaseHealth(float Health) {
+	this->max_health += Health;
+
+	if (Health > 0) {
+		this->health += Health;
+	}
+	else {
+		if (Health > max_health) {
+			this->health = max_health;
+		}
+	}
+	
+}
+
+void MainCharacter::addFlaskUse() {
+	FluskUses++;
+	if (FluskUses == 5) FluskUses--;
+}
+
+
 
 void MainCharacter::damage(float dmg) {
 	if (!canHit) {

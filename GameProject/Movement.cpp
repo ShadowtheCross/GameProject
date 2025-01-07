@@ -88,7 +88,8 @@ bool Movement::onCeiling() {
 
 bool Movement::onFloor() {
 	
-	return !GameObject::m_state->canGoAt(*current_x, *current_y + height/2 +0.001f );
+	return !GameObject::m_state->canGoAt(*current_x +width/2, *current_y + height/2 +0.001f ) ||
+		!GameObject::m_state->canGoAt(*current_x - width / 2, *current_y + height / 2 + 0.001f);
 }
 
 void Movement::draw() {

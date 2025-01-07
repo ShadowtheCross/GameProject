@@ -13,6 +13,6 @@ int Config::mainPlayerHeight = 30;
 float Config::playerVelocity = 0.5f;
 float Config::playerHealth = 100.0f;
 
-float Config::attackDamage1 = 450;
-float Config::attackDamage2= 100.0f;
+float Config::attackDamage1 = 20;
+float Config::attackDamage2= 30;
 

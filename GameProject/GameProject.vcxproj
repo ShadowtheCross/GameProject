@@ -21,7 +21,9 @@
   <ItemGroup>
     <ClCompile Include="AnimationHandler.cpp" />
     <ClCompile Include="BackPanel.cpp" />
+    <ClCompile Include="BlackScreenTransition.cpp" />
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Door.cpp" />
@@ -50,6 +52,7 @@
   <ItemGroup>
     <ClInclude Include="AnimationHandler.h" />
     <ClInclude Include="Back.h" />
+    <ClInclude Include="BlackScreen.h" />
     <ClInclude Include="Border.h" />
     <ClInclude Include="BorderMapManagement.h" />
     <ClInclude Include="Config.h" />

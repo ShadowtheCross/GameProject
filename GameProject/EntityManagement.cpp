@@ -41,6 +41,18 @@ void EntityHandler::draw() {
 
 }
 
+void EntityHandler::regeneratePlayerHealth(float Health) {
+	player->regenerateHealth(Health);
+}
+
+void EntityHandler::increasePlayerHealth(float Health) {
+	player->increaseHealth(Health);
+}
+
+
+
+
+
 void EntityHandler::appendStaticEntity(StaticEntity* en) {
 	
 	StaticEntities.push_back(en);

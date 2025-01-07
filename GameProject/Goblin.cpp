@@ -125,7 +125,7 @@ void Goblin::update(float dt) {
 			dashTimer->start();
 			dashCooldown->start();
 		}
-		else if (abs(dx_p) < 0.2 && !attackCooldown->isRunning() && abs(dy_p) < 0.3f) {
+		else if (abs(dx_p) < 0.3 && !attackCooldown->isRunning() && abs(dy_p) < 0.3f) {
 			attackTimer1->start();
 			attackCooldown->start();
 		} 		
