@@ -204,17 +204,17 @@ inline Drawer* loadLevel(std::string name, GameState* gs) {
 	Drawer* newLevel;
 
 
-	//if (name == "Level1") {
-	//	newLevel = new DungeonDrawer(gs, "Level1");
-	//	newLevel->init( "Assets\\Level1.txt", "Assets\\Textures\\Level1\\", "Assets\\Textures\\Level1\\TextureNumbers.txt");
-	//	return newLevel;
-	//}
-	//if (name == "Level2") {
-	//	newLevel = new DungeonDrawer(gs, "Level1");
-	//	newLevel->init("Assets\\Level2.txt", "Assets\\Textures\\Level2\\","Assets\\Textures\\Level2\\TextureNumbers.txt");
-	//	return newLevel;
-	//}
 	if (name == "Level1") {
+		newLevel = new DungeonDrawer(gs, "Level1");
+		newLevel->init( "Assets\\Level1.txt", "Assets\\Textures\\Level1\\", "Assets\\Textures\\Level1\\TextureNumbers.txt");
+		return newLevel;
+	}
+	if (name == "Level2") {
+		newLevel = new DungeonDrawer(gs, "Level1");
+		newLevel->init("Assets\\Level2.txt", "Assets\\Textures\\Level2\\","Assets\\Textures\\Level2\\TextureNumbers.txt");
+		return newLevel;
+	}
+	if (name == "Level3") {
 		newLevel = new OpenMapDrawer(gs, "Level3");
 		newLevel->init("Assets\\Level3.txt", "Assets\\Textures\\Level3\\", "Assets\\Textures\\Level3\\TextureNumbers.txt");
 		return newLevel;

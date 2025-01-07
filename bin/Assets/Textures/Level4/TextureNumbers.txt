@@ -1,0 +1,12 @@
+DecorativeObjects:7
+BackGround:1
+BottomLeftEdge:1
+BottomRightEdge:1
+Ceiling:3
+Ground:7
+LeftWall:4
+OutsideMap:1
+RightWall:4
+UpperLeftEdge:1
+UpperRightEdge:1
+HalfBlock:1

@@ -1,0 +1,11 @@
+Ground:4
+BottomRightEdge:1
+UpperLeftEdge:1
+UpperRightEdge:1
+BottomLeftEdge:1
+BottomRightEdge:1
+OutsideMap:1
+RightWall:1
+LeftWall:1
+BackGround:2
+Ceiling:1

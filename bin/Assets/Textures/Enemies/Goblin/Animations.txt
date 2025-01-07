@@ -1,0 +1,10 @@
+IdleRight:3:150.0f
+IdleLeft:3:150.0f
+RunRight:7:75.0f
+RunLeft:7:75.0f
+DeathLeft:3:150.0f
+DeathRight:3:150.0f
+TakeHitRight:3:100.0f
+TakeHitLeft:3:100.0f
+AttackRight:7:50.0f
+AttackLeft:7:50.0f
