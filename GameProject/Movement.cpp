@@ -18,6 +18,7 @@ void Movement::init(float acc_x, float acc_y,
 	
 	current_x = player_x;
 	current_y = player_y;
+	overLapRadius = width + height / 2.0;
 }
 
 void Movement::limitX() {
@@ -88,8 +89,8 @@ bool Movement::onCeiling() {
 
 bool Movement::onFloor() {
 	
-	return !GameObject::m_state->canGoAt(*current_x +width/2, *current_y + height/2 +0.001f ) ||
-		!GameObject::m_state->canGoAt(*current_x - width / 2, *current_y + height / 2 + 0.001f);
+	return !GameObject::m_state->canGoAt(*current_x +width/2, *current_y + height/2 +0.02f ) ||
+		!GameObject::m_state->canGoAt(*current_x - width / 2, *current_y + height / 2 + 0.02f);
 }
 
 void Movement::draw() {

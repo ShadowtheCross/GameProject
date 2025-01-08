@@ -62,7 +62,7 @@ public:
 	void wipeStaticEnemies();
 
 	void wipeEnemies();
-	void appendEntity(Entity* en);
+	void appendEntity(Character* en);
 	
 	void damagePlayer(float dmg);
 	void damageEnemies(float dmg);

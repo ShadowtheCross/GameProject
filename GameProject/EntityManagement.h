@@ -10,7 +10,7 @@ class StaticEntity;
 
 class EntityHandler : public GameObject {
 //	std::unordered_map<int, std::unordered_map<int, std::list<class Entity*>>> Entities;
-	std::list<class Entity*> Entities;
+	std::list<class Character*> Entities;
 	std::vector<StaticEntity* > StaticEntities;
 	class MainCharacter* player;
 public:
@@ -37,7 +37,7 @@ public:
 
 
 
-	void appendEntity(Entity* en);
+	void appendEntity(Character* en);
 	void wipeEntities();
 	~EntityHandler();
 

@@ -133,7 +133,7 @@ void GameState::wipeEnemies() {
 	Handler->wipeEntities();
 }
 
-void GameState::appendEntity(Entity* en) {
+void GameState::appendEntity(Character* en) {
 	Handler->appendEntity(en);
 }
 

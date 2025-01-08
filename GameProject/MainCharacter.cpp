@@ -2,8 +2,8 @@
 
 float counter = 0;
 MainCharacter::MainCharacter(GameState* gs, std::string name) : Character(gs, name) {
-	dashTimer = new Timer(0.15f, Timer::TIMER_ONCE);
-	dashCooldown = new Timer(0.3f, Timer::TIMER_ONCE);
+	dashTimer = new Timer(0.05f, Timer::TIMER_ONCE);
+	dashCooldown = new Timer(0.7f, Timer::TIMER_ONCE);
 	jumpTimer1 = new Timer(0.05, Timer::TIMER_ONCE);
 	jumpCoolDown = new Timer(.2f, Timer::TIMER_ONCE);
 	attackTimer1 = new Timer(0.45, Timer::TIMER_ONCE);
@@ -15,7 +15,7 @@ MainCharacter::MainCharacter(GameState* gs, std::string name) : Character(gs, na
 
 void MainCharacter::init(int spawn_x, int spawn_y) {
 	
-	mobilize->init(1, 3, 3, 12, 0.3, .5f, &true_x, &true_y);
+	mobilize->init(2, 3, 3, 12, 0.3, .5f, &true_x, &true_y);
 	animation->init("Assets\\Textures\\MC\\", "Assets\\Textures\\MC\\Animations.txt",
 		2.5, 1.25,
 		&true_x, &true_y);
@@ -36,11 +36,7 @@ void MainCharacter::init(int spawn_x, int spawn_y) {
 void MainCharacter::update(float dt) {
 	float Time = graphics::getDeltaTime() / 10.f;
 	canHit = true;
-	counter += Time;
-	if (counter > 100) {
-		counter = 0;
-		std::cout << "Health " << health << std::endl;
-	}
+	
 
 	float cooldown;
 

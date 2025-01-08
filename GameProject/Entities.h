@@ -158,9 +158,9 @@ public:
 	
 
 
-	void attack() {}
+	virtual void attack() {}
 
-	void damage(float dmg) {}
+	virtual void damage(float dmg) {}
 	
 
 
@@ -235,14 +235,24 @@ public:
 };
 
 class Boss : public Character {
-	bool aggrivate = false;
+private:
+	
+	bool spawned1 = false, spawned2 = false;
+	float spawnHealthTrigger1 = 0.0, spawnHealthTrigger2 = 0.0;
 
+	bool aggrivate = false;
+	Timer attackTimer =  Timer(0.6, Timer::TIMER_ONCE);
+	Timer attackCooldown = Timer(1.5f, Timer::TIMER_ONCE);
+	Timer deathTimer = Timer(2.0f, Timer::TIMER_ONCE);
+public:
 	Boss(GameState* gs);
 
 	void init(int spawn_x, int spawn_y);
 
 	void update(float dt);
 	void draw();
+	void attack(float dmg, float ripperEffect);
+	void damage(float damage);
 
 	~Boss();
 

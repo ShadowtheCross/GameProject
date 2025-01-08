@@ -24,7 +24,6 @@ void Goblin::init(int spawn_x, int spawn_y) {
 
 
 void Goblin::update(float dt) {
-
 	float Time = graphics::getDeltaTime()/10;
 	float elapse;
 	
@@ -165,6 +164,7 @@ void Goblin::damage(float dmg) {
 	health -= dmg;
 	if (health <= 0) {
 		death->start();
+		graphics::playSound("Assets\\SoundTrack\\Enemies\\Goblin\\Death.mp3", 0.1);
 	}
 	dashCooldown->stop();
 	dashTimer->stop();

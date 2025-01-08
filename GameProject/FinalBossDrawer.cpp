@@ -36,10 +36,12 @@ void FinalBossDrawer::init(std::string constructionFile, std::string texturesFil
 
 
 	//RightWall
+
 	Blocks[-6][-101] = (Block::declareAndInit(GameObject::m_state, "", -6, -101, BottomRightEdge.random()));
 	Blocks[-6][-102] = (Block::declareAndInit(GameObject::m_state, "", -6, -102, RightWall.random()));
 	Blocks[-6][-103] = (Block::declareAndInit(GameObject::m_state, "", -6, -103, RightWall.random()));
 	Blocks[-6][-104] = (Block::declareAndInit(GameObject::m_state, "", -6, -104, UpperRightEdge.random()));
+	
 
 
 	//draw the arena
@@ -74,19 +76,56 @@ void FinalBossDrawer::init(std::string constructionFile, std::string texturesFil
 
 	}
 
+	/*
+	* Create the entry points where enemies spawn in
+	*/
+	delete Blocks[-3][-101];
+	delete Border[-3];
+	Blocks[-3][-101] = (Block::declareAndInit(GameObject::m_state, "", -3, -101, BackGround.random()));
+	for (int y = 1; y < 4; y++) {
+		Blocks[-3][-101 + y] = (Block::declareAndInit(GameObject::m_state, "", -3, -101 +y, BackGround.random()));
+		Blocks[-2][-101 + y] = (Block::declareAndInit(GameObject::m_state, "", -2, -101 + y, LeftWall.random()));
+		Blocks[-4][-101 + y] = (Block::declareAndInit(GameObject::m_state, "", -4, -101 + y, RightWall.random()));
+	}
+	Border[-3] = BlockBorder::buildAndInit(GameObject::m_state, "",
+		0, +103.5,
+		0, +0);
+	/*
+	* 
+	* Second spawn point drop
+	* 
+	*/
+
+	delete Blocks[+8][-101];
+	delete Border[+8];
+	Blocks[8][-101] = (Block::declareAndInit(GameObject::m_state, "", 8, -101, BackGround.random()));
+	for (int y = 1; y < 4; y++) {
+		Blocks[8][-101 + y] = (Block::declareAndInit(GameObject::m_state, "", 8, -101 + y, BackGround.random()));
+		Blocks[7][-101 + y] = (Block::declareAndInit(GameObject::m_state, "", 7, -101 + y, RightWall.random()));
+		Blocks[9][-101 + y] = (Block::declareAndInit(GameObject::m_state, "", 9, -101 + y, LeftWall.random()));
+	}
+	Border[8] = BlockBorder::buildAndInit(GameObject::m_state, "",
+		0, +103.5,
+		0, +0);
+
+
+
 	Blocks[15][-101] = (Block::declareAndInit(GameObject::m_state, "", 15, -101, BottomLeftEdge.random()));
 	Blocks[15][-102] = (Block::declareAndInit(GameObject::m_state, "", 15, -102, LeftWall.random()));
 	Blocks[15][-103] = (Block::declareAndInit(GameObject::m_state, "", 15, -103, LeftWall.random()));
 	Blocks[15][-104] = (Block::declareAndInit(GameObject::m_state, "", 15, -104, UpperLeftEdge.random()));
 
 
+
+
 	for (int x = -20; x < 30; x++) {
 		fillLowerY(x, -99, 100);
 		fillUpperY(x, -100, 120);
-
 	}
 
-
+	Boss* finalBoss = new Boss(GameObject::m_state);
+	finalBoss->init(10, -102);
+	GameObject::m_state->appendEntity(finalBoss);
 
 }
 

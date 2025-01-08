@@ -8,7 +8,7 @@ void EntityHandler::init() {
 }
 
 void EntityHandler::update(float dt) {
-	std::list<Entity*>::iterator it;
+	std::list<Character*>::iterator it;
 	it = Entities.begin();
 	while (it != Entities.end() ) {
 		(*it)->update(dt);
@@ -30,7 +30,7 @@ void EntityHandler::update(float dt) {
 }
 
 void EntityHandler::draw() {
-	std::list<Entity*>::iterator it;
+	std::list<Character*>::iterator it;
 	for (it = Entities.begin(); it != Entities.end(); ++it) {
 		(*it)->draw();
 	}
@@ -73,13 +73,13 @@ void EntityHandler::damagePlayer(float dmg) {
 }
 
 void EntityHandler::damageEnemies(float dmg) {
-	std::list<Entity*>::iterator it;
+	std::list<Character*>::iterator it;
 	float dx;
 	float dy;
 	for (it = Entities.begin(); it != Entities.end(); ++it) {
 		dx =  (*it)->getX() - player->getX();
 		dy =  (*it)->getY() - player->getY();
-		if (  ( dx*player->getDirectionX() <1 &&  0 <dx * player->getDirectionX())  && abs(dy)< 0.2f) {
+		if (  ( dx*player->getDirectionX() <1 &&  0 <dx * player->getDirectionX())  && abs(dy)< 0.4f) {
 			(*it)->damage(dmg);
 		}
 		
@@ -93,7 +93,7 @@ void EntityHandler::teleportPlayer(float x, float y) {
 
 
 void EntityHandler::wipeEntities() {
-	std::list<Entity*>::iterator it;
+	std::list<Character*>::iterator it;
 	for (it = Entities.begin(); it != Entities.end(); it++) {
 		delete (*it);
 	}
@@ -108,6 +108,6 @@ EntityHandler::~EntityHandler() {
 	delete player;
 }
 
-void EntityHandler::appendEntity(Entity* en) {
+void EntityHandler::appendEntity(Character* en) {
 		Entities.push_back(en);
 }

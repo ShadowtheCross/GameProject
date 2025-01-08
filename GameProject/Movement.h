@@ -10,7 +10,7 @@ class Movement : public GameObject
 	float max_speed_x = 0, max_speed_y = 0;
 	float width = 0,  height= 0;
 	float* current_x, * current_y;
-
+	float overLapRadius;
 	void limitX();
 	void limitY();
 
@@ -47,6 +47,8 @@ public:
 	bool rising() {
 		return speed_y <= 0;
 	}
+	
+
 
 	bool onCeiling();
 	bool onFloor();
