@@ -7,12 +7,7 @@ Door::Door(GameState* gs, std::string name) : StaticEntity(gs, name) {
 
 
 void Door::init(float x, float y) {
-	true_x = x;
-	true_y = -y;
-	animations->init("Assets\\Textures\\Objects\\Door\\", "Assets\\Textures\\Objects\\Door\\Animations.txt",
-		1.0, 1.0,
-		&true_x, &true_y);
-
+	StaticEntity::init(x ,  y , "Assets\\Textures\\Objects\\Door\\");
 }
 
 void Door::update(float dt) {
@@ -28,16 +23,14 @@ void Door::update(float dt) {
 			GameObject::m_state->nextLevel();
 		}
 	}
-
-
 	if(opened) animations->setCurrent("Opened");
-	animations->update(dt);
+	StaticEntity::update(dt);
 }
 
 void Door::draw() {
-	animations->draw();
+	StaticEntity::draw();
 }
 
 Door::~Door() {
-	delete animations;
+
 }

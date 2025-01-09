@@ -39,17 +39,17 @@ class StaticEntity : public Entity {
 protected:
 	AnimationHandler* animations;
 public:
-	StaticEntity(GameState* gs, std::string name) : Entity(gs,name) {}
+	StaticEntity(GameState* gs, std::string name);
 
-	void init(float x, float y) {}
-	void update(float dt) {}
-	void draw() {}
+	void init(float x, float y,std::string TextureFolder);
+	void update(float dt);
+	void draw();
 	void attack() {}
 	void damage(float dmg) {}
 	
 
 
-	~StaticEntity() {}
+	~StaticEntity();
 
 
 };

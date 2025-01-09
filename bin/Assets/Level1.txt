@@ -1,8 +1,9 @@
-drawLine:34
-drawDownBlocks:7
-drawCavern:9
-drawDropDown:15
-drawLine:13
-drawUpBlocks:7
-drawLine:12
+drawLine:2
+#drawLine:34
+#drawDownBlocks:7
+#drawCavern:9
+#drawDropDown:15
+#drawLine:13
+#drawUpBlocks:7
+#drawLine:12
 dd

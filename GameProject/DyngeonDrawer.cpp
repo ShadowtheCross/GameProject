@@ -307,6 +307,7 @@ void DungeonDrawer::drawEnd() {
 
 	//PathStart
 	for (int i = 0; i < 3; i++) {
+		if (i == 0) drawChest();
 		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random()));
 		Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, Ceiling.random()));
 		Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random()));
@@ -317,7 +318,20 @@ void DungeonDrawer::drawEnd() {
 		fillUpperY(x_next, y_next + 1, 20);
 		x_next++;
 	}
-	Blocks[x_next+1][y_next] =(Block::declareAndInit(GameObject::m_state, "", x_next+1, y_next, LeftWall.random() ));
+	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random()));
+	Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, Ceiling.random()));
+	Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random()));
+	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
+		-0.0f, (-y_next + 0.5f),
+		0.0f, (-y_next - 0.5f));
+	fillLowerY(x_next, y_next - 1, 20);
+	fillUpperY(x_next, y_next + 1, 20);
+
+
+	Blocks[x_next+1][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next+1, y_next, LeftWall.random()));
+	Blocks[x_next+1][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next+1, y_next + 1, BottomLeftEdge.random()));
+	Blocks[x_next+1][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next+1, y_next - 1, UpperLeftEdge.random()));
+
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		-0.0f, (-y_next + 0.5f) ,
 		0.0f, (-y_next - 0.5f) 
@@ -333,14 +347,8 @@ void DungeonDrawer::drawEnd() {
 		fillLowerY(x_next+i, y_next, 20);
 		fillUpperY(x_next+i, y_next-1, 20);
 	}
-	Chest* temp = new Chest(GameObject::m_state, "");
-	temp->init(x_next-2, y_next);
-
-	GameObject::m_state->appendStaticEntity(temp);
-
-	Door* test = new Door(GameObject::m_state, "");
-	test->init(x_next, y_next);
-	GameObject::m_state->appendStaticEntity(test);
+	
+	drawExit();
 	
 
 }

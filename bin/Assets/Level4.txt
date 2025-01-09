@@ -1,6 +1,2 @@
 drawLine:2
-drawDropDown:2
-drawSpikeDrop:4
-drawUpBlocks:4
-drawDownBlocks:3
 dd

@@ -5,9 +5,7 @@ Spikes::Spikes(GameState* gs) :StaticEntity(gs, "Spike") {
 }
 
 void Spikes::init(float x, float y) {
-	true_x = x;
-	true_y = -y;
-	animations->init("Assets\\Textures\\Objects\\Spikes\\", "Assets\\Textures\\Objects\\Spikes\\Animations.txt", 1, 1, &true_x, &true_y);
+	StaticEntity::init(x, y, "Assets\\Textures\\Objects\\Spikes\\");
 }
 
 
@@ -18,12 +16,11 @@ void Spikes::update(float dt) {
 		GameObject::m_state->damagePlayer(10000);
 	}
 	animations->setCurrent("Spikes");
-
+	StaticEntity::update(dt);
 }
 void Spikes::draw() {
-	animations->draw();
+	StaticEntity::draw();
 }
 
 Spikes::~Spikes() {
-	delete animations;
 }

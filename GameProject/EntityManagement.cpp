@@ -77,9 +77,9 @@ void EntityHandler::damageEnemies(float dmg) {
 	float dx;
 	float dy;
 	for (it = Entities.begin(); it != Entities.end(); ++it) {
-		dx =  (*it)->getX() - player->getX();
-		dy =  (*it)->getY() - player->getY();
-		if (  ( dx*player->getDirectionX() <1 &&  0 <dx * player->getDirectionX())  && abs(dy)< 0.4f) {
+		dx =  (*it)->playerDistanceX();
+		dy =  (*it)->playerDistanceY();
+		if (  ( abs(dx*player->getDirectionX() ) < 1 &&  0 > dx * player->getDirectionX())  && abs(dy)< 0.4f) {
 			(*it)->damage(dmg);
 		}
 		

@@ -36,6 +36,7 @@
     <ClCompile Include="EntityBlock.cpp" />
     <ClCompile Include="EntityManagement.cpp" />
     <ClCompile Include="FinalBossDrawer.cpp" />
+    <ClCompile Include="FinalOpenMap.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Goblin.cpp" />
@@ -48,6 +49,7 @@
     <ClCompile Include="SingleAnimation.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Spikes.cpp" />
+    <ClCompile Include="StaticEntity.cpp" />
     <ClCompile Include="timer.cpp" />
   </ItemGroup>
   <ItemGroup>

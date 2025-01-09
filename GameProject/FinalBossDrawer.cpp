@@ -124,9 +124,9 @@ void FinalBossDrawer::init(std::string constructionFile, std::string texturesFil
 	}
 
 	Boss* finalBoss = new Boss(GameObject::m_state);
-	finalBoss->init(10, -102);
+	finalBoss->init(10, 102);
 	GameObject::m_state->appendEntity(finalBoss);
-
+	std::cout << "BUILD";
 }
 
 void FinalBossDrawer::update(float dt) {

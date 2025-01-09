@@ -253,15 +253,19 @@ void OpenMapDrawer::drawEnd() {
 
 
 	//The exit x
-	fillLowerY(x_next, y_next - 1, 20);
-	fillUpperY(x_next, y_next + 1, 20);
+	fillLowerY(x_next, y_next - 1, 200);
+	fillUpperY(x_next, y_next + 1, 200);
 	//x at the right wall
-	fillLowerY(x_next + 1, y_next, 20);
-	fillUpperY(x_next + 1, y_next, 20);
-	for (int i = 2; i < 20; i++) {
+	fillLowerY(x_next + 1, y_next, 200);
+	fillUpperY(x_next + 1, y_next, 200);
+	for (int i = -10; i < 0; i++) {
+		fillLowerY(x_next + i, y_next - 1, 200);
+	}
+
+	for (int i = 0; i < 20; i++) {
 		//fill the rest
-		fillLowerY(x_next + i, y_next, 20);
-		fillUpperY(x_next + i, y_next - 1, 20);
+		fillLowerY(x_next + i, y_next, 200);
+		fillUpperY(x_next + i, y_next - 1, 200);
 	}
 
 

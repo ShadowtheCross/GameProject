@@ -293,8 +293,8 @@ void MainCharacter::damage(float dmg) {
 }
 
 void MainCharacter::teleport(float x, float y) {
-	true_x = x;
-	true_y = y;
+	Entity::true_x = x;
+	Entity::true_y = y;
 
 }
 

@@ -5,14 +5,11 @@ Chest::Chest(GameState *gs,std::string name) : StaticEntity(gs,name) {
 }
 
 void Chest::init(float x, float y) {
-	true_x = x;
-	true_y = -y;
-	animations->init("Assets\\Textures\\Objects\\Chest\\",
-		"Assets\\Textures\\Objects\\Chest\\Animations.txt", 1, 1, &true_x, &true_y);
+	StaticEntity::init(x, y, "Assets\\Textures\\Objects\\Chest\\");
 }
 
 void Chest::draw() {
-	animations->draw();
+	StaticEntity::draw();
 }
 
 void Chest::update(float dt) {
@@ -26,8 +23,8 @@ void Chest::update(float dt) {
 		opened = true;
 		GameObject::m_state->increaseHealth(50);
 	}
+	StaticEntity::update(dt);
 }
 
 Chest::~Chest() {
-	delete animations;
 }

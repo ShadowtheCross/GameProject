@@ -21,8 +21,6 @@ void Boss::draw() {
 }
 
 void Boss::update(float dt) {
-
-	std::cout << playerDistanceX() << " : "  << playerDistanceY()  << "\n";
 	float elapse;
 	float Time = graphics::getDeltaTime();
 	if (!spawned1 && spawnHealthTrigger1 > health) {

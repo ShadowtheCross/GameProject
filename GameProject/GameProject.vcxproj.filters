@@ -64,6 +64,12 @@
     <Filter Include="Source Files\Transition">
       <UniqueIdentifier>{11bc6384-b6fb-4eb6-977a-0c3fae268904}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\LevelBuilding\OpenMaps">
+      <UniqueIdentifier>{1dbabc23-c8a5-4deb-8d30-e57d1a1b03c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LevelBuilding\Building Blocks">
+      <UniqueIdentifier>{71d3ac54-70f3-4f88-861f-7d2283200ab1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="playtest.txt">
@@ -93,12 +99,6 @@
     <ClCompile Include="GameLogic.cpp">
       <Filter>Source Files\Logic</Filter>
     </ClCompile>
-    <ClCompile Include="Block.cpp">
-      <Filter>Source Files\LevelBuilding</Filter>
-    </ClCompile>
-    <ClCompile Include="DyngeonDrawer.cpp">
-      <Filter>Source Files\LevelBuilding</Filter>
-    </ClCompile>
     <ClCompile Include="timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -111,14 +111,8 @@
     <ClCompile Include="EntityManagement.cpp">
       <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBlock.cpp">
-      <Filter>Source Files\LevelBuilding</Filter>
-    </ClCompile>
     <ClCompile Include="Door.cpp">
       <Filter>Source Files\StaticEntities</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityBlock.cpp">
-      <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
     <ClCompile Include="Chest.cpp">
       <Filter>Source Files\StaticEntities</Filter>
@@ -126,23 +120,11 @@
     <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files\Transition</Filter>
     </ClCompile>
-    <ClCompile Include="Drawer.cpp">
-      <Filter>Source Files\LevelBuilding</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenMapDrawer.cpp">
-      <Filter>Source Files\LevelBuilding</Filter>
-    </ClCompile>
     <ClCompile Include="Spikes.cpp">
       <Filter>Source Files\StaticEntities</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Entities\Creature</Filter>
-    </ClCompile>
-    <ClCompile Include="FinalBossDrawer.cpp">
-      <Filter>Source Files\LevelBuilding</Filter>
-    </ClCompile>
-    <ClCompile Include="BackPanel.cpp">
-      <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
     <ClCompile Include="Boss.cpp">
       <Filter>Source Files\Entities\Creature</Filter>
@@ -155,6 +137,36 @@
     </ClCompile>
     <ClCompile Include="Skeleton.cpp">
       <Filter>Source Files\Entities\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenMapDrawer.cpp">
+      <Filter>Source Files\LevelBuilding\OpenMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Source Files\LevelBuilding\Building Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="BackPanel.cpp">
+      <Filter>Source Files\LevelBuilding\Building Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBlock.cpp">
+      <Filter>Source Files\LevelBuilding\Building Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityBlock.cpp">
+      <Filter>Source Files\LevelBuilding\Building Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="DyngeonDrawer.cpp">
+      <Filter>Source Files\LevelBuilding\OpenMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawer.cpp">
+      <Filter>Source Files\LevelBuilding\OpenMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="FinalBossDrawer.cpp">
+      <Filter>Source Files\LevelBuilding\OpenMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="FinalOpenMap.cpp">
+      <Filter>Source Files\LevelBuilding\OpenMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticEntity.cpp">
+      <Filter>Source Files\StaticEntities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
