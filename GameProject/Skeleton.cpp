@@ -1,27 +1,24 @@
 #include "Entities.h"
 
-Skeleton::Skeleton(GameState* gs) : Character(gs, "Skeleton") {
-	death = new Timer(0.5f, Timer::TIMER_ONCE);
-	turnAroundTimer = new Timer(1.0f, Timer::TIMER_ONCE);
-	attackTimer = new Timer(1.0f, Timer::TIMER_ONCE);
-	blockTimer = new Timer(0.5f, Timer::TIMER_ONCE);
-	stuntTimer = new Timer(0.5f, Timer::TIMER_ONCE);
+Skeleton::Skeleton(GameState* gs) : Enemy(gs, "Skeleton") {
+	
 }
 
 void Skeleton::init(int spawn_x, int spawn_y) {
 	
-	true_x = spawn_x;
-	true_y = spawn_y;
+	Enemy::init(0.2, 1, 0.5, 12,
+		"Assets\\Textures\\Enemies\\Skeleton\\", "Assets\\Textures\\Enemies\\Skeleton\\Animations.txt",
+		1.0 / 3.0, 2.0 / 3.0, 6.0 / 4.0, 3.0 / 4.0,
+		spawn_x,spawn_y,
+		200);
 
-	mobilize->init(0.2, 1, 0.5, 12, 1.0 / 3.0, 2.0 / 3.0, &true_x, &true_y);
-	animation->init("Assets\\Textures\\Enemies\\Skeleton\\", "Assets\\Textures\\Enemies\\Skeleton\\Animations.txt", 6.0 / 4.0, 3.0 / 4.0, &true_x, &true_y);
 }
 void Skeleton::update(float dt) {
 	float Time = graphics::getDeltaTime();
 	float elapse;
 
 
-	if (death->isRunning()) {
+	if (death.isRunning()) {
 		if (Character::mobilize->direction_x == Movement::Direction::Right) {
 			Character::animation->setCurrent("DeathRight");
 		}
@@ -31,11 +28,11 @@ void Skeleton::update(float dt) {
 		Character::mobilize->gravity(Time);
 		Character::animation->update(dt);
 		Character::mobilize->update(dt);
-		elapse = *death;
-		if (!death->isRunning()) kill();
+		elapse = death;
+		if (!death.isRunning()) kill();
 		return;
 	}
-	if (stuntTimer->isRunning()) {
+	if (stuntTimer.isRunning()) {
 		if (Character::mobilize->direction_x == Movement::Direction::Right) {
 			Character::animation->setCurrent("HitRight");
 		}
@@ -45,11 +42,11 @@ void Skeleton::update(float dt) {
 		Character::mobilize->gravity(Time);
 		Character::animation->update(dt);
 		Character::mobilize->update(dt);
-		elapse = *stuntTimer;
+		elapse = stuntTimer;
 		return;
 	}
 
-	if (attackTimer->isRunning()) {
+	if (attackTimer.isRunning()) {
 		if (Character::mobilize->direction_x == Movement::Direction::Right) {
 			Character::animation->setCurrent("AttackRight");
 		}
@@ -59,12 +56,12 @@ void Skeleton::update(float dt) {
 		Character::mobilize->gravity(Time);
 		Character::animation->update(dt);
 		Character::mobilize->update(dt);
-		elapse = *attackTimer;
-		if (!attackTimer->isRunning()) attack();
+		elapse = attackTimer;
+		if (!attackTimer.isRunning()) attack();
 
 		return;
 	}
-	if (blockTimer->isRunning()) {
+	if (blockTimer.isRunning()) {
 		if (Character::mobilize->direction_x == Movement::Direction::Right) {
 			Character::animation->setCurrent("BlockRight");
 		}
@@ -74,14 +71,14 @@ void Skeleton::update(float dt) {
 		Character::mobilize->gravity(Time);
 		Character::animation->update(dt);
 		Character::mobilize->update(dt);
-		elapse = *blockTimer;
+		elapse = blockTimer;
 		
 		return;
 	}
 
-	if (turnAroundTimer->isRunning()) {
-		elapse = *turnAroundTimer;
-		if (!turnAroundTimer->isRunning()) {
+	if (turnAroundTimer.isRunning()) {
+		elapse = turnAroundTimer;
+		if (!turnAroundTimer.isRunning()) {
 			Character::mobilize->direction_x = playerDistanceX() > 0 ? Movement::Direction::Right : Movement::Direction::Left;
 		}
 		
@@ -116,14 +113,13 @@ void Skeleton::update(float dt) {
 		}
 		else if (dx_p > 0.2 == mobilize->direction_x == Movement::Direction::Right) {
 			mobilize->moveX(Time, Movement::Direction::Right);
-			
 			animation->setCurrent("RunRight");
 		}
-		else if(!turnAroundTimer->isRunning()) { turnAroundTimer->start(); }
+		else if(!turnAroundTimer.isRunning()) { turnAroundTimer.start(); }
 
 		if (dx_p < 0.4 && dx_p > -0.4 && abs(dy_p) <0.5f ) {
-			if (!attackTimer->isRunning()) {
-				attackTimer->start();
+			if (!attackTimer.isRunning()) {
+				attackTimer.start();
 				mobilize->direction_x = mobilize->direction_x == Movement::Direction::Right ?  Movement::Direction::Right : Movement::Direction::Left;
 			}
 		}
@@ -149,17 +145,17 @@ void Skeleton::attack() {
 }
 
 void Skeleton::damage(float dmg) {
-	attackTimer->stop();
+	attackTimer.stop();
 	if (sign(playerDistanceX() * mobilize->direction_x) == 1) {
-		blockTimer->start();
+		blockTimer.start();
 		return;
 	}
 	health -= dmg;
 	if (health <= 0) {
-		death->start();
+		death.start();
 		return;
 	}
-	stuntTimer->start();
+	stuntTimer.start();
 
 
 }

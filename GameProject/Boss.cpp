@@ -1,20 +1,16 @@
 #include "Entities.h"
 
-Boss::Boss(GameState* gs) : Character(gs, "Boss") {
+Boss::Boss(GameState* gs) : Enemy(gs, "Boss") {
 }
 
 void Boss::init(int spawn_x, int spawn_y) {
-	true_x = spawn_x;
-	true_y = -spawn_y;
-	animation->init("Assets\\Textures\\Enemies\\NightBorn\\", "Assets\\Textures\\Enemies\\NightBorn\\Animations.txt",
-		1, 1,
-		&true_x, &true_y);
-	mobilize->init(1, 3, 3, 12,
-		1.0, 1.0,
-		&true_x, &true_y);
-	health = 300;
-	max_health = 300;
-	mobilize->direction_x = Movement::Direction::Right;
+	Enemy::init(1, 3, 3, 12,
+		"Assets\\Textures\\Enemies\\NightBorn\\", "Assets\\Textures\\Enemies\\NightBorn\\Animations.txt",
+		1.0, 1.0, 1.0, 1.0,
+		spawn_x, spawn_y,
+		1500);
+	
+	mobilize->direction_x = Movement::Direction::Left;
 	spawnHealthTrigger1 = max_health * 2.0 / 3.0;
 	spawnHealthTrigger2 = max_health / 3.0;
 }
@@ -25,6 +21,8 @@ void Boss::draw() {
 }
 
 void Boss::update(float dt) {
+
+	std::cout << playerDistanceX() << " : "  << playerDistanceY()  << "\n";
 	float elapse;
 	float Time = graphics::getDeltaTime();
 	if (!spawned1 && spawnHealthTrigger1 > health) {

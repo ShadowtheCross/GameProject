@@ -108,9 +108,6 @@
     <ClCompile Include="Goblin.cpp">
       <Filter>Source Files\Entities\Creature</Filter>
     </ClCompile>
-    <ClCompile Include="Skeleton.cpp">
-      <Filter>Source Files\Entities\Creature</Filter>
-    </ClCompile>
     <ClCompile Include="EntityManagement.cpp">
       <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
@@ -152,6 +149,12 @@
     </ClCompile>
     <ClCompile Include="BlackScreenTransition.cpp">
       <Filter>Source Files\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,23 +1,15 @@
 #include "Entities.h"
 
-Goblin::Goblin(GameState* gs) : Character(gs, "Goblin") {
-	attackTimer1 = new Timer(.5f,Timer::TIMER_ONCE);
-	attackCooldown = new Timer(2.0f, Timer::TIMER_ONCE);
-	dashTimer = new Timer(0.4f, Timer::TIMER_ONCE);
-	dashCooldown = new Timer(2.0f, Timer::TIMER_ONCE);
-	stunt = new Timer(0.5f, Timer::TIMER_ONCE);
-	death = new Timer(0.5f, Timer::TIMER_ONCE);
+Goblin::Goblin(GameState* gs) : Enemy(gs, "Goblin") {
+	
 }
 
 void Goblin::init(int spawn_x, int spawn_y) {
-	Character::init(1.2, 0.5, 2, 12,
-		"Assets\\Textures\\Enemies\\Goblin\\", 
-		"Assets\\Textures\\Enemies\\Goblin\\Animations.txt",
-		2.0 / 4.0, 2.0 / 4.0, 
+	Enemy::init(1.2, 0.5, 2, 12,
+		"Assets\\Textures\\Enemies\\Goblin\\", 	"Assets\\Textures\\Enemies\\Goblin\\Animations.txt",
+		0.5f, 0.5f ,0.5f ,0.5f ,
 		spawn_x, spawn_y,
 		50);
-	
-
 }
 
 
@@ -27,7 +19,7 @@ void Goblin::update(float dt) {
 	float Time = graphics::getDeltaTime()/10;
 	float elapse;
 	
-	float dx_p = Character::playerDistanceX();
+	float dx_p = playerDistanceX();
 	float dy_p = playerDistanceY();
 	if (mobilize->direction_x == Movement::Direction::Right) {
 		animation->setCurrent("IdleRight");
@@ -35,25 +27,25 @@ void Goblin::update(float dt) {
 	else {
 		animation->setCurrent("IdleLeft");
 	}
-	elapse = *attackCooldown;
-	elapse = *dashCooldown;
+	elapse = attackCooldown;
+	elapse = dashCooldown;
 
 
-	if (death->isRunning()) {
+	if (death.isRunning()) {
 		if (Character::mobilize->direction_x == Movement::Direction::Right) {
-			Character::animation->setCurrent("DeathRight");
+			animation->setCurrent("DeathRight");
 		}
 		else {
-			Character::animation->setCurrent("DeathLeft");
+			animation->setCurrent("DeathLeft");
 		}
-		Character::mobilize->gravity(Time);
-		Character::animation->update(dt);
-		Character::mobilize->update(dt);
-		elapse = *death;
-		if (!death->isRunning()) kill();
+		mobilize->gravity(Time);
+		animation->update(dt);
+		mobilize->update(dt);
+		elapse = death;
+		if (!death.isRunning()) kill();
 		return;
 	}
-	if (stunt->isRunning()) {
+	if (stunt.isRunning()) {
 		if (Character::mobilize->direction_x == Movement::Direction::Right) {
 			Character::animation->setCurrent("TakeHitRight");
 		}
@@ -63,18 +55,18 @@ void Goblin::update(float dt) {
 		Character::mobilize->gravity(Time);
 		Character::animation->update(dt);
 		Character::mobilize->update(dt);
-		elapse = *stunt;
+		elapse = stunt;
 		return;
 	}
-	if (attackTimer1->isRunning()) {
+	if (attackTimer1.isRunning()) {
 		if (mobilize->direction_x == Movement::Direction::Right) {
 			animation->setCurrent("AttackRight");
 		}
 		else {
 			animation->setCurrent("AttackLeft");
 		}
-		elapse = *attackTimer1;
-		if (!attackTimer1->isRunning()) {
+		elapse = attackTimer1;
+		if (!attackTimer1.isRunning()) {
 			attack();
 		}
 		Character::mobilize->gravity(Time);
@@ -82,32 +74,20 @@ void Goblin::update(float dt) {
 		Character::mobilize->update(dt);
 		return;
 	}
-	if (dashTimer->isRunning()) {
+	if (dashTimer.isRunning()) {
 		if (mobilize->direction_x == Movement::Direction::Right) {
 			animation->setCurrent("RunRight");
 		}
 		else {
 			animation->setCurrent("RunLeft");
 		}
-		elapse = *dashTimer;
+		elapse = dashTimer;
 		mobilize->dash(Time, mobilize->direction_x);
 		Character::mobilize->gravity(Time);
 		Character::animation->update(dt);
 		Character::mobilize->update(dt);
 		return;
 	}
-
-
-
-	
-
-
-
-
-
-
-
-
 
 	if (aggrivate) {
 		if (dx_p > 0) {
@@ -120,20 +100,15 @@ void Goblin::update(float dt) {
 			animation->setCurrent("RunLeft");
 			mobilize->direction_x = Movement::Direction::Left;
 		}
-		if (!dashCooldown->isRunning() && abs(dx_p) < 1) {
-			dashTimer->start();
-			dashCooldown->start();
+		if (!dashCooldown.isRunning() && abs(dx_p) < 1) {
+			dashTimer.start();
+			dashCooldown.start();
 		}
-		else if (abs(dx_p) < 0.3 && !attackCooldown->isRunning() && abs(dy_p) < 0.3f) {
-			attackTimer1->start();
-			attackCooldown->start();
+		else if (abs(dx_p) < 0.3 && !attackCooldown.isRunning() && abs(dy_p) < 0.3f) {
+			attackTimer1.start();
+			attackCooldown.start();
 		} 		
 	}
-
-
-
-
-
 
 	if ((aggrivate && abs(dx_p) < 8 ) || (!aggrivate && abs(dx_p) <2) ) {
 		aggrivate = true;
@@ -141,12 +116,6 @@ void Goblin::update(float dt) {
 	else {
 		aggrivate = false;
 	}
-
-
-
-	
-
-
 	Character::mobilize->gravity(Time);
 	Character::animation->update(dt);
 	Character::mobilize->update(dt);
@@ -163,14 +132,14 @@ void Goblin::attack() {
 void Goblin::damage(float dmg) {
 	health -= dmg;
 	if (health <= 0) {
-		death->start();
+		death.start();
 		graphics::playSound("Assets\\SoundTrack\\Enemies\\Goblin\\Death.mp3", 0.1);
 	}
-	dashCooldown->stop();
-	dashTimer->stop();
-	attackCooldown->stop();
-	attackTimer1->stop();
-	stunt->start();
+	dashCooldown.stop();
+	dashTimer.stop();
+	attackCooldown.stop();
+	attackTimer1.stop();
+	stunt.start();
 }
 
 
@@ -182,5 +151,5 @@ void Goblin::draw() {
 }
 
 Goblin::~Goblin() {
-	delete attackTimer1, attackCooldown,dashTimer,dashCooldown;
+	
 }

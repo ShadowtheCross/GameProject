@@ -14,16 +14,14 @@ MainCharacter::MainCharacter(GameState* gs, std::string name) : Character(gs, na
 }
 
 void MainCharacter::init(int spawn_x, int spawn_y) {
+	Character::init(2, 3, 3, 12,
+		"Assets\\Textures\\MC\\", "Assets\\Textures\\MC\\Animations.txt",
+		.5f, .5f, 2.5, 1.25,
+		spawn_x, spawn_y,
+		150);
 	
-	mobilize->init(2, 3, 3, 12, 0.3, .5f, &true_x, &true_y);
-	animation->init("Assets\\Textures\\MC\\", "Assets\\Textures\\MC\\Animations.txt",
-		2.5, 1.25,
-		&true_x, &true_y);
-	health = 100;
-	max_health = 100;
-
-	GameObject::m_state->setPlayerX(&true_x);
-	GameObject::m_state->setPlayerY(&true_y);
+	GameObject::m_state->setPlayerX(&(Entity::true_x) );
+	GameObject::m_state->setPlayerY(&(Entity::true_y) );
 	text.fill_color[0] = 1.0f;
 	text.fill_color[1] = 1.0f;
 	text.fill_color[2] = 1.0f;

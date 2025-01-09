@@ -4,8 +4,9 @@ Entity::Entity(GameState* gs,std::string name) : GameObject(gs, "Entity") {
 
 }
 
-void Entity::init() {
-
+void Entity::init(int spawn_x,int spawn_y) {
+	true_x = spawn_x;
+	true_y = spawn_y;
 }
 float Entity::playerDistanceX() {
 	return GameObject::m_state->getPlayerX() - true_x;

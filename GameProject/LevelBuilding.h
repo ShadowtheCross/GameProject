@@ -207,12 +207,12 @@ inline Drawer* loadLevel(std::string name, GameState* gs) {
 	Drawer* newLevel;
 	
 
-	//if (name == "Level1") {
-	//	//graphics::playMusic("Assets\\SoundTrack\\Level1\\[Drumstep] - Tristam & Braken - Flight [Monstercat Release].mp3", 0.5);
-	//	newLevel = new DungeonDrawer(gs, "Level1");
-	//	newLevel->init( "Assets\\Level1.txt", "Assets\\Textures\\Level1\\", "Assets\\Textures\\Level1\\TextureNumbers.txt");
-	//	return newLevel;
-	//}
+	if (name == "Level1") {
+		//graphics::playMusic("Assets\\SoundTrack\\Level1\\[Drumstep] - Tristam & Braken - Flight [Monstercat Release].mp3", 0.5);
+		newLevel = new DungeonDrawer(gs, "Level1");
+		newLevel->init( "Assets\\Level1.txt", "Assets\\Textures\\Level1\\", "Assets\\Textures\\Level1\\TextureNumbers.txt");
+		return newLevel;
+	}
 	//if (name == "Level2") {
 	//	//graphics::playMusic("Assets\\SoundTrack\\Level2\\Nitro Fun - New Game.mp3",0.5);
 	//	newLevel = new DungeonDrawer(gs, "Level2");

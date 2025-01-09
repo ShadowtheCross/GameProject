@@ -11,7 +11,7 @@ protected:
 public:
 	Entity(GameState* gs, std::string name);
 
-	void init();
+	void init(int spawn_x,int spawn_y);
 	void update(float dt);
 	void draw();
 	virtual void attack();
@@ -36,6 +36,8 @@ public:
 */
 
 class StaticEntity : public Entity {
+protected:
+	AnimationHandler* animations;
 public:
 	StaticEntity(GameState* gs, std::string name) : Entity(gs,name) {}
 
@@ -53,10 +55,9 @@ public:
 };
 
 class Door :public StaticEntity {
+private:
 	bool opened = false;
-    protected:
-	AnimationHandler* animations;
-        Timer NextLevelGo = Timer(0.5f, Timer::TIMER_ONCE);
+    Timer NextLevelGo = Timer(0.5f, Timer::TIMER_ONCE);
     public:
 
 		Door* declareAndInit(GameState* gs, float x, float y) {
@@ -83,7 +84,7 @@ class Door :public StaticEntity {
 
 
 class Chest :public StaticEntity {
-	AnimationHandler* animations;
+private:
 	bool opened = false;
 public:
 
@@ -120,7 +121,7 @@ public:
 
 /*
 * 
-* Definition of the Character Class along with allthe active Entities in Game
+* Definition of the Character Class along with all the active Entities in Game
 * 
 * 
 */
@@ -139,12 +140,10 @@ public:
 
 	void init(float acc_x, float acc_y, float max_x, float max_y,
 		std::string TexturesDirectory, std::string LoadScript,
-		float width, float height,
+		float width, float height, float animation_width, float animation_height,
 		int spawn_x, int spawn_y,
 		float m_h);
 	
-	float playerDistanceX();
-	float playerDistanceY();
 
 	
 	void update(float dt);
@@ -172,46 +171,62 @@ public:
 
 };
 
-
-
-class Goblin : public Character {
-	bool aggrivate =false;
-	Timer *attackCooldown, * attackTimer1, * dashTimer,*dashCooldown,*stunt,*death;
+class Enemy : public Character {
+protected:
+	bool aggrivate = false;
 public:
-	Goblin(GameState* gs);
+Enemy(GameState* gs, std::string name);
 
-	void init(int spawn_x, int spawn_y);
-
-
-	static Goblin* declareAndInit(GameState* gs, int spawn_x, int spawn_y) {
-		Goblin* temp = new Goblin(gs);
-		temp->init(spawn_x, spawn_y);
-		return temp;
-	}
-
-	void attack();
-
-	void damage(float dmg);
-
-
-
-	void draw();
+void init(float acc_x, float acc_y, float max_x, float max_y,
+	std::string TexturesDirectory, std::string LoadScript,
+	float width, float height, float animation_width, float animation_height,
+	int spawn_x, int spawn_y,
+	float m_h);
 	void update(float dt);
-
-	~Goblin();
-
+	void draw();
+	~Enemy();
+	virtual void attack();
+	virtual void damage(float dmg);
 
 
 };
 
 
-class Skeleton : public Character {
+
+
+class Goblin : public Enemy {
+private:
+	Timer attackTimer1 =  Timer(.5f, Timer::TIMER_ONCE);
+	Timer attackCooldown = Timer(2.0f, Timer::TIMER_ONCE);
+	Timer dashTimer = Timer(0.4f, Timer::TIMER_ONCE);
+	Timer dashCooldown = Timer(2.0f, Timer::TIMER_ONCE);
+	Timer stunt = Timer(0.5f, Timer::TIMER_ONCE);
+	Timer death = Timer(0.5f, Timer::TIMER_ONCE);
 public:
-	
-	
+	Goblin(GameState* gs);
+	void init(int spawn_x, int spawn_y);
+	void draw();
+	void update(float dt);
+	~Goblin();
+	static Goblin* declareAndInit(GameState* gs, int spawn_x, int spawn_y) {
+		Goblin* temp = new Goblin(gs);
+		temp->init(spawn_x, spawn_y);
+		return temp;
+	}
+	void attack();
+	void damage(float dmg);
+};
+
+
+class Skeleton : public Enemy {
+private:
+	Timer death =  Timer(0.5f, Timer::TIMER_ONCE);
+	Timer turnAroundTimer = Timer(1.0f, Timer::TIMER_ONCE);
+	Timer attackTimer = Timer(1.0f, Timer::TIMER_ONCE);
+	Timer blockTimer = Timer(0.5f, Timer::TIMER_ONCE);
+	Timer stuntTimer = Timer(0.5f, Timer::TIMER_ONCE);
+public:
 	Skeleton(GameState* gs);
-	bool aggrivate = false;
-	Timer* death,*turnAroundTimer,*attackTimer,*blockTimer,*stuntTimer;
 	void init(int spawn_x, int spawn_y);
 
 	static Skeleton* declareAndInit(GameState* gs, int spawn_x, int spawn_y) {
@@ -234,14 +249,12 @@ public:
 
 };
 
-class Boss : public Character {
+class Boss : public Enemy {
 private:
 	
 	bool spawned1 = false, spawned2 = false;
 	float spawnHealthTrigger1 = 0.0, spawnHealthTrigger2 = 0.0;
-
-	bool aggrivate = false;
-	Timer attackTimer =  Timer(0.6, Timer::TIMER_ONCE);
+	Timer attackTimer =  Timer(1., Timer::TIMER_ONCE);
 	Timer attackCooldown = Timer(1.5f, Timer::TIMER_ONCE);
 	Timer deathTimer = Timer(2.0f, Timer::TIMER_ONCE);
 public:
