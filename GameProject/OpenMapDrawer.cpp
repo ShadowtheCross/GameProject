@@ -6,7 +6,7 @@ OpenMapDrawer::OpenMapDrawer(GameState*gs,std::string name) : Drawer(gs,name) {
 
 void OpenMapDrawer::init(std::string constructionFile, std::string texturesFile, std::string TexturesPerBlock) {
 	Drawer::init(constructionFile, texturesFile, TexturesPerBlock);
-	backPanel->init(1.0,1.2,texturesFile + "Back\\BackGround.png");
+	backPanel->init(1.5f,3.0f,texturesFile + "Back\\BackGround.png");
 
 	BackGround.setup(texturesFile + "BackGround", TexturesNum["BackGround"]);
 	RightWall.setup(texturesFile + "RightWall", TexturesNum["RightWall"]);
@@ -233,17 +233,12 @@ void OpenMapDrawer::drawEnd() {
 	
 	/*
 	* 
-	* Door to exit
+	* DecorativeDoor to exit
 	* 
 	*/
-	Chest* healChest = new Chest(GameObject::m_state, "");
-	healChest->init(x_next-2, y_next);
-	GameObject::m_state->appendStaticEntity(healChest);
-
-	Door* test = new Door(GameObject::m_state, "");
-	test->init(x_next, y_next);
-	GameObject::m_state->appendStaticEntity(test);
-
+	drawChest(x_next - 2, y_next);
+	drawExit(x_next, y_next);
+	
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		-0.0f, (-y_next + 0.5f),
 		0.0f, (-y_next - 0.5f)
@@ -270,5 +265,10 @@ void OpenMapDrawer::drawEnd() {
 
 
 
+}
+
+
+void OpenMapDrawer::drawExit(int x, int y) {
+	Drawer::drawExit(x, y);
 }
 

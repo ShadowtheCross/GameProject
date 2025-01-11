@@ -3,11 +3,12 @@
 #include "GameLogic.h"
 #include "GameState.h"
 #include "Config.h"
+#include <cmath>
 
 class VisualBackground : public GameObject {
 protected:
-	float width=0, height=0;
-	float c_x = 0, c_y = 0;
+	float lock_x=0, lock_y=0;
+	float start_x = 0, start_y = 0;
 	graphics::Brush backBrush;
 public:
 	VisualBackground(GameState* gs);

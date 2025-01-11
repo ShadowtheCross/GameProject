@@ -8,21 +8,26 @@ void MainPlayerMenu::init() {
 	BackGround.outline_opacity = 0.0f;
 	graphics::setWindowBackground(BackGround);
 	Red.fill_color[1] = .0f; Red.fill_color[2] = .0f;
+	Black.fill_color[0] = 0.0f; Black.fill_color[1] = 0.0f; Black.fill_color[2] = 0.0f;
 	centerx = Config::window_width/2;
 	centery = Config::window_height/2;
 	uppery = centery - (float) Config::window_height/6.0;
 	lowery = centery + (float) Config::window_height / 6.0;
+	graphics::playMusic("Assets\\SoundTrack\\MainMenu\\Price_Of_Freedom - Good_B_Music.mp3", 0.2);
 	graphics::setFont("Assets\\Fonts\\ImperialScript-Regular.ttf");
+
 }
 
-void MainPlayerMenu::update(float dt) {
+
+void MainPlayerMenu::update(float dt) {	
+
 	bool up = graphics::getKeyState(graphics::SCANCODE_UP);
 	bool down = graphics::getKeyState(graphics::SCANCODE_DOWN);
 	//Run cooldown to move up and down
 	if (play.isRunning()) {
 		float elapse = play;
 	}
-	if (!play.isRunning()) {
+	if (!play.isRunning() && !controlViewer) {
 		if (up) {
 			counter--;
 			play.start();
@@ -41,23 +46,27 @@ void MainPlayerMenu::update(float dt) {
 	
 	bool Enter = graphics::getKeyState(graphics::SCANCODE_RETURN);
 	bool Q = graphics::getKeyState(graphics::SCANCODE_Q);
-	if (Enter) {
+	if (controlViewer && Q) {
+		controlViewer = false;
+		graphics::setFont("Assets\\Fonts\\ImperialScript-Regular.ttf");
+
+
+	}else if (Enter) {
 		if (counter == 0) {
 			GameObject::m_state->nextLevel();
 		}
 		if (counter == 1) {
 			controlViewer = true;
+			graphics::setFont("Assets\\Fonts\\Orbitron-VariableFont_wght.ttf");
 		}
-		if (counter == 1 && controlViewer && Q) {
-			controlViewer = false;
-		}
-
-		if (counter == 2|| Q) {	
+	
+		if (counter == 2) {	
 
 			graphics::stopMessageLoop();
 		}
 
 	}
+	
 }
 
 void MainPlayerMenu::draw() {
@@ -71,6 +80,16 @@ void MainPlayerMenu::draw() {
 		graphics::drawText(centerx, lowery, 100, "Quit", Plain);
 		break;
 	case 1:
+		if (controlViewer == 1) {
+			graphics::drawText(centerx, centery +200, 50, "A-D: Move Left/Right", Plain);
+			graphics::drawText(centerx, centery + 100, 50, "Interact : E", Plain);
+			graphics::drawText(centerx, centery , 50, "Attack : LeftClick", Plain);
+			graphics::drawText(centerx, centery - 100, 50, "H : Use Heals", Plain);
+			graphics::drawText(centerx, centery - 200, 50, "Q : Back", Plain);
+			graphics::drawText(centerx, centery - 200, 50, "SHIFT : DASH", Plain);
+
+			break;
+		} 
 		graphics::drawText(centerx, uppery, 100, "Start", Plain);
 		graphics::drawText(centerx, centery, 100, "Controls", Red);
 		graphics::drawText(centerx, lowery, 100, "Quit", Plain);

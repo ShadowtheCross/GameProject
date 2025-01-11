@@ -26,45 +26,39 @@ void Boss::update(float dt) {
 	if (!spawned1 && spawnHealthTrigger1 > health) {
 		Skeleton* s;
 		Goblin* g;
-		for (int i = 0; i < 3; i++) {
-			s = new Skeleton(GameObject::m_state);
-			s->init(-3, 98);
-			g = new Goblin(GameObject::m_state);
-			g->init(-3, 98);
-			GameObject::m_state->appendEntity(s);
-			GameObject::m_state->appendEntity(g);
-
-		}
-		for (int i = 0; i < 3; i++) {
-			s = new Skeleton(GameObject::m_state);
-			s->init(8, 98);
-			g = new Goblin(GameObject::m_state);
-			g->init(8, 98);
-			GameObject::m_state->appendEntity(s);
-			GameObject::m_state->appendEntity(g);
-		}
+		
+		s = new Skeleton(GameObject::m_state);
+		s->init(-3, 98);
+		g = new Goblin(GameObject::m_state);
+		g->init(-3, 98);
+		GameObject::m_state->appendEntity(s);
+		GameObject::m_state->appendEntity(g);
+		
+		s = new Skeleton(GameObject::m_state);
+		s->init(8, 98);
+		g = new Goblin(GameObject::m_state);
+		g->init(8, 98);
+		GameObject::m_state->appendEntity(s);
+		GameObject::m_state->appendEntity(g);
 		spawned1 = true;
 	}
 	if (!spawned2 && spawnHealthTrigger2 > health) {
 		Skeleton* s;
 		Goblin* g;
-		for (int i = 0; i < 3; i++) {
-			s = new Skeleton(GameObject::m_state);
-			s->init(-3, 98);
-			g = new Goblin(GameObject::m_state);
-			g->init(-3, 98);
-			GameObject::m_state->appendEntity(s);
-			GameObject::m_state->appendEntity(g);
+		s = new Skeleton(GameObject::m_state);
+		s->init(-3, 98);
+		g = new Goblin(GameObject::m_state);
+		g->init(-3, 98);
+		GameObject::m_state->appendEntity(s);
+		GameObject::m_state->appendEntity(g);
 
-		}
-		for (int i = 0; i < 3; i++) {
-			s = new Skeleton(GameObject::m_state);
-			s->init(8, 98);
-			g = new Goblin(GameObject::m_state);
-			g->init(8, 98);
-			GameObject::m_state->appendEntity(s);
-			GameObject::m_state->appendEntity(g);
-		}
+		s = new Skeleton(GameObject::m_state);
+		s->init(8, 98);
+		g = new Goblin(GameObject::m_state);
+		g->init(8, 98);
+		GameObject::m_state->appendEntity(s);
+		GameObject::m_state->appendEntity(g);
+		
 		spawned2 = true;
 	}
 
@@ -95,7 +89,6 @@ void Boss::update(float dt) {
 		}
 		if (!deathTimer.isRunning()) {
 			kill();
-			
 		}
 		mobilize->gravity(Time);
 		mobilize->update(dt);
@@ -127,7 +120,7 @@ void Boss::update(float dt) {
 	float dy_p = playerDistanceY();
 
 	if (aggrivate) {
-		if (abs(dx_p) >= .5f) {
+		if (abs(dx_p) >= .3f) {
 			if (dx_p > 0) {
 				mobilize->direction_x = Movement::Direction::Right;
 				animation->setCurrent("RunRight");
@@ -137,7 +130,7 @@ void Boss::update(float dt) {
 				animation->setCurrent("RunLeft");
 			}
 			mobilize->moveX(Time, mobilize->direction_x,1.0);
-		} else 
+		}  
 		if (abs(dx_p) < 0.5f && !attackCooldown.isRunning()) {
 			attackTimer.start();
 			attackCooldown.start();
@@ -154,8 +147,10 @@ void Boss::update(float dt) {
 
 void Boss::damage(float damage) {
 	health -= damage;
-	if (health < 0) {
+	if (health < 0 && !deathTimer.isRunning()) {
 		deathTimer.start();
+		GameObject::m_state->playerWon();
+		graphics::stopMusic();
 	}
 
 }

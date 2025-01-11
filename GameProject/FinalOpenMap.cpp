@@ -8,6 +8,13 @@ void FinalOpenMapDrawer::init(std::string constructionFile, std::string textures
 	OpenMapDrawer::init(constructionFile, texturesFile, TexturesPerBlock);
 }
 
+void FinalOpenMapDrawer::drawExit(int x,int y) {
+	DecorativeDoor* d = new DecorativeDoor(GameObject::m_state, "Deadly Door");
+	d->init(x_next, y_next);
+	GameObject::m_state->appendStaticEntity(d);
+}
+
+
 void FinalOpenMapDrawer::draw() {
 	OpenMapDrawer::draw();
 }
@@ -48,13 +55,15 @@ void FinalOpenMapDrawer::update(float dt) {
 		int change_y = GameObject::m_state->getPlayerY() + trigger_y;
 		if (abs(change_y) < 1) {
 			GameObject::m_state->nextLevel();
-			levelTrigger = true;
+			levelTrigger = false;
 		}
 	}
 	
 
 
 }
+
+
 
 
 FinalOpenMapDrawer::~FinalOpenMapDrawer() {

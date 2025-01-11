@@ -31,9 +31,13 @@ public:
 	void damagePlayer(float dmg);
 	void damageEnemies(float dmg);
 
+	void clearHandler();
 
 	void regeneratePlayerHealth(float Health);
 	void increasePlayerHealth(float Health);
+	
+	bool enemiesInRange(float x, float range);
+
 
 
 

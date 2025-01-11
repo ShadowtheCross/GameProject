@@ -111,7 +111,7 @@
     <ClCompile Include="EntityManagement.cpp">
       <Filter>Source Files\LevelBuilding</Filter>
     </ClCompile>
-    <ClCompile Include="Door.cpp">
+    <ClCompile Include="DecorativeDoor.cpp">
       <Filter>Source Files\StaticEntities</Filter>
     </ClCompile>
     <ClCompile Include="Chest.cpp">
@@ -167,6 +167,12 @@
     </ClCompile>
     <ClCompile Include="StaticEntity.cpp">
       <Filter>Source Files\StaticEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="ExitDoor.cpp">
+      <Filter>Source Files\StaticEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockHandler.cpp">
+      <Filter>Source Files\LevelBuilding\Building Blocks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

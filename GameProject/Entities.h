@@ -54,20 +54,18 @@ public:
 
 };
 
-class Door :public StaticEntity {
+class DecorativeDoor :public StaticEntity {
 private:
-	bool opened = false;
-    Timer NextLevelGo = Timer(0.5f, Timer::TIMER_ONCE);
     public:
 
-		Door* declareAndInit(GameState* gs, float x, float y) {
-			Door* temp = new Door(gs, "Door");
+		DecorativeDoor* declareAndInit(GameState* gs, float x, float y) {
+			DecorativeDoor* temp = new DecorativeDoor(gs, "DecorativeDoor");
 			temp->init(x, y);
 			return temp;
 		}
 
 
-		Door(GameState* gs, std::string name);
+		DecorativeDoor(GameState* gs, std::string name);
 
 		void init(float x, float y);
 		void update(float dt);
@@ -78,7 +76,22 @@ private:
 
 
 
-	~Door();
+	~DecorativeDoor();
+
+};
+class ExitDoor : public  DecorativeDoor {
+private:
+	bool opened = false;
+	Timer NextLevelGo = Timer(0.5f, Timer::TIMER_ONCE);
+	graphics::Brush Plain;
+public:
+	ExitDoor(GameState* gs);
+	void init(float x, float y);
+	void update(float dt);
+	void draw();
+	~ExitDoor();
+
+
 
 };
 
@@ -89,7 +102,7 @@ private:
 public:
 
 	Chest* declareAndInit(GameState* gs, float x, float y) {
-		Chest* temp = new Chest(gs, "Door");
+		Chest* temp = new Chest(gs, "DecorativeDoor");
 		temp->init(x, y);
 		return temp;
 	}
@@ -148,12 +161,6 @@ public:
 	
 	void update(float dt);
 
-	float getX() {
-		return true_x;
-	}
-	float getY() {
-		return true_y;
-	}
 	
 
 
@@ -173,7 +180,10 @@ public:
 
 class Enemy : public Character {
 protected:
+	bool alwaysAgro= false;
 	bool aggrivate = false;
+	float rate = 1;
+
 public:
 Enemy(GameState* gs, std::string name);
 
@@ -187,7 +197,6 @@ void init(float acc_x, float acc_y, float max_x, float max_y,
 	~Enemy();
 	virtual void attack();
 	virtual void damage(float dmg);
-
 
 };
 
@@ -277,11 +286,18 @@ public:
 class MainCharacter : public Character {
 	
 	//Ability Timers
-	class Timer* dashTimer, * dashCooldown,
-		* jumpTimer1, * jumpCoolDown,*attackTimer1,*attackTimer2,*nextAttackWindow,
-		*stuntTimer,*fluskUseCooldown;
+	Timer dashTimer =  Timer(0.05f, Timer::TIMER_ONCE);
+	Timer dashCooldown =  Timer(0.7f, Timer::TIMER_ONCE);
+	Timer jumpTimer1 =  Timer(0.05, Timer::TIMER_ONCE);
+	Timer jumpCoolDown =  Timer(.2f, Timer::TIMER_ONCE);
+	Timer attackTimer1 =  Timer(0.45, Timer::TIMER_ONCE);
+	Timer attackTimer2 =  Timer(0.45, Timer::TIMER_ONCE);
+	Timer nextAttackWindow =  Timer(0.3f, Timer::TIMER_ONCE);
+	Timer stuntTimer = Timer(0.5f, Timer::TIMER_ONCE);
+	Timer fluskUseCooldown =  Timer(2.0f, Timer::TIMER_ONCE);
+	Timer deathAnimation = Timer(1.2f, Timer::TIMER_ONCE);
 	bool canDash = true;
-	bool canJumpAgain = true;
+	bool canJumpAgain = true,dead = false;
 	int FluskUses = 4;
 
 	graphics::Brush text;

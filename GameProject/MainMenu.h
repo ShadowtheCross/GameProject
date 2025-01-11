@@ -7,7 +7,7 @@
 class MainPlayerMenu : public GameObject {
 protected:
 	graphics::Brush BackGround;
-	graphics::Brush Plain, Red;
+	graphics::Brush Plain, Red,Black;
 	int counter = 0;
 	int centerx=0, centery=0;
 	int uppery=0, lowery = 0;

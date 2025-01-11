@@ -1,2 +1,7 @@
+drawLine:10
+drawUpBlocks:2
+drawDownBlocks:3
+drawDropDown:3
+drawSpikes:7
 drawLine:2
 dd

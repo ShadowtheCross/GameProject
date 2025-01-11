@@ -7,15 +7,15 @@ Drawer::Drawer(GameState *gs, std::string name) : GameObject(gs,name) {
 void Drawer::drawStart() {}
 void Drawer::drawEnd() {}
 
-void Drawer::drawExit() {
-	Door* temp = new Door(GameObject::m_state,"Door");
-	temp->init(x_next, y_next);
+void Drawer::drawExit(int x,int y) {
+	ExitDoor* temp = new ExitDoor(GameObject::m_state);
+	temp->init(x, y);
 	GameObject::m_state->appendStaticEntity(temp);
 
 }
-void Drawer::drawChest() {
+void Drawer::drawChest(int x,int y) {
 	Chest* temp = new Chest(GameObject::m_state, "Chest");
-	temp->init(x_next, y_next);
+	temp->init(x, y);
 	GameObject::m_state->appendStaticEntity(temp);
 }
 
@@ -24,6 +24,8 @@ void Drawer::init(std::string constructionFile, std::string texturesFile, std::s
 	loadTexturesPerNum(TexturesPerBlock);
 	OutsideMap.setup(texturesFile + "OutsideMap", TexturesNum["OutsideMap"]);
 	GameObject::m_state->setBorder(&Border);
+	GameObject::m_state->setAgro(false);
+
 }
 
 void Drawer::draw() {

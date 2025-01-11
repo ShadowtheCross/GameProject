@@ -12,6 +12,8 @@ void Enemy::init(float acc_x, float acc_y, float max_x, float max_y,
 		width, height, animation_width, animation_height,
 		spawn_x,spawn_y,
 		m_h);
+	rate = ((float)randomInt(900, 1100)) / 1000.0f;
+	Enemy::alwaysAgro = GameObject::m_state->getAgro();
 }
 void Enemy::update(float dt) {}
 void Enemy::draw()  {}

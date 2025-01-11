@@ -6,23 +6,56 @@
 #include <cmath>
 #include "LevelBuilding.h"
 
-GameState::GameState()  {
+
+GameState::GameState() {
+
+
+
 	x_global = &x;
 	y_global = &y;
 	player_x = &x;
 	player_y = &y;
 	OffsetX = Config::window_width / 2;
 	OffsetY = Config::window_height / 2;
-	Handler = new EntityHandler(this);
 	Menu = new MainPlayerMenu(this);
 	transition = new BlackScreen(this);
 }
 
 void GameState::update(float dt) {
+	//Player Wins
+	if (victory && victoryTimer.isRunning()) {
+		Handler->wipeEntities();
+		float elapse = victoryTimer;
+		if (!victoryTimer.isRunning()) {
+			victory = false;
+			backToMenu();
+		}
+	}
+	//Player Dies
+	if (defeat && defeatTimer.isRunning()) {
+		Handler->wipeEntities();
+		float elapse = defeatTimer;
+		if (!defeatTimer.isRunning()) {
+			defeat = false;
+			backToMenu();
+		}
+	}
+
+
+
+	//From the title Screen
 	if (onTheMenu) {
 		Menu->update(dt);
+		if (!onTheMenu) {
+			Handler = new EntityHandler(this);
+			Handler->init();
+			ActiveLevel =loadLevel("Level" + std::to_string(currentLevel), this);
+			goToTheNextLevel = false;
+			transition->deactivate();
+		}
 		return;
 	}
+	//Level To Level Transition
 	if (goToTheNextLevel) {
 		transition->activate();
 	}
@@ -32,39 +65,46 @@ void GameState::update(float dt) {
 		Handler->teleportPlayer(0, 0);
 		Drawer* temp = ActiveLevel;
 		ActiveLevel = loadLevel("Level" + std::to_string(currentLevel), this);
-		if (temp != nullptr) {
-			delete temp;
-
-		}
+		
 		goToTheNextLevel = false;
 		transition->deactivate();
 	}
+
+	//Update Parameters
 	transition->update(dt);
-	ActiveLevel->update(dt); 
+	ActiveLevel->update(dt);
 	Handler->update(dt);
 }
-void GameState::init(int BlockS,std::string ConstructionFile, std::string texturesFile) {
+void GameState::init(int BlockSize) {
 	Menu->init();
-	BlockSize = BlockS;
-	Handler->init();
+	this->BlockSize = BlockSize;
 	transition->init();
 }
 void GameState::draw() {
+
 	if (onTheMenu) {
 		Menu->draw();
 		return;
 	}
+	if (victory) {
+		graphics::setFont("Assets\\Fonts\\Oi-Regular.ttf");
+		int c_x = Config::window_width / 4;
+		int c_y = Config::window_height/ 2;
+		graphics::drawText(c_x, c_y-100 , 50, "Victory  Achieved", Plain);
+		graphics::drawText(c_x, c_y+100 , 50, "Thanks  For  Playing", Plain);
+	} if (defeat) {
+		graphics::setFont("Assets\\Fonts\\Oi-Regular.ttf");
+		int c_x = Config::window_width / 4;
+		int c_y = Config::window_height / 2;
+		graphics::drawText(c_x, c_y - 100, 50, "!!!DEATH!!!", Plain);
+		graphics::drawText(c_x, c_y + 100, 50, "You have Failed", Plain);
+	}
+
 	if(ActiveLevel!= nullptr)
 	ActiveLevel->draw();
 	Handler->draw();
 	transition->draw();
 
-}
-void GameState::backToMenu() {
-	Handler->wipeEntities();
-	Handler->clearStaticEntities();
-	delete ActiveLevel;
-	currentLevel = 0;
 }
 
 
@@ -145,6 +185,13 @@ void GameState::wipeStaticEnemies() {
 	Handler->clearStaticEntities();
 }
 
+void GameState::setAgro(bool val) {
+	AgroByDefault = val;
+}
+bool GameState::getAgro() {
+	return AgroByDefault;
+}
+
 void GameState::setGlobalX(float* X) {
 	x_global = X;
 }
@@ -164,10 +211,13 @@ void GameState::nextLevel() {
 	onTheMenu = false;
 	goToTheNextLevel = true;
 	currentLevel++;
-	
+	if (currentLevel == 5) {
+		setAgro(true);
+	}
+	else {
+		setAgro(false);
+	}
 }
-
-
 
 int GameState::getBlockSize() {
 	return BlockSize;
@@ -180,4 +230,35 @@ void GameState::increaseHealth(float Health) {
 	Handler->increasePlayerHealth(Health);
 }
 
+void GameState::playerWon() {
+	victory = true;
+	victoryTimer.start();	
+}
+void GameState::playerLost() {
+	defeat = true;
+	defeatTimer.start();
+}
 
+void GameState::backToMenu() {
+	AgroByDefault = false;
+	currentLevel = 0;
+	onTheMenu = true;
+	goToTheNextLevel = false;
+	if (ActiveLevel != nullptr) {
+		delete ActiveLevel;
+		ActiveLevel = nullptr;
+	}
+	if (Handler != nullptr) {
+		delete Handler;
+		Handler = nullptr;
+	}
+	graphics::setFont("Assets\\Fonts\\ImperialScript-Regular.ttf");
+	graphics::playMusic("Assets\\SoundTrack\\MainMenu\\Price_Of_Freedom - Good_B_Music.mp3", 0.2);
+
+	
+}
+
+
+bool GameState::enemiesInRange(float x, float range) {
+	return Handler->enemiesInRange(x, range);
+}

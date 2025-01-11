@@ -1,5 +1,5 @@
 drawLine:23
-#drawDownBlocks:13
+#drawUpBlocks:13
 #drawCavern:15
 #drawLine:20
 #drawUpBlocks:23

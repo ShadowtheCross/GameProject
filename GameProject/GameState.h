@@ -19,9 +19,11 @@ private:
 	float* player_x, * player_y;
 	int OffsetX, OffsetY;
 	bool onTheMenu = true,goToTheNextLevel= false;
+	bool AgroByDefault = false, victory = false, defeat = false;
 	int currentLevel = 0;
-	
-
+	Timer victoryTimer = Timer(10.0, Timer::TIMER_ONCE);
+	Timer defeatTimer = Timer(10.0, Timer::TIMER_ONCE);
+	graphics::Brush Plain;
 	GameState();
 	class Drawer* ActiveLevel;
 	class EntityHandler* Handler;
@@ -29,10 +31,14 @@ private:
 
 	class MainPlayerMenu *Menu;
 	
-public:
 
+
+public:
+	void playerWon();
+	void playerLost();
+	
 	void update(float dt);
-	void init(int BlockSize,std::string constructionFile, std::string texturesFile);
+	void init(int BlockSize);
 	void draw();
 	static void createInstance();
 	static void deleteInstance();
@@ -43,6 +49,11 @@ public:
 	void setGlobalY(float*);
 	void setPlayerX(float*);
 	void setPlayerY(float*);
+	void setAgro(bool val);
+	bool getAgro();
+	bool enemiesInRange(float x,  float range);
+
+
 
 	void regenerateHealth(float Health);
 	void increaseHealth(float Health);

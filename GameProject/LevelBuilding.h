@@ -57,6 +57,27 @@ public:
 
 };
 
+class BlockHandler : GameObject{
+protected:
+	std::unordered_map<int, std::unordered_map<int, Block*>> Blocks;
+public:
+	void fillLowerY(int x, int y, int n);
+	void fillUpperY(int x, int y, int n);
+
+
+	void addBlock(int x, int y);
+
+
+	BlockHandler(GameState* gs);
+	void init();
+	void update(float dt);
+	void draw();
+	~BlockHandler();
+
+
+};
+
+
 
 
 
@@ -98,8 +119,8 @@ public:
 	virtual void init(std::string constructionFile, std::string texturesFile, std::string TexturesPerBlock);
 	virtual void update(float dt);
 	virtual void draw();
-	void drawExit();
-	void drawChest();
+	virtual void drawExit(int x,int y);
+	void drawChest(int x,int y);
 
 
 
@@ -179,6 +200,7 @@ public:
 	virtual void init(std::string constructionFile, std::string texturesFile, std::string TexturesPerBlock);
 	virtual void update(float dt);
 	virtual void draw();
+	virtual void drawExit(int x, int y);
 
 	~OpenMapDrawer();
 
@@ -188,8 +210,8 @@ class FinalOpenMapDrawer : public OpenMapDrawer{
 private:
 	bool fallTrigger,levelTrigger;
 	int trigger_y=0;
-void dropBuilder();
-
+	
+	virtual void drawExit(int x,int y);
 public:
 	FinalOpenMapDrawer(GameState* gs, std::string name);
 	virtual void init(std::string constructionFile, std::string texturesFile, std::string TexturesPerBlock);
@@ -225,30 +247,33 @@ public:
 inline Drawer* loadLevel(std::string name, GameState* gs) {
 	Drawer* newLevel;
 	
-
-	//if (name == "Level1") {
-	//	graphics::playMusic("Assets\\SoundTrack\\Level1\\[Drumstep] - Tristam & Braken - Flight [Monstercat Release].mp3", 0.5);
-	//	newLevel = new DungeonDrawer(gs, "Level1");
-	//	newLevel->init( "Assets\\Level1.txt", "Assets\\Textures\\Level1\\", "Assets\\Textures\\Level1\\TextureNumbers.txt");
-	//	return newLevel;
-	//}
-	//if (name == "Level2") {
-	//	graphics::playMusic("Assets\\SoundTrack\\Level2\\Nitro Fun - New Game.mp3",0.5);
-	//	newLevel = new DungeonDrawer(gs, "Level2");
-	//	newLevel->init("Assets\\Level2.txt", "Assets\\Textures\\Level2\\","Assets\\Textures\\Level2\\TextureNumbers.txt");
-	//	return newLevel;
-	//}
-	//if (name == "Level3") {
-	//	newLevel = new OpenMapDrawer(gs, "Level3");
-	//	newLevel->init("Assets\\Level3.txt", "Assets\\Textures\\Level3\\", "Assets\\Textures\\Level3\\TextureNumbers.txt");
-	//	return newLevel;
-	//}
-	//if (name == "Level4") {
-	//	newLevel = new FinalOpenMapDrawer(gs, "Level4");
-	//	newLevel->init("Assets\\Level4.txt", "Assets\\Textures\\Level4\\", "Assets\\Textures\\Level4\\TextureNumbers.txt");
-	//	return newLevel;
-	//}
-	graphics::playMusic("Assets\\SoundTrack\\Level5\\meganeko - The Cyber Grind (Ultrakill Soundtrack).mp3", 0.5);		newLevel = new FinalBossDrawer(gs, "Level5");
+	graphics::stopMusic();
+	if (name == "Level1") {
+		graphics::playMusic("Assets\\SoundTrack\\Level1\\[Drumstep] - Tristam & Braken - Flight [Monstercat Release].mp3", 0.2);
+		newLevel = new DungeonDrawer(gs, "Level1");
+		newLevel->init( "Assets\\Level1.txt", "Assets\\Textures\\Level1\\", "Assets\\Textures\\Level1\\TextureNumbers.txt");
+		return newLevel;
+	}
+	if (name == "Level2") {
+		graphics::playMusic("Assets\\SoundTrack\\Level2\\Nitro Fun - New Game.mp3",0.2);
+		newLevel = new DungeonDrawer(gs, "Level2");
+		newLevel->init("Assets\\Level2.txt", "Assets\\Textures\\Level2\\","Assets\\Textures\\Level2\\TextureNumbers.txt");
+		return newLevel;
+	}
+	if (name == "Level1") {
+		graphics::playMusic("Assets\\SoundTrack\\Level3\\Swordsman of a Distant Star (Remix).mp3", 0.2);
+		newLevel = new OpenMapDrawer(gs, "Level3");
+		newLevel->init("Assets\\Level3.txt", "Assets\\Textures\\Level3\\", "Assets\\Textures\\Level3\\TextureNumbers.txt");
+		return newLevel;
+	}
+	if (name == "Level4") {
+		graphics::playMusic("Assets\\SoundTrack\\Level4\\Eerie Terraria.mp3", 0.2);
+		newLevel = new FinalOpenMapDrawer(gs, "Level4");
+		newLevel->init("Assets\\Level4.txt", "Assets\\Textures\\Level4\\", "Assets\\Textures\\Level4\\TextureNumbers.txt");
+		return newLevel;
+	}
+	
+	graphics::playMusic("Assets\\SoundTrack\\Level5\\meganeko - The Cyber Grind (Ultrakill Soundtrack).mp3", 0.2);
 	newLevel = new FinalBossDrawer(gs, "Level5");
 	newLevel->init("Assets\\Level5.txt", "Assets\\Textures\\Level5\\", "Assets\\Textures\\Level5\\TextureNumbers.txt");
 	return newLevel;

@@ -46,6 +46,8 @@ void Goblin::update(float dt) {
 		return;
 	}
 	if (stunt.isRunning()) {
+		elapse = death;
+
 		if (Character::mobilize->direction_x == Movement::Direction::Right) {
 			Character::animation->setCurrent("TakeHitRight");
 		}
@@ -82,21 +84,21 @@ void Goblin::update(float dt) {
 			animation->setCurrent("RunLeft");
 		}
 		elapse = dashTimer;
-		mobilize->dash(Time, mobilize->direction_x);
+		mobilize->dash(Time, mobilize->direction_x,rate);
 		Character::mobilize->gravity(Time);
 		Character::animation->update(dt);
 		Character::mobilize->update(dt);
 		return;
 	}
 
-	if (aggrivate) {
+	if (aggrivate|| Enemy::alwaysAgro) {
 		if (dx_p > 0) {
-			mobilize->moveX(Time, Movement::Direction::Right);
+			mobilize->moveX(Time, Movement::Direction::Right, rate);
 			animation->setCurrent("RunRight");
 			mobilize->direction_x = Movement::Direction::Right;
 		}
 		 if (dx_p < 0 ) {			
-			mobilize->moveX(Time, Movement::Direction::Left);
+			mobilize->moveX(Time, Movement::Direction::Left, rate);
 			animation->setCurrent("RunLeft");
 			mobilize->direction_x = Movement::Direction::Left;
 		}
@@ -131,7 +133,7 @@ void Goblin::attack() {
 
 void Goblin::damage(float dmg) {
 	health -= dmg;
-	if (health <= 0) {
+	if (health <= 0 && !death.isRunning()) {
 		death.start();
 		graphics::playSound("Assets\\SoundTrack\\Enemies\\Goblin\\Death.mp3", 0.1);
 	}

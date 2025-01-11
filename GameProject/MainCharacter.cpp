@@ -2,15 +2,7 @@
 
 float counter = 0;
 MainCharacter::MainCharacter(GameState* gs, std::string name) : Character(gs, name) {
-	dashTimer = new Timer(0.05f, Timer::TIMER_ONCE);
-	dashCooldown = new Timer(0.7f, Timer::TIMER_ONCE);
-	jumpTimer1 = new Timer(0.05, Timer::TIMER_ONCE);
-	jumpCoolDown = new Timer(.2f, Timer::TIMER_ONCE);
-	attackTimer1 = new Timer(0.45, Timer::TIMER_ONCE);
-	attackTimer2 = new Timer(0.45, Timer::TIMER_ONCE);
-	nextAttackWindow = new Timer(0.3f, Timer::TIMER_ONCE);
-	stuntTimer = new Timer(0.5f, Timer::TIMER_ONCE);
-	fluskUseCooldown = new Timer(2.0f, Timer::TIMER_ONCE);
+
 }
 
 void MainCharacter::init(int spawn_x, int spawn_y) {
@@ -37,9 +29,40 @@ void MainCharacter::update(float dt) {
 	
 
 	float cooldown;
+	
+	if (dead) {
+		return;
+	}
 
-	if (stuntTimer->isRunning()) {
-		cooldown = *stuntTimer;
+
+
+
+
+	if (deathAnimation.isRunning()) {
+		
+		cooldown = deathAnimation;
+		if (mobilize->direction_x == Movement::Direction::Right) {
+			animation->setCurrent("DeathRight");
+		}
+		else {
+			animation->setCurrent("DeathLeft");
+		}
+		if (!deathAnimation.isRunning()) {
+			animation->setCurrent("NULL");
+			dead = true;
+			GameObject::m_state->playerLost();
+		}
+
+		mobilize->gravity(Time);
+		animation->update(dt);
+		mobilize->update(dt);
+		return;
+
+	}
+
+
+	if (stuntTimer.isRunning()) {
+		cooldown = stuntTimer;
 		if (mobilize->direction_x == Movement::Direction::Right) {
 			animation->setCurrent("TakeHitRight");
 		}
@@ -69,14 +92,14 @@ void MainCharacter::update(float dt) {
 	graphics::getMouseState(st);
 	bool attacking = st.button_left_pressed;
 
-	cooldown = *dashCooldown;
-	cooldown = *jumpCoolDown;
-	cooldown = *fluskUseCooldown;
+	cooldown = dashCooldown;
+	cooldown = jumpCoolDown;
+	cooldown = fluskUseCooldown;
 	bool activeAbility = false;
 
 	//Ability set
-	if (dashTimer->isRunning()) {
-		float elapsed1= *dashTimer;
+	if (dashTimer.isRunning()) {
+		float elapsed1= dashTimer;
 		mobilize->dash(Time,mobilize->direction_x);
 		if (mobilize->direction_x == Movement::Direction::Right) {
 			animation->setCurrent("DashRight");
@@ -91,41 +114,41 @@ void MainCharacter::update(float dt) {
 		canHit = false;
 		return;
 	}
-	if (jumpTimer1->isRunning()) {
-		float elapsed2 = *jumpTimer1;
+	if (jumpTimer1.isRunning()) {
+		float elapsed2 = jumpTimer1;
 		mobilize->moveY(Time, Movement::Direction::Up,6);
 		activeAbility = true;
-		if (mobilize->onCeiling()) jumpTimer1->stop();
+		if (mobilize->onCeiling()) jumpTimer1.stop();
 	}
 	float elapsed3;
-	elapsed3 = *nextAttackWindow;
-	if (attackTimer1->isRunning()) {
-		elapsed3 = *attackTimer1;
+	elapsed3 = nextAttackWindow;
+	if (attackTimer1.isRunning()) {
+		elapsed3 = attackTimer1;
 		if (mobilize->direction_x == Movement::Direction::Right) {
 			animation->setCurrent("Attack1Right");
 		}
 		else {
 			animation->setCurrent("Attack1Left");
 		}
-		if (!attackTimer1->isRunning()) {
+		if (!attackTimer1.isRunning()) {
 			attack(Config::attackDamage1);
-			nextAttackWindow->start();
+			nextAttackWindow.start();
 		}
 		mobilize->gravity(Time);
 		animation->update(dt);
 		mobilize->update(dt);
 		return;
 	}
-	else if (attackTimer2->isRunning()) {
-		nextAttackWindow->stop();
-		elapsed3 = *attackTimer2;
+	else if (attackTimer2.isRunning()) {
+		nextAttackWindow.stop();
+		elapsed3 = attackTimer2;
 		if (mobilize->direction_x == Movement::Direction::Right) {
 			animation->setCurrent("Attack2Right");
 		}
 		else {
 			animation->setCurrent("Attack2Left");
 		}
-		if (!attackTimer2->isRunning()) {
+		if (!attackTimer2.isRunning()) {
 			attack(Config::attackDamage2);
 		}
 		mobilize->gravity(Time);
@@ -173,22 +196,22 @@ void MainCharacter::update(float dt) {
 		else if(right) {
 			animation->setCurrent("RunRight");
 		}
-		if (jump && !jumpCoolDown->isRunning()) {
-			jumpTimer1->start();
-			jumpCoolDown->start();
+		if (jump && !jumpCoolDown.isRunning()) {
+			jumpTimer1.start();
+			jumpCoolDown.start();
 		}  
 		
 		if (attacking) {
-			if (nextAttackWindow->isRunning()) {
-				attackTimer2->start();
+			if (nextAttackWindow.isRunning()) {
+				attackTimer2.start();
 				if (mobilize->direction_x == Movement::Direction::Right) {
 					animation->fromTheStart("Attack2Right");
 				}
 				else {
 					animation->fromTheStart("Attack2Left");
 				}
-			} else if (!attackTimer1->isRunning()) {
-				attackTimer1->start();
+			} else if (!attackTimer1.isRunning()) {
+				attackTimer1.start();
 				if (mobilize->direction_x == Movement::Direction::Right) {
 					animation->fromTheStart("Attack1Right");
 				}
@@ -200,8 +223,8 @@ void MainCharacter::update(float dt) {
 		} 
 	}
 	else {
-		if (canJumpAgain && jump && !jumpCoolDown->isRunning()) {
-			jumpTimer1->start();
+		if (canJumpAgain && jump && !jumpCoolDown.isRunning()) {
+			jumpTimer1.start();
 			canJumpAgain = false;
 		}
 		if (mobilize->rising()) {
@@ -223,13 +246,13 @@ void MainCharacter::update(float dt) {
 
 
 	}
-	if (dash && !dashCooldown->isRunning() && !idle && canDash) {
-		dashTimer->start();
-		dashCooldown->start();
+	if (dash && !dashCooldown.isRunning() && !idle && canDash) {
+		dashTimer.start();
+		dashCooldown.start();
 	}
-	if (!fluskUseCooldown->isRunning() && heal && FluskUses > 0) {
+	if (!fluskUseCooldown.isRunning() && heal && FluskUses > 0) {
 		FluskUses--;
-		fluskUseCooldown->start();
+		fluskUseCooldown.start();
 		regenerateHealth(50);
 	}
 
@@ -243,6 +266,7 @@ void MainCharacter::update(float dt) {
 void MainCharacter::draw() {
 	animation->draw();
 	mobilize->draw();
+	if (dead) return;
 	graphics::setFont("Assets\\Fonts\\RubikVinyl-Regular.ttf");
 	graphics::drawText(10, 100, 50, "Health: " + std::to_string((int)health) + "/" + std::to_string((int)max_health), text);
 	graphics::drawText(10, 200, 50, "Flusk Uses: " + std::to_string(FluskUses) + "/4", text);
@@ -283,13 +307,15 @@ void MainCharacter::damage(float dmg) {
 		return;
 	}
 	health -= dmg;
-	if (health <= 0) {
+	if (health <= 0 && !deathAnimation.isRunning() && !dead) {
 		kill();
+		deathAnimation.start();
+		graphics::stopMusic();
 	}
-	stuntTimer->start();
-	attackTimer1->stop();
-	attackTimer2->stop();
-	dashTimer->stop();
+	stuntTimer.start();
+	attackTimer1.stop();
+	attackTimer2.stop();
+	dashTimer.stop();
 }
 
 void MainCharacter::teleport(float x, float y) {
@@ -300,6 +326,5 @@ void MainCharacter::teleport(float x, float y) {
 
 
 MainCharacter::~MainCharacter() {
-	delete animation, mobilize;
-	delete jumpTimer1, dashTimer;
+
 }

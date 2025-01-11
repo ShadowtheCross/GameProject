@@ -10,7 +10,8 @@ void Skeleton::init(int spawn_x, int spawn_y) {
 		"Assets\\Textures\\Enemies\\Skeleton\\", "Assets\\Textures\\Enemies\\Skeleton\\Animations.txt",
 		1.0 / 3.0, 2.0 / 3.0, 6.0 / 4.0, 3.0 / 4.0,
 		spawn_x,spawn_y,
-		200);
+		100);
+	rate = (float) randomInt(900, 1100)/1000.0f;
 
 }
 void Skeleton::update(float dt) {
@@ -97,7 +98,7 @@ void Skeleton::update(float dt) {
 	float dx_p = playerDistanceX();
 	float dy_p = playerDistanceY();
 
-	if (( abs(dx_p) < 8 && aggrivate) || abs(dx_p ) < 2 ) {
+	if (  ( abs(dx_p) < 8 && aggrivate) || abs(dx_p ) < 2 ) {
 		aggrivate = true;
 	}
 	else {
@@ -105,14 +106,14 @@ void Skeleton::update(float dt) {
 	}
 
 
-	if (aggrivate) {
+	if (aggrivate || Enemy::alwaysAgro) {
 		
 		if (dx_p < -0.2 && mobilize->direction_x == Movement::Direction::Left) {
-			mobilize->moveX(Time, Movement::Direction::Left);
+			mobilize->moveX(Time, Movement::Direction::Left,rate);
 			animation->setCurrent("RunLeft");
 		}
 		else if (dx_p > 0.2 == mobilize->direction_x == Movement::Direction::Right) {
-			mobilize->moveX(Time, Movement::Direction::Right);
+			mobilize->moveX(Time, Movement::Direction::Right,rate);
 			animation->setCurrent("RunRight");
 		}
 		else if(!turnAroundTimer.isRunning()) { turnAroundTimer.start(); }
@@ -146,7 +147,7 @@ void Skeleton::attack() {
 
 void Skeleton::damage(float dmg) {
 	attackTimer.stop();
-	if (sign(playerDistanceX() * mobilize->direction_x) == 1) {
+	if (sign(playerDistanceX() * mobilize->direction_x) == 1 && !death.isRunning()) {
 		blockTimer.start();
 		return;
 	}

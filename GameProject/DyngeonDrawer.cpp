@@ -176,11 +176,8 @@ void DungeonDrawer::drawDownBlocks(int n) {
 		else {
 			drawLine(5);
 		}
-
-		
-		
-		
 	}
+	drawLine(1);
 }
 
 
@@ -304,10 +301,9 @@ void DungeonDrawer::drawCavern(int n) {
 void DungeonDrawer::drawEnd() {
 	int BlockSize = GameObject::m_state->getBlockSize();
 	
-
+	drawChest(x_next, y_next);
 	//PathStart
 	for (int i = 0; i < 3; i++) {
-		if (i == 0) drawChest();
 		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random()));
 		Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, Ceiling.random()));
 		Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random()));
@@ -348,7 +344,7 @@ void DungeonDrawer::drawEnd() {
 		fillUpperY(x_next+i, y_next-1, 20);
 	}
 	
-	drawExit();
+	drawExit(x_next,y_next);
 	
 
 }

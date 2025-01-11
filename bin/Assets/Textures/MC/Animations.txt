@@ -4,8 +4,6 @@ RiseRight:2:100.0f
 RiseLeft:2:100.0f
 RunRight:8:100.0f
 RunLeft:8:100.0f
-DeathLeft:6:400.0f
-DeathRight:6:400.0f
 Attack1Right:6:75.0f
 Attack1Left:6:75.0f
 Attack2Right:6:75.0f
@@ -16,3 +14,6 @@ TakeHitRight:4:100.0f
 TakeHitLeft:4:100.0f
 DashRight:1:100.0f
 DashLeft:1:100.0f
+DeathLeft:6:200.0f
+DeathRight:6:200.0f
+NULL:1:1000000.0f

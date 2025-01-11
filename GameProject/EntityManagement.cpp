@@ -1,9 +1,9 @@
 #include "EntityManagement.h"
 
 EntityHandler::EntityHandler(GameState* gs) : GameObject(gs,"EntityHandler" ) {
-	player = new MainCharacter(gs, "Character");
 }
 void EntityHandler::init() {
+	player = new MainCharacter(GameObject::m_state, "Character");
 	player->init(0,0);
 }
 
@@ -31,12 +31,13 @@ void EntityHandler::update(float dt) {
 
 void EntityHandler::draw() {
 	std::list<Character*>::iterator it;
+	for (int i = 0; i < StaticEntities.size(); i++) {
+		StaticEntities[i]->draw();
+	}	
 	for (it = Entities.begin(); it != Entities.end(); ++it) {
 		(*it)->draw();
 	}
-	for (int i = 0; i < StaticEntities.size(); i++) {
-		StaticEntities[i]->draw();
-	}
+	
 	player->draw();
 
 }
@@ -105,9 +106,28 @@ EntityHandler::~EntityHandler() {
 	wipeEntities();
 	Entities.clear();
 	clearStaticEntities();
+	StaticEntities.clear();
 	delete player;
 }
 
 void EntityHandler::appendEntity(Character* en) {
-		Entities.push_back(en);
+		Entities.push_front(en);
+}
+
+void EntityHandler::clearHandler() {
+	wipeEntities();
+	clearStaticEntities();
+	
+}
+
+bool EntityHandler::enemiesInRange(float x, float range) {
+	std::list<Character*>::iterator it;
+	int BlockSize = GameObject::m_state->getBlockSize();
+	float dx;
+	float dy;
+	for (it = Entities.begin(); it != Entities.end(); ++it) {
+		dx = ( (*it)->getX() - x);
+		if (abs(dx) < range) return true;
+	}
+	return false;
 }
