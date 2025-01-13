@@ -23,7 +23,6 @@
     <ClCompile Include="BackPanel.cpp" />
     <ClCompile Include="BlackScreenTransition.cpp" />
     <ClCompile Include="Block.cpp" />
-    <ClCompile Include="BlockHandler.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Chest.cpp" />
     <ClCompile Include="Config.cpp" />

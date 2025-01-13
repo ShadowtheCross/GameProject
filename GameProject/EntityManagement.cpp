@@ -68,12 +68,21 @@ void EntityHandler::clearStaticEntities() {
 }
 
 
+void EntityHandler::damageEnemies(float dmg) {
+	std::list<Character*>::iterator it;
+	
+	for (it = Entities.begin(); it != Entities.end(); ++it) {
+		(*it)->damage(dmg);
+	}
+
+}
+
 
 void EntityHandler::damagePlayer(float dmg) {
 	player->damage(dmg);
 }
 
-void EntityHandler::damageEnemies(float dmg) {
+void EntityHandler::playerDamageEnemies(float dmg) {
 	std::list<Character*>::iterator it;
 	float dx;
 	float dy;

@@ -7,6 +7,29 @@ Drawer::Drawer(GameState *gs, std::string name) : GameObject(gs,name) {
 void Drawer::drawStart() {}
 void Drawer::drawEnd() {}
 
+void Drawer::addBlock(int x, int y, graphics::Brush * br) {
+	if (Blocks[x][y] == nullptr) {
+		Blocks[x][y] = Block::declareAndInit(GameObject::m_state, "", x, y, br);
+	}
+	else {
+		Block* temp = Blocks[x][y];
+		delete temp;
+		Blocks[x][y] = Block::declareAndInit(GameObject::m_state, "", x, y, br);
+	}
+}
+
+void Drawer::addEnemyBlock(int x, int y, graphics::Brush* br) {
+	if (Blocks[x][y] == nullptr) {
+		Blocks[x][y] = EnemyBlock::declareAndInit(GameObject::m_state, "", x, y, br,Config::spawn_rate);
+	}
+	else {
+		Block* temp = Blocks[x][y];
+		delete temp;
+		Blocks[x][y] = EnemyBlock::declareAndInit(GameObject::m_state, "", x, y, br, Config::spawn_rate);
+	}
+}
+
+
 void Drawer::drawExit(int x,int y) {
 	ExitDoor* temp = new ExitDoor(GameObject::m_state);
 	temp->init(x, y);

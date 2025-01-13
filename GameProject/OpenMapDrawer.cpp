@@ -78,9 +78,9 @@ void OpenMapDrawer::drawStart() {
 	//for the back wall
 	fillUpperY(-1, 1, 20);
 	fillLowerY(-1, -1, 20);
-	Blocks[-1][-1] = (Block::declareAndInit(GameObject::m_state, "", -1, -1, UpperRightEdge.random()));
-	Blocks[-1][0] = (Block::declareAndInit(GameObject::m_state, "", -1, 0, LeftWall.random()));
-	Blocks[-1][1] = (Block::declareAndInit(GameObject::m_state, "", -1, 1, BottomRightEdge.random()));
+	addBlock(-1, -1, UpperRightEdge.random());
+	addBlock(-1, 0, LeftWall.random());
+	addBlock(-1, 1, BottomRightEdge.random());
 
 	//for the starting point
 	x_next = 0;
@@ -88,9 +88,9 @@ void OpenMapDrawer::drawStart() {
 	while (x_next < 4) {
 		fillUpperY(x_next, +1, 20);
 		fillLowerY(x_next, -1, 20);
-		Blocks[x_next][0] = (Block::declareAndInit(GameObject::m_state, "", x_next, 0, BackGround.random()));
-		Blocks[x_next][1] = (Block::declareAndInit(GameObject::m_state, "", x_next, 1, Ceiling.random()));
-		Blocks[x_next][-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, -1, Ground.random()));
+		addBlock(x_next ,  0, BackGround.random());
+		addBlock(x_next , 1, Ceiling.random());
+		addBlock(x_next , -1, Ground.random());
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			0.0, .5f, //bottom 
 			0.0, -.5f); //top
@@ -103,9 +103,8 @@ void OpenMapDrawer::drawStart() {
 void OpenMapDrawer::drawLine(int n) {
 
 	for (int i = 0; i < n; i++) {
-		Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next-1 , Ground.random()));
-		Blocks[x_next][y_next] = (EnemyBlock::declareAndInit(GameObject::m_state, "", x_next, y_next, DecorativeObjects.random() , Config::spawn_rate));
-
+		addBlock(x_next, y_next-1, Ground.random());
+		addEnemyBlock(x_next, y_next, DecorativeObjects.random());
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			0.0, -y_next+.5f, //bottom 
 			0.0, -y_next-top); //top
@@ -118,7 +117,7 @@ void OpenMapDrawer::drawLine(int n) {
 void OpenMapDrawer::drawUpBlocks(int n) {
 
 	for (int i = 0; i < n / 2; i++) {
-		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, HalfBlock.random()));
+		addBlock(x_next, y_next, HalfBlock.random());
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			0.0, -y_next, //bottom 
 			0.0, -y_next - top); //top
@@ -133,7 +132,7 @@ void OpenMapDrawer::drawUpBlocks(int n) {
 void OpenMapDrawer::drawDownBlocks(int n) {
 	for (int i = 0; i < n / 2; i++) {
 		y_next--;
-		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, HalfBlock.random()));
+		addBlock(x_next, y_next, HalfBlock.random());
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			0.0, -y_next, //bottom 
 			0.0, -y_next - top); //top
@@ -150,10 +149,10 @@ void OpenMapDrawer::drawSpikeDrop(int n) {
 	Spikes* temp;
 	for (int i = 0; i < n; i++) {
 	//Draw Ledge
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, DecorativeObjects.random()));
-	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next-1, Ground.random()));
-	Blocks[x_next][y_next-2] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 2, LeftWall.random()));
-	Blocks[x_next][y_next-3] = Blocks[x_next][y_next-3] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 3, UpperRightEdge.random()));
+	addBlock(x_next, y_next, DecorativeObjects.random());
+	addBlock(x_next, y_next-1, Ground.random());
+	addBlock(x_next, y_next-2, LeftWall.random());
+	addBlock(x_next, y_next-3, UpperRightEdge.random());
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		0.0, -y_next + 0.5, //bottom 
 		0.0, -y_next - top);
@@ -162,9 +161,9 @@ void OpenMapDrawer::drawSpikeDrop(int n) {
 
 	x_next++;
 	//Draw the drop
-	Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, BackGround.random()));
-	Blocks[x_next][y_next - 2] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 2, BackGround.random()));
-	Blocks[x_next][y_next - 3] = Blocks[x_next][y_next - 3] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 3, Ground.random()));
+	addBlock(x_next, y_next - 1, BackGround.random());
+	addBlock(x_next, y_next - 2, BackGround.random());
+	addBlock(x_next, y_next - 3, Ground.random());
 	temp = new Spikes(GameObject::m_state);
 	temp->init(x_next, y_next-2);
 	GameObject::m_state->appendStaticEntity(temp);
@@ -175,10 +174,10 @@ void OpenMapDrawer::drawSpikeDrop(int n) {
 	x_next++;
 
 	//draw the next edge
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, DecorativeObjects.random()));
-	Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random()));
-	Blocks[x_next][y_next - 2] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 2, RightWall.random()));
-	Blocks[x_next][y_next - 3] = Blocks[x_next][y_next - 3] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 3, UpperLeftEdge.random()));
+	addBlock(x_next, y_next, DecorativeObjects.random());
+	addBlock(x_next, y_next - 1, Ground.random());
+	addBlock(x_next, y_next - 2, RightWall.random());
+	addBlock(x_next, y_next - 3, UpperLeftEdge.random());
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		0.0, -y_next + 0.5, //bottom 
 		0.0, -y_next - top);
@@ -191,10 +190,10 @@ void OpenMapDrawer::drawDropDown(int n) {
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state,"",
 		0, -y_next + 0.5,
 		0, -y_next - top);
-	Blocks[x_next][y_next - 1] = Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random());
+	addBlock(x_next, y_next - 1, Ground.random());
 	y_next--;
 	for (int i = 0; i < n; i++) {
-		Blocks[x_next][y_next - 1] = Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, LeftWall.random());
+		addBlock(x_next, y_next - 1, LeftWall.random());
 		y_next--;
 	}
 	fillLowerY(x_next, y_next, 20);
@@ -211,9 +210,9 @@ void OpenMapDrawer::drawEnd() {
 
 	//Cave Exit
 	for (int i = 0; i < 4; i++) {
-		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random()));
-		Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, Ceiling.random()));
-		Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random()));
+		addBlock(x_next, y_next , BackGround.random());
+		addBlock(x_next, y_next + 1, Ceiling.random());
+		addBlock(x_next, y_next - 1, Ground.random());
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			-0.0f, (-y_next + 0.5f),
 			0.0f, (-y_next - 0.5f));
@@ -222,14 +221,15 @@ void OpenMapDrawer::drawEnd() {
 		x_next++;
 	}
 	//Exit
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random()));
-	Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, Ceiling.random()));
-	Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random()));
+	addBlock(x_next, y_next, BackGround.random());
+	addBlock(x_next, y_next + 1, Ceiling.random());
+	addBlock(x_next, y_next - 1, Ground.random());
 	
 	//End
-	Blocks[x_next + 1][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next + 1, y_next, RightWall.random()));
-	Blocks[x_next + 1][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next + 1, y_next-1, UpperLeftEdge.random()));
-	Blocks[x_next + 1][y_next+1] = (Block::declareAndInit(GameObject::m_state, "", x_next + 1, y_next+1, BottomLeftEdge.random()));
+	addBlock(x_next+1, y_next, RightWall.random());
+	addBlock(x_next+1, y_next + 1, BottomLeftEdge.random());
+	addBlock(x_next+1, y_next - 1, UpperLeftEdge.random());
+
 	
 	/*
 	* 

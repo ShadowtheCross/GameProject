@@ -272,7 +272,7 @@ void MainCharacter::draw() {
 	graphics::drawText(10, 200, 50, "Flusk Uses: " + std::to_string(FluskUses) + "/4", text);
 }
 void MainCharacter::attack(float dmg) {
-	GameObject::m_state->damageEnemies(dmg);
+	GameObject::m_state->playerDamageEnemies(dmg);
 }
 
 void MainCharacter::regenerateHealth(float Health) {

@@ -28,8 +28,9 @@ public:
 	void appendStaticEntity(StaticEntity * en);
 	void clearStaticEntities();
 
-	void damagePlayer(float dmg);
 	void damageEnemies(float dmg);
+	void damagePlayer(float dmg);
+	void playerDamageEnemies(float dmg);
 
 	void clearHandler();
 

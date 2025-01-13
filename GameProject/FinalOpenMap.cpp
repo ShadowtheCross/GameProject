@@ -34,17 +34,10 @@ void FinalOpenMapDrawer::update(float dt) {
 
 
 		//Create and render drop
-		tempBlock = Blocks[x_next][y_next - 1];
-		delete tempBlock;
-		Blocks[x_next][y_next - 1] = Block::declareAndInit(GameObject::m_state, "",
-			x_next, y_next - 1, BackGround.random());
+		addBlock(x_next, y_next - 1, BackGround.random());
 		y_next -= 2;
 		for (int i = 0; i < 200; i++) {
-			if (Blocks[x_next][y_next] != nullptr) {
-				tempBlock = Blocks[x_next][y_next];
-				delete tempBlock;
-			}
-			Blocks[x_next][y_next] = Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random());
+			addBlock(x_next, y_next, BackGround.random());
 			y_next--;
 		}
 		trigger_y = y_next + 200;

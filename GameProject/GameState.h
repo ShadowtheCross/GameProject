@@ -76,7 +76,7 @@ public:
 	void appendEntity(Character* en);
 	
 	void damagePlayer(float dmg);
-	void damageEnemies(float dmg);
+	void playerDamageEnemies(float dmg);
 public:
 	void nextLevel();
 	void backToMenu();

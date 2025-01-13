@@ -57,30 +57,6 @@ public:
 
 };
 
-class BlockHandler : GameObject{
-protected:
-	std::unordered_map<int, std::unordered_map<int, Block*>> Blocks;
-public:
-	void fillLowerY(int x, int y, int n);
-	void fillUpperY(int x, int y, int n);
-
-
-	void addBlock(int x, int y);
-
-
-	BlockHandler(GameState* gs);
-	void init();
-	void update(float dt);
-	void draw();
-	~BlockHandler();
-
-
-};
-
-
-
-
-
 
 
 /*
@@ -97,8 +73,10 @@ public:
 */
 
 class Drawer : public GameObject {
-protected:
+private:
 	std::unordered_map<int, std::unordered_map<int, Block*> > Blocks;
+protected:
+
 	std::unordered_map<int, BlockBorder*>  Border;
 	std::unordered_map<std::string, int> TexturesNum;
 
@@ -108,6 +86,10 @@ protected:
 	void loadTexturesPerNum(std::string file);
 
 	int x_next, y_next;
+
+	void addBlock(int x, int y, graphics::Brush* br);
+	void addEnemyBlock(int x, int y, graphics::Brush* br);
+
 
 	virtual void fillUpperY(int x_next, int y_next, int nBlocks);
 	virtual void fillLowerY(int x_next, int y_next, int nBlocks);
@@ -260,7 +242,7 @@ inline Drawer* loadLevel(std::string name, GameState* gs) {
 		newLevel->init("Assets\\Level2.txt", "Assets\\Textures\\Level2\\","Assets\\Textures\\Level2\\TextureNumbers.txt");
 		return newLevel;
 	}
-	if (name == "Level1") {
+	if (name == "Level3") {
 		graphics::playMusic("Assets\\SoundTrack\\Level3\\Swordsman of a Distant Star (Remix).mp3", 0.2);
 		newLevel = new OpenMapDrawer(gs, "Level3");
 		newLevel->init("Assets\\Level3.txt", "Assets\\Textures\\Level3\\", "Assets\\Textures\\Level3\\TextureNumbers.txt");

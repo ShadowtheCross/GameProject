@@ -84,7 +84,7 @@ void Goblin::update(float dt) {
 			animation->setCurrent("RunLeft");
 		}
 		elapse = dashTimer;
-		mobilize->dash(Time, mobilize->direction_x,rate);
+		mobilize->dash(Time, mobilize->direction_x,rate*2);
 		Character::mobilize->gravity(Time);
 		Character::animation->update(dt);
 		Character::mobilize->update(dt);

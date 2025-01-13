@@ -24,7 +24,7 @@ GameState::GameState() {
 void GameState::update(float dt) {
 	//Player Wins
 	if (victory && victoryTimer.isRunning()) {
-		Handler->wipeEntities();
+		Handler->damageEnemies(100000);
 		float elapse = victoryTimer;
 		if (!victoryTimer.isRunning()) {
 			victory = false;
@@ -203,8 +203,8 @@ void GameState::damagePlayer(float dmg) {
 	Handler->damagePlayer(dmg);
 }
 
-void GameState::damageEnemies(float dmg) {
-	Handler->damageEnemies(dmg);
+void GameState::playerDamageEnemies(float dmg) {
+	Handler->playerDamageEnemies(dmg);
 }
 
 void GameState::nextLevel() {

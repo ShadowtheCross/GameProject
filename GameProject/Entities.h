@@ -207,7 +207,7 @@ class Goblin : public Enemy {
 private:
 	Timer attackTimer1 =  Timer(.5f, Timer::TIMER_ONCE);
 	Timer attackCooldown = Timer(2.0f, Timer::TIMER_ONCE);
-	Timer dashTimer = Timer(0.4f, Timer::TIMER_ONCE);
+	Timer dashTimer = Timer(0.8f, Timer::TIMER_ONCE);
 	Timer dashCooldown = Timer(2.0f, Timer::TIMER_ONCE);
 	Timer stunt = Timer(0.5f, Timer::TIMER_ONCE);
 	Timer death = Timer(0.5f, Timer::TIMER_ONCE);

@@ -88,19 +88,16 @@ void DungeonDrawer::drawStart() {
 	//for the back wall
 	fillUpperY(-1, 1, 20);
 	fillLowerY(-1, -1, 20);
-	Blocks[-1][-1]= (Block::declareAndInit(GameObject::m_state, "", -1, -1, UpperRightEdge.random()));
-	Blocks[-1][0] = (Block::declareAndInit(GameObject::m_state, "",-1, 0, RightWall.random() ));
-	Blocks[-1][1] = (Block::declareAndInit(GameObject::m_state, "", -1, 1, BottomRightEdge.random()));
+	addBlock(-1, -1, UpperRightEdge.random() );
+	addBlock(-1, 0, RightWall.random() );
+	addBlock(-1, 1, BottomRightEdge.random());
 
 	//for the starting point
 	fillUpperY(0, +1, 20);
 	fillLowerY(0, -1, 20);
-	Blocks[0][0] = (Block::declareAndInit(GameObject::m_state, "", 0, 0, BackGround.random() ));
-	Blocks[0][1] = (Block::declareAndInit(GameObject::m_state, "", 0, 1, Ceiling.random() ));
-	Blocks[0][-1] = (Block::declareAndInit(GameObject::m_state, "",0, -1,Ground.random() ));
-	
-
-
+	addBlock(0, 0, BackGround.random());
+	addBlock(0, 1, Ceiling.random());
+	addBlock(0, -1, Ground.random());
 	Border[0] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		0.0, .5f, //bottom 
 		0.0, -.5f); //top
@@ -118,9 +115,9 @@ void DungeonDrawer::drawLine(int n) {
 	}
 	int BlockSize = GameObject::m_state->getBlockSize();
 	for (int i = 0; i < n; i++) {
-		Blocks[x_next][y_next] = (EnemyBlock::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random(), Config::spawn_rate ));
-		Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random() ));
-		Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, Ceiling.random() ));
+		addEnemyBlock(x_next, y_next, BackGround.random());
+		addBlock(x_next, y_next - 1, Ground.random());
+		addBlock(x_next, y_next + 1, Ceiling.random());
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			0.0, (-y_next + 0.5f) , 
 			0.0, (-y_next - 0.5f) );
@@ -134,12 +131,10 @@ void DungeonDrawer::drawUpBlocks(int n) {
 	n = n / 2;
 	for (int i = 0; i < n; i++) {
 		if (i % 2) {
-
-		
-		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, HalfBlockUp.random()));
-		Blocks[x_next][y_next +1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, HalfCeilingUp.random()));
-		Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next-1, UpperLeftEdge.random()));
-		Blocks[x_next][y_next +2] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 2, BottomRightEdge.random()));
+		addBlock(x_next, y_next, HalfBlockUp.random());
+		addBlock(x_next, y_next +1, HalfCeilingUp.random());
+		addBlock(x_next, y_next -1, UpperLeftEdge.random());
+		addBlock(x_next, y_next +2, BottomRightEdge.random());			
 
 		fillUpperY(x_next, y_next + 1, 20);
 		fillLowerY(x_next, y_next, 20);
@@ -160,18 +155,20 @@ void DungeonDrawer::drawDownBlocks(int n) {
 	n = n /2;
 	for (int i = 0; i < n; i++) {
 		if (i % 2) {
-		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, HalfCeilingDown.random()));
-		Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, HalfBlockDown.random()));
-		Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next+1, BottomLeftEdge.random()));
-		Blocks[x_next][y_next - 2] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 2, UpperRightEdge.random()));
 
-		fillUpperY(x_next, y_next , 20);
-		fillLowerY(x_next, y_next - 1, 20);
-		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
+			addBlock(x_next, y_next, HalfCeilingDown.random());
+			addBlock(x_next, y_next-1, HalfBlockDown.random());
+			addBlock(x_next, y_next+1, BottomLeftEdge.random());
+			addBlock(x_next, y_next-2, UpperRightEdge.random());
+
+
+			fillUpperY(x_next, y_next , 20);
+			fillLowerY(x_next, y_next - 1, 20);
+			Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			0.0, (-y_next+1.2),
 			0.0, (-y_next-0.2));
-		x_next++;
-		y_next--;
+			x_next++;
+			y_next--;
 		}
 		else {
 			drawLine(5);
@@ -190,34 +187,32 @@ void DungeonDrawer::drawDropDown(int n) {
 
 
 	// x where the drop is
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, BackGround.random() ) );
-	Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, GroundRight.random() ));
-	Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next + 1, Ceiling.random() ));
-
+	addBlock(x_next, y_next , BackGround.random());
+	addBlock(x_next, y_next - 1, GroundRight.random());
+	addBlock(x_next, y_next + 1, Ceiling.random());
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		0.0, (-y_next + 0.5f),
 		0.0, (-y_next - 0.5f));
 	x_next++;
 
 	//Above the wall on the right hand side
-
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next, BackGround.random() ));
-	Blocks[x_next+1][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next+1 , y_next + 1, BottomLeftEdge.random()));
-
-	Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next+1, Ceiling.random() ));
-	Blocks[x_next+1][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next + 1, y_next , LeftWall.random() ));
+	addBlock(x_next, y_next , BackGround.random());
+	addBlock(x_next+1, y_next + 1, BottomLeftEdge.random());
+	addBlock(x_next , y_next + 1, Ceiling.random());
+	addBlock(x_next + 1, y_next , LeftWall.random());
 	
 	y_next--;
 
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random() ));
-	Blocks[x_next+1][y_next] =(Block::declareAndInit(GameObject::m_state, "",x_next+1, y_next, LeftWall.random() ));
+	addBlock(x_next, y_next, BackGround.random());
+	addBlock(x_next + 1, y_next, LeftWall.random());
+
 	y_next--;
 
 	float temp_y = y_next + 3;
 	for (int i = 0; i < n; i++) {
-		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random() ));
-		Blocks[x_next - 1 ][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next-1, y_next , RightWall.random() ));
-		Blocks[x_next + 1][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next+1, y_next , LeftWall.random() ));
+		addBlock(x_next, y_next, BackGround.random());
+		addBlock(x_next - 1, y_next, RightWall.random());
+		addBlock(x_next + 1, y_next, LeftWall.random());
 		y_next--;
 	}
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
@@ -226,14 +221,16 @@ void DungeonDrawer::drawDropDown(int n) {
 	);
 
 	//The end of the drop
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next , BackGround.random() ));
-	Blocks[x_next-1][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next -1 , y_next , RightWall.random() ) );
-	Blocks[x_next - 1][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next - 1, y_next-1, UpperRightEdge.random()));
-	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next-1, Ground.random() ));
+	addBlock(x_next, y_next, BackGround.random());
+	addBlock(x_next - 1, y_next, RightWall.random());
+	addBlock(x_next - 1, y_next-1, UpperRightEdge.random());
+	addBlock(x_next, y_next-1, Ground.random());
+
 	x_next++;
 
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random()));
-	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next-1, Ground.random()));
+	addBlock(x_next, y_next, BackGround.random());
+	addBlock(x_next, y_next - 1, Ground.random());
+
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		-0.0f, (-y_next + 0.5),
 		-0.0f, (-y_next - 0.5)
@@ -253,11 +250,9 @@ void DungeonDrawer::drawDropDown(int n) {
 void DungeonDrawer::drawCavern(int n) {
 	int BlockSize = GameObject::m_state->getBlockSize();
 	
-	Blocks[x_next][y_next] = (EnemyBlock::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random(), Config::spawn_rate));
-	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random() ));
-	Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, LeftEdge.random() ));
-	
-	
+	addEnemyBlock(x_next, y_next, BackGround.random());
+	addBlock(x_next, y_next - 1, Ground.random());
+	addBlock(x_next, y_next + 1, LeftEdge.random());	
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		0.0, -y_next + 0.5f,
 		-1.0f, -y_next -1.0f);
@@ -269,10 +264,10 @@ void DungeonDrawer::drawCavern(int n) {
 	
 	x_next++;
 	for (int i = 0; i < n - 2; i++) {
-		Blocks[x_next][y_next] = (EnemyBlock::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random(), Config::spawn_rate) );
-		Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random() ));
-		Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, BackGround.random() ));
-		Blocks[x_next][y_next+2] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 2, Ceiling.random() ));
+		addEnemyBlock(x_next, y_next, BackGround.random());
+		addBlock(x_next, y_next - 1, Ground.random());
+		addBlock(x_next, y_next + 1, BackGround.random());
+		addBlock(x_next, y_next + 2, Ceiling.random());
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			0.0f, (-y_next + .5f) ,
 			0.0f, (-y_next - 1.5f) 
@@ -282,9 +277,9 @@ void DungeonDrawer::drawCavern(int n) {
 		x_next++;
 	}
 
-	Blocks[x_next][y_next] =(EnemyBlock::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random(), Config::spawn_rate));
-	Blocks[x_next][y_next-1] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next - 1, Ground.random() ));
-	Blocks[x_next][y_next+1] = (Block::declareAndInit(GameObject::m_state, "",x_next, y_next + 1, RightEdge.random()));
+	addEnemyBlock(x_next, y_next, BackGround.random());
+	addBlock(x_next, y_next-1, Ground.random());
+	addBlock(x_next, y_next+1, RightEdge.random());
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		0.0, -y_next + 0.5f,
 		1.0f, -y_next - 1.0f);
@@ -304,9 +299,9 @@ void DungeonDrawer::drawEnd() {
 	drawChest(x_next, y_next);
 	//PathStart
 	for (int i = 0; i < 3; i++) {
-		Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random()));
-		Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, Ceiling.random()));
-		Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random()));
+		addBlock(x_next, y_next, BackGround.random());
+		addBlock(x_next, y_next+1, Ceiling.random());
+		addBlock(x_next, y_next-1, Ground.random());
 		Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 			-0.0f, (-y_next + 0.5f),
 			0.0f, (-y_next - 0.5f));
@@ -314,20 +309,18 @@ void DungeonDrawer::drawEnd() {
 		fillUpperY(x_next, y_next + 1, 20);
 		x_next++;
 	}
-	Blocks[x_next][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next, BackGround.random()));
-	Blocks[x_next][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next + 1, Ceiling.random()));
-	Blocks[x_next][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next, y_next - 1, Ground.random()));
+	addBlock(x_next, y_next, BackGround.random());
+	addBlock(x_next, y_next + 1, Ceiling.random());
+	addBlock(x_next, y_next - 1, Ground.random());
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		-0.0f, (-y_next + 0.5f),
 		0.0f, (-y_next - 0.5f));
 	fillLowerY(x_next, y_next - 1, 20);
 	fillUpperY(x_next, y_next + 1, 20);
 
-
-	Blocks[x_next+1][y_next] = (Block::declareAndInit(GameObject::m_state, "", x_next+1, y_next, LeftWall.random()));
-	Blocks[x_next+1][y_next + 1] = (Block::declareAndInit(GameObject::m_state, "", x_next+1, y_next + 1, BottomLeftEdge.random()));
-	Blocks[x_next+1][y_next - 1] = (Block::declareAndInit(GameObject::m_state, "", x_next+1, y_next - 1, UpperLeftEdge.random()));
-
+	addBlock(x_next + 1, y_next, LeftWall.random());
+	addBlock(x_next + 1, y_next + 1, BottomLeftEdge.random());
+	addBlock(x_next + 1, y_next - 1, UpperLeftEdge.random());
 	Border[x_next] = BlockBorder::buildAndInit(GameObject::m_state, "",
 		-0.0f, (-y_next + 0.5f) ,
 		0.0f, (-y_next - 0.5f) 

@@ -171,9 +171,6 @@
     <ClCompile Include="ExitDoor.cpp">
       <Filter>Source Files\StaticEntities</Filter>
     </ClCompile>
-    <ClCompile Include="BlockHandler.cpp">
-      <Filter>Source Files\LevelBuilding\Building Blocks</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EventHandler.h">
