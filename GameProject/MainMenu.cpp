@@ -86,7 +86,7 @@ void MainPlayerMenu::draw() {
 			graphics::drawText(centerx, centery , 50, "Attack : LeftClick", Plain);
 			graphics::drawText(centerx, centery - 100, 50, "H : Use Heals", Plain);
 			graphics::drawText(centerx, centery - 200, 50, "Q : Back", Plain);
-			graphics::drawText(centerx, centery - 200, 50, "SHIFT : DASH", Plain);
+			graphics::drawText(centerx, centery - 300, 50, "SHIFT : DASH", Plain);
 
 			break;
 		} 

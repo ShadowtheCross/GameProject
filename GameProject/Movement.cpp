@@ -6,13 +6,11 @@ Movement::Movement(GameState* gs, std::string name) : GameObject(gs, name) {
 }
 
 void Movement::init(float acc_x, float acc_y,
-	float max_x, float max_y,
 	float w, float h,
 	float* player_x, float* player_y) {
 
 
 	acceleration_x = acc_x*10e-4; acceleration_y = acc_y * 10e-4;
-	max_speed_x = max_x * 10e-4; max_speed_y = max_y * 10e-4;
 	width = w;
 	height = h;
 	
@@ -21,16 +19,6 @@ void Movement::init(float acc_x, float acc_y,
 	overLapRadius = width + height / 2.0;
 }
 
-void Movement::limitX() {
-	if (abs(speed_x) > abs(max_speed_x)) {
-		speed_x = sign(speed_x) * max_speed_x;
-	}
-}
-void Movement::limitY() {
-	if (abs(speed_y) > abs(max_speed_y)) {
-		speed_y = sign(speed_y) * max_speed_y;
-	}
-}
 
 void Movement::moveY(float Time, Direction dir, float rate) {
 	speed_y += Time * dir * acceleration_x *rate;

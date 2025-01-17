@@ -6,4 +6,4 @@ drawSpikeDrop:6
 drawUpBlocks:4
 drawDownBlocks:3
 drawLine:4
-dd
+end

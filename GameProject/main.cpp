@@ -16,7 +16,7 @@ void update(float dt) {
 
 int main(void) {
 
-	graphics::createWindow(Config::window_width, Config::window_height,"Game");
+	graphics::createWindow(Config::window_width, Config::window_height,"Monster Slayer");
 	graphics::setCanvasSize(1000, 1000);
 	graphics::setDrawFunction(draw);
 	graphics::setUpdateFunction(update);	

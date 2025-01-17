@@ -1,7 +1,7 @@
 drawLine:10
-drawUpBlocks:2
-drawDownBlocks:3
-drawDropDown:3
-drawSpikes:7
-drawLine:2
+drawUpBlocks:7
+drawDownBlocks:7
+drawDropDown:4
+drawSpikes:5
+drawLine:11
 dd

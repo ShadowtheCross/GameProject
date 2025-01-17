@@ -4,7 +4,7 @@ Boss::Boss(GameState* gs) : Enemy(gs, "Boss") {
 }
 
 void Boss::init(int spawn_x, int spawn_y) {
-	Enemy::init(1, 3, 3, 12,
+	Enemy::init(1, 3, 
 		"Assets\\Textures\\Enemies\\NightBorn\\", "Assets\\Textures\\Enemies\\NightBorn\\Animations.txt",
 		1.0, 1.0, 1.0, 1.0,
 		spawn_x, spawn_y,

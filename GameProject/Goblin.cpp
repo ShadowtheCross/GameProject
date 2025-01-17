@@ -5,7 +5,7 @@ Goblin::Goblin(GameState* gs) : Enemy(gs, "Goblin") {
 }
 
 void Goblin::init(int spawn_x, int spawn_y) {
-	Enemy::init(1.2, 0.5, 2, 12,
+	Enemy::init(2, 0.5,
 		"Assets\\Textures\\Enemies\\Goblin\\", 	"Assets\\Textures\\Enemies\\Goblin\\Animations.txt",
 		0.5f, 0.5f ,0.5f ,0.5f ,
 		spawn_x, spawn_y,

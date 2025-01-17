@@ -6,7 +6,7 @@ MainCharacter::MainCharacter(GameState* gs, std::string name) : Character(gs, na
 }
 
 void MainCharacter::init(int spawn_x, int spawn_y) {
-	Character::init(2, 3, 3, 12,
+	Character::init(2, 3, 
 		"Assets\\Textures\\MC\\", "Assets\\Textures\\MC\\Animations.txt",
 		.5f, .5f, 2.5, 1.25,
 		spawn_x, spawn_y,
@@ -96,10 +96,11 @@ void MainCharacter::update(float dt) {
 	cooldown = jumpCoolDown;
 	cooldown = fluskUseCooldown;
 	bool activeAbility = false;
+	
 
 	//Ability set
 	if (dashTimer.isRunning()) {
-		float elapsed1= dashTimer;
+		cooldown = dashTimer;
 		mobilize->dash(Time,mobilize->direction_x);
 		if (mobilize->direction_x == Movement::Direction::Right) {
 			animation->setCurrent("DashRight");
@@ -115,15 +116,15 @@ void MainCharacter::update(float dt) {
 		return;
 	}
 	if (jumpTimer1.isRunning()) {
-		float elapsed2 = jumpTimer1;
+		cooldown = jumpTimer1;
 		mobilize->moveY(Time, Movement::Direction::Up,6);
 		activeAbility = true;
 		if (mobilize->onCeiling()) jumpTimer1.stop();
 	}
-	float elapsed3;
-	elapsed3 = nextAttackWindow;
+	
+	cooldown = nextAttackWindow;
 	if (attackTimer1.isRunning()) {
-		elapsed3 = attackTimer1;
+		cooldown = attackTimer1;
 		if (mobilize->direction_x == Movement::Direction::Right) {
 			animation->setCurrent("Attack1Right");
 		}
@@ -141,7 +142,7 @@ void MainCharacter::update(float dt) {
 	}
 	else if (attackTimer2.isRunning()) {
 		nextAttackWindow.stop();
-		elapsed3 = attackTimer2;
+		cooldown = attackTimer2;
 		if (mobilize->direction_x == Movement::Direction::Right) {
 			animation->setCurrent("Attack2Right");
 		}

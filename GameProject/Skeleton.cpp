@@ -6,7 +6,7 @@ Skeleton::Skeleton(GameState* gs) : Enemy(gs, "Skeleton") {
 
 void Skeleton::init(int spawn_x, int spawn_y) {
 	
-	Enemy::init(0.2, 1, 0.5, 12,
+	Enemy::init(0.2, 1, 
 		"Assets\\Textures\\Enemies\\Skeleton\\", "Assets\\Textures\\Enemies\\Skeleton\\Animations.txt",
 		1.0 / 3.0, 2.0 / 3.0, 6.0 / 4.0, 3.0 / 4.0,
 		spawn_x,spawn_y,
@@ -147,12 +147,13 @@ void Skeleton::attack() {
 
 void Skeleton::damage(float dmg) {
 	attackTimer.stop();
-	if (sign(playerDistanceX() * mobilize->direction_x) == 1 && !death.isRunning()) {
+	if (sign(playerDistanceX() * mobilize->direction_x) == 1 && !death.isRunning() 
+		) {
 		blockTimer.start();
 		return;
 	}
 	health -= dmg;
-	if (health <= 0) {
+	if (health <= 0 && !death.isRunning()) {
 		death.start();
 		return;
 	}
