@@ -131,7 +131,7 @@ void Boss::update(float dt) {
 			}
 			mobilize->moveX(Time, mobilize->direction_x,1.0);
 		}  
-		if (abs(dx_p) < 0.5f && !attackCooldown.isRunning()) {
+		if (abs(dx_p) < 0.5f && !attackCooldown.isRunning() )  {
 			attackTimer.start();
 			attackCooldown.start();
 			animation->fromTheStart("AttackRight");

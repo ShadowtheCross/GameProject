@@ -254,7 +254,6 @@ inline Drawer* loadLevel(std::string name, GameState* gs) {
 		newLevel->init("Assets\\Level4.txt", "Assets\\Textures\\Level4\\", "Assets\\Textures\\Level4\\TextureNumbers.txt");
 		return newLevel;
 	}
-	
 	graphics::playMusic("Assets\\SoundTrack\\Level5\\meganeko - The Cyber Grind (Ultrakill Soundtrack).mp3", 0.2);
 	newLevel = new FinalBossDrawer(gs, "Level5");
 	newLevel->init("Assets\\Level5.txt", "Assets\\Textures\\Level5\\", "Assets\\Textures\\Level5\\TextureNumbers.txt");

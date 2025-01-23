@@ -138,7 +138,7 @@ void Skeleton::update(float dt) {
 void Skeleton::attack() {
 	float dx_p = playerDistanceX();
 	float dy_p = playerDistanceY();
-	if (dx_p * mobilize->direction_x < 0.5f && dx_p * mobilize->direction_x > 0 && abs(dy_p) < 0.5f) {
+	if (dx_p * mobilize->direction_x < 1 && dx_p * mobilize->direction_x > 0 && abs(dy_p) < 0.5f) {
 		GameObject::m_state->damagePlayer(20);
 	}
 
