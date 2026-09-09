@@ -1,0 +1,9 @@
+drawLine:5
+drawUpBlocks:4
+drawDownBlocks:7
+drawDropDown:5
+drawSpikeDrop:6
+drawUpBlocks:4
+drawDownBlocks:3
+drawLine:4
+end

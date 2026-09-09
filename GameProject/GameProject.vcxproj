@@ -19,30 +19,60 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\AnimationHandler.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\BorderMapManagement.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Config.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\EventHandler.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameLogic.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameState.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\LevelBuilding.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\MainCharacter.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Miscallenious.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Movement.h" />
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\SingleAnimation.h" />
+    <ClCompile Include="AnimationHandler.cpp" />
+    <ClCompile Include="BackPanel.cpp" />
+    <ClCompile Include="BlackScreenTransition.cpp" />
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="Chest.cpp" />
+    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="DecorativeDoor.cpp" />
+    <ClCompile Include="Drawer.cpp" />
+    <ClCompile Include="DyngeonDrawer.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyBlock.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityBlock.cpp" />
+    <ClCompile Include="EntityManagement.cpp" />
+    <ClCompile Include="ExitDoor.cpp" />
+    <ClCompile Include="FinalBossDrawer.cpp" />
+    <ClCompile Include="FinalOpenMap.cpp" />
+    <ClCompile Include="GameLogic.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Goblin.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainCharacter.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="Movement.cpp" />
+    <ClCompile Include="OpenMapDrawer.cpp" />
+    <ClCompile Include="playtest.txt" />
+    <ClCompile Include="SingleAnimation.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
+    <ClCompile Include="Spikes.cpp" />
+    <ClCompile Include="StaticEntity.cpp" />
+    <ClCompile Include="timer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\AnimationHandler.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Block.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Config.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Drawer.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameLogic.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameState.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Level.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\main.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\MainCharacter.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Movement.cpp" />
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\SingleAnimation.cpp" />
+    <ClInclude Include="AnimationHandler.h" />
+    <ClInclude Include="Back.h" />
+    <ClInclude Include="BlackScreen.h" />
+    <ClInclude Include="Border.h" />
+    <ClInclude Include="BorderMapManagement.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="Entities.h" />
+    <ClInclude Include="EntityManagement.h" />
+    <ClInclude Include="EventHandler.h" />
+    <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="AttackEntity.cpp" />
+    <ClInclude Include="LevelBuilding.h" />
+    <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="Miscallenious.h" />
+    <ClInclude Include="Movement.h" />
+    <ClInclude Include="RandomGet.h" />
+    <ClInclude Include="SingleAnimation.h" />
+    <ClInclude Include="timer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

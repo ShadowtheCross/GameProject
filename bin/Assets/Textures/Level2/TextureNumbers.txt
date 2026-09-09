@@ -1,0 +1,17 @@
+HalfBlockDown:1
+HalfCeilingDown:1
+HalfCeilingUp:1
+HalfBlockUp:1
+RightEdge:1
+LeftEdge:1
+BackGround:1
+Ceiling:1
+Ground:1
+GroundRight:1
+LeftWall:1
+RightWall:1
+OutsideMap:1
+UpperRightEdge:1
+UpperLeftEdge:1
+BottomRightEdge:1
+BottomLeftEdge:1

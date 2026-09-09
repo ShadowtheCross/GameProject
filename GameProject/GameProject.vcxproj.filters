@@ -13,93 +13,222 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Characters">
-      <UniqueIdentifier>{b02d89fc-7a59-412e-bb51-961bde401fc8}</UniqueIdentifier>
+    <Filter Include="Local">
+      <UniqueIdentifier>{a7030c71-a25b-4e5c-95bd-8be712fed067}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Border">
-      <UniqueIdentifier>{a191ce23-bb61-4bb7-9dfb-387be1b59bdc}</UniqueIdentifier>
+    <Filter Include="Header Files\Entities">
+      <UniqueIdentifier>{ed4705e2-cd00-4859-942d-673e3faeeceb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\AnimationManagement">
+      <UniqueIdentifier>{c0fd3de0-7af0-4b2a-8f24-864359e68b63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\Movement">
+      <UniqueIdentifier>{889f6742-5a6e-43df-81ae-eff706399786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities\Creatures">
+      <UniqueIdentifier>{d5b32ff6-7e26-4409-88d1-2465ccd4af30}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Logic">
-      <UniqueIdentifier>{a03d078e-2e06-49ef-9f66-da31ce6402e7}</UniqueIdentifier>
+      <UniqueIdentifier>{b3398165-4b58-4f6d-be1f-b1647273cd9c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Characters">
-      <UniqueIdentifier>{7b0ff9e1-84d7-4dc7-bc58-1d2274059ede}</UniqueIdentifier>
+    <Filter Include="Header Files\LevelHandling">
+      <UniqueIdentifier>{2c7facf0-7b63-443c-a54f-7f90418837bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Levels">
-      <UniqueIdentifier>{2d3136e7-26c9-46a5-a279-8fb8012e6560}</UniqueIdentifier>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{936520b9-6f20-4ffe-bc83-4aaf18d80659}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\AnimationMangement">
+      <UniqueIdentifier>{c496cdee-51a4-4c30-abdd-4d0b5f57990a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Movement">
+      <UniqueIdentifier>{85a72349-f5e4-4300-a8a8-2a871fbc42c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities\Creature">
+      <UniqueIdentifier>{691ea612-1696-4a89-bf5e-3db153577c3d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Logic">
-      <UniqueIdentifier>{d501f45f-3039-4ad8-96f0-7269dffb3f1f}</UniqueIdentifier>
+      <UniqueIdentifier>{1f71a42b-3850-487c-b582-3a0260e45cfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LevelBuilding">
+      <UniqueIdentifier>{4c762ade-7019-4bec-b8d8-881c117285bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helpful">
+      <UniqueIdentifier>{c9f2bc82-000d-4792-9252-35ac861e6eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StaticEntities">
+      <UniqueIdentifier>{20eb5c71-9e41-4dc9-80b4-31e5740a5041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainMenu">
+      <UniqueIdentifier>{818b273b-b4ff-44d1-b40a-742524e12a0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Transition">
+      <UniqueIdentifier>{11bc6384-b6fb-4eb6-977a-0c3fae268904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LevelBuilding\OpenMaps">
+      <UniqueIdentifier>{1dbabc23-c8a5-4deb-8d30-e57d1a1b03c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\LevelBuilding\Building Blocks">
+      <UniqueIdentifier>{71d3ac54-70f3-4f88-861f-7d2283200ab1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Movement.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\MainCharacter.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\AnimationHandler.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\BorderMapManagement.h">
-      <Filter>Header Files\Border</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameState.h">
-      <Filter>Header Files\Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameLogic.h">
-      <Filter>Header Files\Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\SingleAnimation.h">
-      <Filter>Header Files\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Miscallenious.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\LevelBuilding.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\EventHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\main.cpp">
+    <ClCompile Include="playtest.txt">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\AnimationHandler.cpp">
-      <Filter>Source Files\Characters</Filter>
+    <ClCompile Include="Config.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\MainCharacter.cpp">
-      <Filter>Source Files\Characters</Filter>
+    <ClCompile Include="SingleAnimation.cpp">
+      <Filter>Source Files\Entities\AnimationMangement</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Movement.cpp">
-      <Filter>Source Files\Characters</Filter>
+    <ClCompile Include="AnimationHandler.cpp">
+      <Filter>Source Files\Entities\AnimationMangement</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\SingleAnimation.cpp">
-      <Filter>Source Files\Characters</Filter>
+    <ClCompile Include="Movement.cpp">
+      <Filter>Source Files\Entities\Movement</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Block.cpp">
-      <Filter>Source Files\Levels</Filter>
+    <ClCompile Include="MainCharacter.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Drawer.cpp">
-      <Filter>Source Files\Levels</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Level.cpp">
-      <Filter>Source Files\Levels</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\Config.cpp">
+    <ClCompile Include="GameState.cpp">
       <Filter>Source Files\Logic</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameLogic.cpp">
+    <ClCompile Include="GameLogic.cpp">
       <Filter>Source Files\Logic</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\temp\ProcceduralLevelGeneration\Testing\GameState.cpp">
-      <Filter>Source Files\Logic</Filter>
+    <ClCompile Include="timer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="Goblin.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManagement.cpp">
+      <Filter>Source Files\LevelBuilding</Filter>
+    </ClCompile>
+    <ClCompile Include="DecorativeDoor.cpp">
+      <Filter>Source Files\StaticEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="Chest.cpp">
+      <Filter>Source Files\StaticEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="Spikes.cpp">
+      <Filter>Source Files\StaticEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackScreenTransition.cpp">
+      <Filter>Source Files\Transition</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Source Files\Entities\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenMapDrawer.cpp">
+      <Filter>Source Files\LevelBuilding\OpenMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Source Files\LevelBuilding\Building Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="BackPanel.cpp">
+      <Filter>Source Files\LevelBuilding\Building Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBlock.cpp">
+      <Filter>Source Files\LevelBuilding\Building Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityBlock.cpp">
+      <Filter>Source Files\LevelBuilding\Building Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="DyngeonDrawer.cpp">
+      <Filter>Source Files\LevelBuilding\OpenMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawer.cpp">
+      <Filter>Source Files\LevelBuilding\OpenMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="FinalBossDrawer.cpp">
+      <Filter>Source Files\LevelBuilding\OpenMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="FinalOpenMap.cpp">
+      <Filter>Source Files\LevelBuilding\OpenMaps</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticEntity.cpp">
+      <Filter>Source Files\StaticEntities</Filter>
+    </ClCompile>
+    <ClCompile Include="ExitDoor.cpp">
+      <Filter>Source Files\StaticEntities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationHandler.h">
+      <Filter>Header Files\Entities\AnimationManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleAnimation.h">
+      <Filter>Header Files\Entities\AnimationManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.h">
+      <Filter>Header Files\Entities\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic.h">
+      <Filter>Header Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="BorderMapManagement.h">
+      <Filter>Header Files\LevelHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="Border.h">
+      <Filter>Header Files\LevelHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Miscallenious.h">
+      <Filter>Header Files\Helpful</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomGet.h">
+      <Filter>Header Files\Helpful</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities.h">
+      <Filter>Header Files\Entities\Creatures</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelBuilding.h">
+      <Filter>Header Files\LevelHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManagement.h">
+      <Filter>Header Files\LevelHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Header Files\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackEntity.cpp">
+      <Filter>Source Files\StaticEntities</Filter>
+    </ClInclude>
+    <ClInclude Include="Back.h">
+      <Filter>Header Files\Helpful</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackScreen.h">
+      <Filter>Header Files\Helpful</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

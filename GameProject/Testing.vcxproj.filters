@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Control">
+      <UniqueIdentifier>{12fc2098-8983-4ac6-b0ed-3c17ec96a112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Level">
+      <UniqueIdentifier>{f653e964-97e5-41af-bb10-5190ce407d8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Level">
+      <UniqueIdentifier>{03004640-3e8c-4b90-a2aa-45d00adaf5e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Control">
+      <UniqueIdentifier>{0f0f8e59-250c-4cf2-98f5-8e23b5466f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Creatures">
+      <UniqueIdentifier>{63abc66c-a55e-487b-a013-d5b723ff2103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Level\Characters">
+      <UniqueIdentifier>{01331839-d581-409b-a76a-f5b4b4cbf03f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Level\Boarder">
+      <UniqueIdentifier>{9033b02d-f712-4e87-8873-0765fd9a7862}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Creatures">
+      <UniqueIdentifier>{bd0c858d-0222-4036-a660-e9786c0281ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Creatures\Animation">
+      <UniqueIdentifier>{968f6222-0b65-4625-b12f-7055c25bb50e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Creatures\Movement">
+      <UniqueIdentifier>{7c7c51d8-a6bb-4134-ac3a-15b8cde9e586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Creatures\Character">
+      <UniqueIdentifier>{691faac1-1e44-4503-86b8-8ae55323d476}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Creatures\Animation">
+      <UniqueIdentifier>{f94c6016-bb19-4afc-8361-28e31b8e017f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Creatures\Movement">
+      <UniqueIdentifier>{c2eb50da-a05b-45cd-a5c5-850afbd487f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Creatures\Character">
+      <UniqueIdentifier>{f6842b0b-603c-470d-81be-fe73c77945d5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameLogic.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelBuilding.h">
+      <Filter>Header Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Miscallenious.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleAnimation.h">
+      <Filter>Header Files\Creatures\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="BorderMapManagement.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Movement.h">
+      <Filter>Header Files\Creatures\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="MainCharacter.h">
+      <Filter>Header Files\Creatures\Character</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>Source Files\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawer.cpp">
+      <Filter>Source Files\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleAnimation.cpp">
+      <Filter>Source Files\Creatures\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationHandler.h">
+      <Filter>Header Files\Creatures\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationHandler.cpp">
+      <Filter>Source Files\Creatures\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Movement.cpp">
+      <Filter>Source Files\Creatures\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="MainCharacter.cpp">
+      <Filter>Source Files\Creatures\Character</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
